@@ -6,15 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.OracleClient;
 
 namespace MyDiplomProject
 {
     public partial class AddAdres : Form
     {
-        OracleCommand cmd;
-        OracleConnection con;
-        OracleDataReader dr;
         bool Lock = true;
         string oldYlica;
         string oldDom;
@@ -37,7 +33,7 @@ namespace MyDiplomProject
 
         private void AddAdres_Load(object sender, EventArgs e)
         {
-            con = new OracleConnection("Data Source=(DESCRIPTION =(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = xe))); User Id=" + User + ";Password=" + Password + ";");
+           /* con = new OracleConnection("Data Source=(DESCRIPTION =(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = xe))); User Id=" + User + ";Password=" + Password + ";");
             cmd = new OracleCommand("", con);
             con.Open();
 
@@ -57,7 +53,7 @@ namespace MyDiplomProject
 
             dataGridView1.Enabled = true;
             timer1.Start();
-            items = dataGridView1.Rows.Count;
+            items = dataGridView1.Rows.Count;*/
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -68,7 +64,7 @@ namespace MyDiplomProject
 
         private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (!Lock)
+            /*if (!Lock)
             {
                 if (e.RowIndex != dataGridView1.Rows.Count - 1)
                 {
@@ -81,12 +77,12 @@ namespace MyDiplomProject
                 }
                 else
                     button1.Enabled = false;
-            }
+            }*/
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            string str0, str1;
+            /*string str0, str1;
 
             if (!Lock)
             {
@@ -133,12 +129,12 @@ namespace MyDiplomProject
                         Lock = false;
                     }
                 }
-            }
+            }*/
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            bool del = true;
+            /*bool del = true;
             button1.Enabled = false;
 
             if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
@@ -179,7 +175,7 @@ namespace MyDiplomProject
                     items = dataGridView1.Rows.Count;
                     Lock = false;
                 }
-            }
+            }*/
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.OracleClient;
+
 
 namespace MyDiplomProject
 {
@@ -17,9 +17,7 @@ namespace MyDiplomProject
         string Password;
         string pk_protokol;
 
-        OracleCommand cmd;
-        OracleConnection con;
-        OracleDataReader dr;
+
 
         bool Lock = true;
         bool ponatie = false;
@@ -51,68 +49,68 @@ namespace MyDiplomProject
 
         void AddPonatoi()
         {
-            if (!Lock)
-            {
-                if (textBox3.Text != "" && textBox4.Text != "")
-                    if (comboBox3.SelectedIndex != -1 && comboBox4.SelectedIndex != -1)
-                    {
-                        cmd.CommandText = "DELETE FROM PONATOI WHERE PK_PROTOKOL = '" + pk_protokol + "'";
-                        cmd.ExecuteNonQuery();
+            //if (!Lock)
+            //{
+            //    if (textBox3.Text != "" && textBox4.Text != "")
+            //        if (comboBox3.SelectedIndex != -1 && comboBox4.SelectedIndex != -1)
+            //        {
+            //            cmd.CommandText = "DELETE FROM PONATOI WHERE PK_PROTOKOL = '" + pk_protokol + "'";
+            //            cmd.ExecuteNonQuery();
 
-                        string s1 = "", s2 = "", s3 = "", s4 = "";
+            //            string s1 = "", s2 = "", s3 = "", s4 = "";
 
-                        int i = 0;
+            //            int i = 0;
 
-                        cmd.CommandText = "SELECT YLICA,NOMER_DOMA FROM SPRAVOCHNIK_ADRESOVV";
-                        dr = cmd.ExecuteReader();
+            //            cmd.CommandText = "SELECT YLICA,NOMER_DOMA FROM SPRAVOCHNIK_ADRESOVV";
+            //            dr = cmd.ExecuteReader();
 
-                        while (dr.Read())
-                        {
-                            s1 = dr[0].ToString();
-                            s2 = dr[1].ToString();
-                            if (i == comboBox3.SelectedIndex)
-                                break;
-                        }
-                        cmd.CommandText = "INSERT INTO PONATOI (FIO,PK_ADRES ,PK_PROTOKOL) VALUES ('" + textBox3.Text + "', (SELECT PK_ADRES FROM SPRAVOCHNIK_ADRESOVV WHERE SPRAVOCHNIK_ADRESOVV.YLICA = '" + s1 + "' AND SPRAVOCHNIK_ADRESOVV.NOMER_DOMA = '" + s2.ToString() + "'),'" + pk_protokol + "' )";
-                        cmd.ExecuteNonQuery();
+            //            while (dr.Read())
+            //            {
+            //                s1 = dr[0].ToString();
+            //                s2 = dr[1].ToString();
+            //                if (i == comboBox3.SelectedIndex)
+            //                    break;
+            //            }
+            //            cmd.CommandText = "INSERT INTO PONATOI (FIO,PK_ADRES ,PK_PROTOKOL) VALUES ('" + textBox3.Text + "', (SELECT PK_ADRES FROM SPRAVOCHNIK_ADRESOVV WHERE SPRAVOCHNIK_ADRESOVV.YLICA = '" + s1 + "' AND SPRAVOCHNIK_ADRESOVV.NOMER_DOMA = '" + s2.ToString() + "'),'" + pk_protokol + "' )";
+            //            cmd.ExecuteNonQuery();
 
-                        i = 0;
+            //            i = 0;
 
-                        cmd.CommandText = "SELECT YLICA,NOMER_DOMA FROM SPRAVOCHNIK_ADRESOVV";
-                        dr = cmd.ExecuteReader();
+            //            cmd.CommandText = "SELECT YLICA,NOMER_DOMA FROM SPRAVOCHNIK_ADRESOVV";
+            //            dr = cmd.ExecuteReader();
 
-                        while (dr.Read())
-                        {
-                            s3 = dr[0].ToString();
-                            s4 = dr[1].ToString();
-                            if (i == comboBox4.SelectedIndex)
-                                break;
-                        }
-                        cmd.CommandText = "INSERT INTO PONATOI (FIO,PK_ADRES ,PK_PROTOKOL) VALUES ('" + textBox4.Text + "', (SELECT PK_ADRES FROM SPRAVOCHNIK_ADRESOVV WHERE SPRAVOCHNIK_ADRESOVV.YLICA = '" + s3 + "' AND SPRAVOCHNIK_ADRESOVV.NOMER_DOMA = '" + s4.ToString() + "'),'" + pk_protokol + "' )";
-                        cmd.ExecuteNonQuery();
-                    }
-            }
+            //            while (dr.Read())
+            //            {
+            //                s3 = dr[0].ToString();
+            //                s4 = dr[1].ToString();
+            //                if (i == comboBox4.SelectedIndex)
+            //                    break;
+            //            }
+            //            cmd.CommandText = "INSERT INTO PONATOI (FIO,PK_ADRES ,PK_PROTOKOL) VALUES ('" + textBox4.Text + "', (SELECT PK_ADRES FROM SPRAVOCHNIK_ADRESOVV WHERE SPRAVOCHNIK_ADRESOVV.YLICA = '" + s3 + "' AND SPRAVOCHNIK_ADRESOVV.NOMER_DOMA = '" + s4.ToString() + "'),'" + pk_protokol + "' )";
+            //            cmd.ExecuteNonQuery();
+            //        }
+            //}
         }
 
         void UpDate()
         {
-            con = new OracleConnection("Data Source=(DESCRIPTION =(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = xe))); User Id=" + User + ";Password=" + Password + ";");
-            cmd = new OracleCommand("", con);
-            con.Open();
+            //con = new OracleConnection("Data Source=(DESCRIPTION =(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = xe))); User Id=" + User + ";Password=" + Password + ";");
+            //cmd = new OracleCommand("", con);
+            //con.Open();
 
-            UpdateGorod();
-            UpdatePolise();
-            UpdateAdress();
-            UpdatePodoga();
-            UpdateSvet();
-            UpdateSpec();
-            UpdateTexCredstvo();
-            UpdateYpacovka();
-            UpdateSposobYpacovki();
-            UpdateVeshDok();
-            UpdateLica();
+            //UpdateGorod();
+            //UpdatePolise();
+            //UpdateAdress();
+            //UpdatePodoga();
+            //UpdateSvet();
+            //UpdateSpec();
+            //UpdateTexCredstvo();
+            //UpdateYpacovka();
+            //UpdateSposobYpacovki();
+            //UpdateVeshDok();
+            //UpdateLica();
         }
-
+        /*
         void UpdateGorod()
         {
             cmd.CommandText = "SELECT NAZVANIE FROM SPRAVOCHNIK_GORODOV";
@@ -358,6 +356,7 @@ namespace MyDiplomProject
                 comboBox4.SelectedText = dr[1].ToString() + " (" + dr[2].ToString() + ")";
             }
         }
+        */
 
         private void AddProtokol_Load(object sender, EventArgs e)
         {
@@ -365,7 +364,7 @@ namespace MyDiplomProject
 
             UpDate();
             this.Text += " " + pk_protokol;
-            LoadProtokol();
+           // LoadProtokol();
 
             Lock = false;
         }
@@ -381,7 +380,7 @@ namespace MyDiplomProject
             Form f = new AddYpak(User, Password);
             f.ShowDialog();
 
-            UpdateSposobYpacovki();
+          //  UpdateSposobYpacovki();
         }
 
         private void справочникТехническихСредствToolStripMenuItem_Click(object sender, EventArgs e)
@@ -389,7 +388,7 @@ namespace MyDiplomProject
             Form f = new AddTexSred(User, Password);
             f.ShowDialog();
 
-            UpdateTexCredstvo();
+          //  UpdateTexCredstvo();
         }
 
         private void справочникОбластейСпециализацииToolStripMenuItem_Click(object sender, EventArgs e)
@@ -397,7 +396,7 @@ namespace MyDiplomProject
             Form f = new AddSpec(User, Password);
             f.ShowDialog();
 
-            UpdateSpec();
+          //  UpdateSpec();
         }
 
         private void справочникПогодныхУсловийToolStripMenuItem_Click(object sender, EventArgs e)
@@ -405,7 +404,7 @@ namespace MyDiplomProject
             Form f = new AddPogoda(User, Password);
             f.ShowDialog();
 
-            UpdatePodoga();
+           // UpdatePodoga();
         }
 
         private void справочникМатериаловУпаковкиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -413,7 +412,7 @@ namespace MyDiplomProject
             Form f = new AddMaterial(User, Password);
             f.ShowDialog();
 
-            UpdateYpacovka();
+           // UpdateYpacovka();
         }
 
         private void справочникГоробовToolStripMenuItem_Click(object sender, EventArgs e)
@@ -421,7 +420,7 @@ namespace MyDiplomProject
             Form f = new AddGorod(User, Password);
             f.ShowDialog();
 
-            UpdateGorod();
+          //  UpdateGorod();
         }
 
         private void справочникДолжностейToolStripMenuItem_Click(object sender, EventArgs e)
@@ -432,10 +431,10 @@ namespace MyDiplomProject
 
         private void справочникДолжностныхЛицToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddDojnost(User, Password);
-            f.ShowDialog();
+          //  Form f = new AddDojnost(User, Password);
+          //  f.ShowDialog();
 
-            UpdatePolise();
+          //  UpdatePolise();
         }
 
         private void справочникТабкльныхНомеровToolStripMenuItem_Click(object sender, EventArgs e)
@@ -449,14 +448,14 @@ namespace MyDiplomProject
             Form f = new AddSvet(User, Password);
             f.ShowDialog();
 
-            UpdateSvet();
+          //  UpdateSvet();
         }
 
         private void справочникАдресовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = new AddAdres(User, Password);
             f.ShowDialog();
-            UpdateAdress();
+           // UpdateAdress();
         }
 
         private void справочникЛицПередавшихВещДокНаХранниеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -476,14 +475,14 @@ namespace MyDiplomProject
             Form f = new AddSpecMen(User, Password);
             f.ShowDialog();
 
-            UpdateSpec();
+           // UpdateSpec();
         }
 
         private void справочникToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = new AddOper(User, Password);
             f.ShowDialog();
-            UpdatePolise();
+           // UpdatePolise();
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -498,48 +497,48 @@ namespace MyDiplomProject
 
         private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            string str0, str1, str2, str3;
-            bool NotNull = true;
+            //string str0, str1, str2, str3;
+            //bool NotNull = true;
 
-            if (!Lock)
-            {
-                for (int i = 0; i < 4; i++)
-                    if (dataGridView2.Rows[e.RowIndex].Cells[i].Value == null)
-                        NotNull = false;
-                if (NotNull)
-                {
-                    str0 = dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString();    // признаки
-                    str1 = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();    // наименование
-                    str2 = dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString();    // упаковка
-                    str3 = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();    // способ
+            //if (!Lock)
+            //{
+            //    for (int i = 0; i < 4; i++)
+            //        if (dataGridView2.Rows[e.RowIndex].Cells[i].Value == null)
+            //            NotNull = false;
+            //    if (NotNull)
+            //    {
+            //        str0 = dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString();    // признаки
+            //        str1 = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();    // наименование
+            //        str2 = dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString();    // упаковка
+            //        str3 = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();    // способ
 
-                    cmd.CommandText = "SELECT * FROM VESH_DOK, PROTOKOL, SPRAVOCHNIK_MATERIALOV,YPAKOVKA WHERE VESH_DOK.PK_PROTOKOL = '" + pk_protokol + "' AND VESH_DOK.NAIMINOVANIE = '" + str1 + "' AND VESH_DOK.PRIZNAKI = '" + str0 + "' AND VESH_DOK.PK_MATERIAL = (SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + str2 + "') AND VESH_DOK.PK_YPAKOVKA = (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + str3 + "')";
-                    dr = cmd.ExecuteReader();
+            //        cmd.CommandText = "SELECT * FROM VESH_DOK, PROTOKOL, SPRAVOCHNIK_MATERIALOV,YPAKOVKA WHERE VESH_DOK.PK_PROTOKOL = '" + pk_protokol + "' AND VESH_DOK.NAIMINOVANIE = '" + str1 + "' AND VESH_DOK.PRIZNAKI = '" + str0 + "' AND VESH_DOK.PK_MATERIAL = (SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + str2 + "') AND VESH_DOK.PK_YPAKOVKA = (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + str3 + "')";
+            //        dr = cmd.ExecuteReader();
 
-                    if (!dr.Read())
-                    {
-                        if (VeshDokItems != dataGridView2.Rows.Count)
-                        {
-                            cmd.CommandText = "INSERT INTO VESH_DOK (PRIZNAKI,NAIMINOVANIE,PK_MATERIAL, PK_YPAKOVKA, PK_PROTOKOL) VALUES ('" + str0 + "', '" + str1 + "',(SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + str2 + "'), (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + str3 + "'), '" + pk_protokol + "')";
-                            cmd.ExecuteNonQuery();
-                            VeshDokItems = dataGridView2.Rows.Count;
-                        }
-                        else
-                        {
-                            cmd.CommandText = "UPDATE VESH_DOK SET PRIZNAKI = '" + str0 + "', NAIMINOVANIE = '" + str1 + "', PK_MATERIAL = (SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + str2 + "'), PK_YPAKOVKA = (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + str3 + "') WHERE VESH_DOK.PK_PROTOKOL = '" + pk_protokol + "' AND VESH_DOK.NAIMINOVANIE = '" + oldVDCell0 + "' AND VESH_DOK.PRIZNAKI = '" + oldVDCell1 + "' AND VESH_DOK.PK_MATERIAL = (SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + oldVDCell2 + "') AND VESH_DOK.PK_YPAKOVKA = (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + oldVDCell3 + "')";
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Данный элемент уже присудствует в таблице!", "Изменение / добавление невозможно!");
+            //        if (!dr.Read())
+            //        {
+            //            if (VeshDokItems != dataGridView2.Rows.Count)
+            //            {
+            //                cmd.CommandText = "INSERT INTO VESH_DOK (PRIZNAKI,NAIMINOVANIE,PK_MATERIAL, PK_YPAKOVKA, PK_PROTOKOL) VALUES ('" + str0 + "', '" + str1 + "',(SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + str2 + "'), (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + str3 + "'), '" + pk_protokol + "')";
+            //                cmd.ExecuteNonQuery();
+            //                VeshDokItems = dataGridView2.Rows.Count;
+            //            }
+            //            else
+            //            {
+            //                cmd.CommandText = "UPDATE VESH_DOK SET PRIZNAKI = '" + str0 + "', NAIMINOVANIE = '" + str1 + "', PK_MATERIAL = (SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + str2 + "'), PK_YPAKOVKA = (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + str3 + "') WHERE VESH_DOK.PK_PROTOKOL = '" + pk_protokol + "' AND VESH_DOK.NAIMINOVANIE = '" + oldVDCell0 + "' AND VESH_DOK.PRIZNAKI = '" + oldVDCell1 + "' AND VESH_DOK.PK_MATERIAL = (SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + oldVDCell2 + "') AND VESH_DOK.PK_YPAKOVKA = (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + oldVDCell3 + "')";
+            //                cmd.ExecuteNonQuery();
+            //            }
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Данный элемент уже присудствует в таблице!", "Изменение / добавление невозможно!");
 
-                        Lock = true;
-                        UpdateVeshDok();
-                        Lock = false;
-                    }
-                }
-            }
+            //            Lock = true;
+            //            UpdateVeshDok();
+            //            Lock = false;
+            //        }
+            //    }
+            //}
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -550,205 +549,205 @@ namespace MyDiplomProject
 
         private void dataGridView2_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (!Lock)
-            {
-                if (e.RowIndex != dataGridView2.Rows.Count - 1)
-                {
-                    bool NotNull = true;
+            //if (!Lock)
+            //{
+            //    if (e.RowIndex != dataGridView2.Rows.Count - 1)
+            //    {
+            //        bool NotNull = true;
 
-                    for (int i = 0; i < 4; i++)
-                        if (dataGridView2.Rows[e.RowIndex].Cells[i].Value == null)
-                            NotNull = false;
+            //        for (int i = 0; i < 4; i++)
+            //            if (dataGridView2.Rows[e.RowIndex].Cells[i].Value == null)
+            //                NotNull = false;
 
-                    if (NotNull)
-                    {
-                        oldVDCell0 = dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString();    // признаки
-                        oldVDCell1 = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();    // наименование
-                        oldVDCell2 = dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString();    // упаковка
-                        oldVDCell3 = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();    // способ
-                        button2.Enabled = true;
-                    }
-                }
-                else
-                    button2.Enabled = false;
-            }
+            //        if (NotNull)
+            //        {
+            //            oldVDCell0 = dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString();    // признаки
+            //            oldVDCell1 = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();    // наименование
+            //            oldVDCell2 = dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString();    // упаковка
+            //            oldVDCell3 = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();    // способ
+            //            button2.Enabled = true;
+            //        }
+            //    }
+            //    else
+            //        button2.Enabled = false;
+            //}
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            button2.Enabled = false;
-            if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
-            {
+            //button2.Enabled = false;
+            //if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
+            //{
 
-                cmd.CommandText = "DELETE FROM VESH_DOK WHERE VESH_DOK.PK_PROTOKOL = '" + pk_protokol + "' AND VESH_DOK.NAIMINOVANIE = '" + oldVDCell1 + "' AND VESH_DOK.PRIZNAKI = '" + oldVDCell0 + "' AND VESH_DOK.PK_MATERIAL = (SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + oldVDCell2 + "') AND VESH_DOK.PK_YPAKOVKA = (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + oldVDCell3 + "')";
-                cmd.ExecuteNonQuery();
+            //    cmd.CommandText = "DELETE FROM VESH_DOK WHERE VESH_DOK.PK_PROTOKOL = '" + pk_protokol + "' AND VESH_DOK.NAIMINOVANIE = '" + oldVDCell1 + "' AND VESH_DOK.PRIZNAKI = '" + oldVDCell0 + "' AND VESH_DOK.PK_MATERIAL = (SELECT SPRAVOCHNIK_MATERIALOV.PK_MATERIAL FROM SPRAVOCHNIK_MATERIALOV WHERE SPRAVOCHNIK_MATERIALOV.MATERIAL = '" + oldVDCell2 + "') AND VESH_DOK.PK_YPAKOVKA = (SELECT YPAKOVKA.PK_YPAKOVKA FROM YPAKOVKA WHERE YPAKOVKA.SPOSOB = '" + oldVDCell3 + "')";
+            //    cmd.ExecuteNonQuery();
 
-                Lock = true;
-                UpdateVeshDok();
-                Lock = false;
-            }
+            //    Lock = true;
+            //    UpdateVeshDok();
+            //    Lock = false;
+            //}
         }
 
         private void dataGridView3_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            string str0, str1;
-            bool NotNull = true;
+            //string str0, str1;
+            //bool NotNull = true;
 
-            if (!Lock)
-            {
-                for (int i = 0; i < 2; i++)
-                    if (dataGridView3.Rows[e.RowIndex].Cells[i].Value == null)
-                        NotNull = false;
-                if (NotNull)
-                {
-                    str0 = dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString();    // фио
-                    str1 = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();    // примечание
+            //if (!Lock)
+            //{
+            //    for (int i = 0; i < 2; i++)
+            //        if (dataGridView3.Rows[e.RowIndex].Cells[i].Value == null)
+            //            NotNull = false;
+            //    if (NotNull)
+            //    {
+            //        str0 = dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString();    // фио
+            //        str1 = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();    // примечание
 
-                    cmd.CommandText = "SELECT * FROM DRYGIE_LICA WHERE DRYGIE_LICA.FIO = '" + str0 + "' AND DRYGIE_LICA.PRIMICHANIE = '" + str1 + "' AND DRYGIE_LICA.PK_PROTOKOL = '" + pk_protokol + "'";
-                    dr = cmd.ExecuteReader();
+            //        cmd.CommandText = "SELECT * FROM DRYGIE_LICA WHERE DRYGIE_LICA.FIO = '" + str0 + "' AND DRYGIE_LICA.PRIMICHANIE = '" + str1 + "' AND DRYGIE_LICA.PK_PROTOKOL = '" + pk_protokol + "'";
+            //        dr = cmd.ExecuteReader();
 
-                    if (!dr.Read())
-                    {
-                        if (LicaItems != dataGridView3.Rows.Count)
-                        {
-                            cmd.CommandText = "INSERT INTO DRYGIE_LICA (FIO, PRIMICHANIE, PK_PROTOKOL) VALUES ('" + str0 + "','" + str1 + "','" + pk_protokol + "')";
-                            cmd.ExecuteNonQuery();
-                            LicaItems = dataGridView3.Rows.Count;
-                        }
-                        else
-                        {
-                            cmd.CommandText = "UPDATE DRYGIE_LICA SET FIO = '" + str0 + "', PRIMICHANIE = '" + str1 + "' WHERE FIO = '" + oldLCell0 + "' AND PRIMICHANIE  = '" + oldLCell1 + "' AND PK_PROTOKOL = '" + pk_protokol + "'";
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Данный элемент уже присудствует в таблице!", "Изменение / добавление невозможно!");
+            //        if (!dr.Read())
+            //        {
+            //            if (LicaItems != dataGridView3.Rows.Count)
+            //            {
+            //                cmd.CommandText = "INSERT INTO DRYGIE_LICA (FIO, PRIMICHANIE, PK_PROTOKOL) VALUES ('" + str0 + "','" + str1 + "','" + pk_protokol + "')";
+            //                cmd.ExecuteNonQuery();
+            //                LicaItems = dataGridView3.Rows.Count;
+            //            }
+            //            else
+            //            {
+            //                cmd.CommandText = "UPDATE DRYGIE_LICA SET FIO = '" + str0 + "', PRIMICHANIE = '" + str1 + "' WHERE FIO = '" + oldLCell0 + "' AND PRIMICHANIE  = '" + oldLCell1 + "' AND PK_PROTOKOL = '" + pk_protokol + "'";
+            //                cmd.ExecuteNonQuery();
+            //            }
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Данный элемент уже присудствует в таблице!", "Изменение / добавление невозможно!");
 
-                        Lock = true;
-                        UpdateLica();
-                        Lock = false;
-                    }
-                }
-            }
+            //            Lock = true;
+            //            UpdateLica();
+            //            Lock = false;
+            //        }
+            //    }
+            //}
         }
 
         private void dataGridView3_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (!Lock)
-            {
-                if (e.RowIndex != dataGridView3.Rows.Count - 1)
-                {
-                    bool NotNull = true;
+            //if (!Lock)
+            //{
+            //    if (e.RowIndex != dataGridView3.Rows.Count - 1)
+            //    {
+            //        bool NotNull = true;
 
-                    for (int i = 0; i < 2; i++)
-                        if (dataGridView3.Rows[e.RowIndex].Cells[i].Value == null)
-                            NotNull = false;
+            //        for (int i = 0; i < 2; i++)
+            //            if (dataGridView3.Rows[e.RowIndex].Cells[i].Value == null)
+            //                NotNull = false;
 
-                    if (NotNull)
-                    {
-                        oldLCell0 = dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString();    // фио
-                        oldLCell1 = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();    // примечание
-                        button3.Enabled = true;
-                    }
-                }
-                else
-                    button3.Enabled = false;
-            }
+            //        if (NotNull)
+            //        {
+            //            oldLCell0 = dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString();    // фио
+            //            oldLCell1 = dataGridView3.Rows[e.RowIndex].Cells[1].Value.ToString();    // примечание
+            //            button3.Enabled = true;
+            //        }
+            //    }
+            //    else
+            //        button3.Enabled = false;
+            //}
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            button3.Enabled = false;
-            if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
-            {
+            //button3.Enabled = false;
+            //if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
+            //{
 
-                cmd.CommandText = "DELETE FROM DRYGIE_LICA WHERE FIO = '" + oldLCell0 + "' AND PRIMICHANIE  = '" + oldLCell1 + "' AND PK_PROTOKOL = '" + pk_protokol + "'";
-                cmd.ExecuteNonQuery();
+            //    cmd.CommandText = "DELETE FROM DRYGIE_LICA WHERE FIO = '" + oldLCell0 + "' AND PRIMICHANIE  = '" + oldLCell1 + "' AND PK_PROTOKOL = '" + pk_protokol + "'";
+            //    cmd.ExecuteNonQuery();
 
-                Lock = true;
-                UpdateLica();
-                Lock = false;
-            }
+            //    Lock = true;
+            //    UpdateLica();
+            //    Lock = false;
+            //}
         }
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET PK_GOROD = (SELECT SPRAVOCHNIK_GORODOV.PK_GOROD FROM SPRAVOCHNIK_GORODOV WHERE SPRAVOCHNIK_GORODOV.NAZVANIE = '" + comboBox1.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET PK_GOROD = (SELECT SPRAVOCHNIK_GORODOV.PK_GOROD FROM SPRAVOCHNIK_GORODOV WHERE SPRAVOCHNIK_GORODOV.NAZVANIE = '" + comboBox1.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void comboBox2_SelectedValueChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET PK_polise = (SELECT PK_polise FROM POLISE WHERE FIO = '" + comboBox2.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET PK_polise = (SELECT PK_polise FROM POLISE WHERE FIO = '" + comboBox2.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET COOBSHENIE = '" + textBox1.Text + "' WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET COOBSHENIE = '" + textBox1.Text + "' WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET SOOBSHIL = '" + textBox6.Text + "' WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET SOOBSHIL = '" + textBox6.Text + "' WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET MESTO_PEIBITIYA = '" + textBox2.Text + "' WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET MESTO_PEIBITIYA = '" + textBox2.Text + "' WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET PREDMET_OSMOTRA = '" + textBox5.Text + "' WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET PREDMET_OSMOTRA = '" + textBox5.Text + "' WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void comboBox5_SelectedValueChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET PK_POGODA = (SELECT PK_POGODA FROM SPRAVOCHNIK_POGODI WHERE NAZVANIE = '" + comboBox5.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET PK_POGODA = (SELECT PK_POGODA FROM SPRAVOCHNIK_POGODI WHERE NAZVANIE = '" + comboBox5.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void comboBox6_SelectedValueChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET PK_OSVESHENNOST = (SELECT PK_OSVESHENNOST FROM SPRAVOCHNIK_OSVESHENNOSTI WHERE NAZVANIE = '" + comboBox6.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET PK_OSVESHENNOST = (SELECT PK_OSVESHENNOST FROM SPRAVOCHNIK_OSVESHENNOSTI WHERE NAZVANIE = '" + comboBox6.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void comboBox8_SelectedValueChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET PK_TEX_SREDSTVO = (SELECT PK_TEX_SREDSTVO FROM SPRAVOCHNIK_TEX_SREDSTV WHERE TEX_SREDSTVO = '" + comboBox8.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET PK_TEX_SREDSTVO = (SELECT PK_TEX_SREDSTVO FROM SPRAVOCHNIK_TEX_SREDSTV WHERE TEX_SREDSTVO = '" + comboBox8.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void comboBox7_SelectedValueChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET PK_SPEC = (SELECT PK_SPEC FROM SPECIALIST WHERE FIO = '" + comboBox7.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET PK_SPEC = (SELECT PK_SPEC FROM SPECIALIST WHERE FIO = '" + comboBox7.SelectedItem.ToString() + "') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET VREMYA_NACHALA = TO_DATE('" + dateTimePicker2.Value.ToString() + "','DD/MM/YY HH24:MI:SS') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET VREMYA_NACHALA = TO_DATE('" + dateTimePicker2.Value.ToString() + "','DD/MM/YY HH24:MI:SS') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
         {
-            cmd.CommandText = "UPDATE PROTOKOL SET VREMYA_OKONCH = TO_DATE('" + dateTimePicker3.Value.ToString() + "','DD/MM/YY HH24:MI:SS') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET VREMYA_OKONCH = TO_DATE('" + dateTimePicker3.Value.ToString() + "','DD/MM/YY HH24:MI:SS') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
-            cmd.CommandText = "UPDATE PROTOKOL SET DATA_SOSTAV = TO_DATE('" + dateTimePicker1.Value.ToString() + "','DD/MM/YY HH24:MI:SS') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "UPDATE PROTOKOL SET DATA_SOSTAV = TO_DATE('" + dateTimePicker1.Value.ToString() + "','DD/MM/YY HH24:MI:SS') WHERE PROTOKOL.PK_PROTOKOL = '" + pk_protokol + "'";
+            //cmd.ExecuteNonQuery();
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)

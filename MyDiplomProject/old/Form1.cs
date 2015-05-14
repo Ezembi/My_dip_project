@@ -6,20 +6,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.OracleClient;
+using MySql;
+using MySql.Data.MySqlClient;
 
 namespace MyDiplomProject
 {
     public partial class Form1 : Form
     {
-        OracleCommand cmd;
-        OracleConnection con;
-        OracleDataReader dr;
+
 
         string index = "";
 
         string User;
         string Password;
+        string Database;
+        string Ip;
 
         public Form1()
         {
@@ -28,58 +29,58 @@ namespace MyDiplomProject
 
         void UpDatePro()
         {
-            con = new OracleConnection("Data Source=(DESCRIPTION =(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = xe))); User Id=" + User + ";Password=" + Password + ";");
-            cmd = new OracleCommand("", con);
-            con.Open();
-            /*
-            cmd.CommandText = "SELECT SPRAVOCHNIK_GORODOV.NAZVANIE ,TO_CHAR(PROTOKOL.DATA_SOSTAV,'DD.MM.YY'),PROTOKOL.VREMYA_NACHALA,PROTOKOL.VREMYA_OKONCH FROM PROTOKOL,SPRAVOCHNIK_GORODOV WHERE SPRAVOCHNIK_GORODOV.PK_GOROD(+) = PROTOKOL.PK_GOROD";
+            //con = new OracleConnection("Data Source=(DESCRIPTION =(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = xe))); User Id=" + User + ";Password=" + Password + ";");
+            //cmd = new OracleCommand("", con);
+            //con.Open();
+            ///*
+            //cmd.CommandText = "SELECT SPRAVOCHNIK_GORODOV.NAZVANIE ,TO_CHAR(PROTOKOL.DATA_SOSTAV,'DD.MM.YY'),PROTOKOL.VREMYA_NACHALA,PROTOKOL.VREMYA_OKONCH FROM PROTOKOL,SPRAVOCHNIK_GORODOV WHERE SPRAVOCHNIK_GORODOV.PK_GOROD(+) = PROTOKOL.PK_GOROD";
 
-            dr = cmd.ExecuteReader();
-            int i = 0;
+            //dr = cmd.ExecuteReader();
+            //int i = 0;
 
-            listBox1.Items.Clear();
+            //listBox1.Items.Clear();
 
-            while (dr.Read())
-            {
-                listBox1.Items.Add(dr[0].ToString() + ", " + dr[1].ToString() + " ( " + dr[2].ToString() + " - " + dr[3].ToString() + " )");
-                i++;
-            }*/
-            cmd.CommandText = "SELECT PK_PROTOKOL FROM PROTOKOL";
+            //while (dr.Read())
+            //{
+            //    listBox1.Items.Add(dr[0].ToString() + ", " + dr[1].ToString() + " ( " + dr[2].ToString() + " - " + dr[3].ToString() + " )");
+            //    i++;
+            //}*/
+            //cmd.CommandText = "SELECT PK_PROTOKOL FROM PROTOKOL";
 
-            dr = cmd.ExecuteReader();
-            int i = 0;
+            //dr = cmd.ExecuteReader();
+            //int i = 0;
 
-            listBox1.Items.Clear();
+            //listBox1.Items.Clear();
 
-            while (dr.Read())
-            {
-                listBox1.Items.Add(dr[0].ToString());
-                i++;
-            }
+            //while (dr.Read())
+            //{
+            //    listBox1.Items.Add(dr[0].ToString());
+            //    i++;
+            //}
 
-            button2.Enabled = false;
+            //button2.Enabled = false;
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string pk;
+            //string pk;
 
-            cmd.CommandText = "INSERT INTO PROTOKOL (DATA_SOSTAV) VALUES (NULL)";
-            cmd.ExecuteNonQuery();
+            //cmd.CommandText = "INSERT INTO PROTOKOL (DATA_SOSTAV) VALUES (NULL)";
+            //cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "SELECT MAX(PK_PROTOKOL) FROM PROTOKOL";
-            dr = cmd.ExecuteReader();
+            //cmd.CommandText = "SELECT MAX(PK_PROTOKOL) FROM PROTOKOL";
+            //dr = cmd.ExecuteReader();
 
-            if (dr.Read())
-            {
-                pk = dr[0].ToString();
-                Form f = new AddProtokol(User, Password, true, pk);
-                f.ShowDialog();
-                UpDatePro();
-            }
-            else
-                MessageBox.Show("Ой! Что - то не так! 0(О_О)0");
+            //if (dr.Read())
+            //{
+            //    pk = dr[0].ToString();
+            //    Form f = new AddProtokol(User, Password, true, pk);
+            //    f.ShowDialog();
+            //    UpDatePro();
+            //}
+            //else
+            //    MessageBox.Show("Ой! Что - то не так! 0(О_О)0");
 
         }
 
@@ -91,8 +92,10 @@ namespace MyDiplomProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            User = "polise";
-            Password = "polise";
+            User = "root";
+            Password = "ezembi007";
+            Database = "polise";
+            Ip = "127.0.0.1";
             UpDatePro();
         }
 
@@ -147,7 +150,7 @@ namespace MyDiplomProject
 
         private void справочникДолжностныхЛицToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddDojnost(User, Password);
+            Form f = new AddDojnost(User, Password, Database,Ip);
             f.ShowDialog();
         }
 
@@ -208,23 +211,23 @@ namespace MyDiplomProject
 
         private void button2_Click(object sender, EventArgs e)
         {
-            button2.Enabled = false;
+            //button2.Enabled = false;
 
-            if (MessageBox.Show("Вы уверены, что хотите удалить протокл?\nВсе вещественные доказательства описанные в данном протоколе также будут удалены!\nДанное действие нельзя отменить!", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
-            {
-                cmd.CommandText = "DELETE FROM DRYGIE_LICA WHERE PK_PROTOKOL = '" + index + "'";
-                cmd.ExecuteNonQuery();
+            //if (MessageBox.Show("Вы уверены, что хотите удалить протокл?\nВсе вещественные доказательства описанные в данном протоколе также будут удалены!\nДанное действие нельзя отменить!", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
+            //{
+            //    cmd.CommandText = "DELETE FROM DRYGIE_LICA WHERE PK_PROTOKOL = '" + index + "'";
+            //    cmd.ExecuteNonQuery();
 
-                cmd.CommandText = "DELETE FROM PONATOI WHERE PK_PROTOKOL = '" + index + "'";
-                cmd.ExecuteNonQuery();
+            //    cmd.CommandText = "DELETE FROM PONATOI WHERE PK_PROTOKOL = '" + index + "'";
+            //    cmd.ExecuteNonQuery();
 
-                cmd.CommandText = "DELETE FROM VESH_DOK WHERE PK_PROTOKOL = '" + index + "'";
-                cmd.ExecuteNonQuery();
+            //    cmd.CommandText = "DELETE FROM VESH_DOK WHERE PK_PROTOKOL = '" + index + "'";
+            //    cmd.ExecuteNonQuery();
 
-                cmd.CommandText = "DELETE FROM PROTOKOL WHERE PK_PROTOKOL = '" + index + "'";
-                cmd.ExecuteNonQuery();
-                UpDatePro();
-            }
+            //    cmd.CommandText = "DELETE FROM PROTOKOL WHERE PK_PROTOKOL = '" + index + "'";
+            //    cmd.ExecuteNonQuery();
+            //    UpDatePro();
+            //}
 
         }
 
