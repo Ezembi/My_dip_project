@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FA06AB12-592B-410F-AB02-7305F81A1A4F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyDiplomProject</RootNamespace>
+    <AssemblyName>MyDiplomProject</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient">
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\Framework64\v2.0.50727\System.Data.OracleClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddAct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAct.Designer.cs">
+      <DependentUpon>AddAct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddAdres.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddAdres.Designer.cs">
+      <DependentUpon>AddAdres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddDojnost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddDojnost.Designer.cs">
+      <DependentUpon>AddDojnost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddDolgnost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddDolgnost.Designer.cs">
+      <DependentUpon>AddDolgnost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddGorod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddGorod.Designer.cs">
+      <DependentUpon>AddGorod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddMaterial.Designer.cs">
+      <DependentUpon>AddMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Сотрудники\AddOper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Сотрудники\AddOper.Designer.cs">
+      <DependentUpon>AddOper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Сотрудники\AddPeredal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Сотрудники\AddPeredal.Designer.cs">
+      <DependentUpon>AddPeredal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddPogoda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddPogoda.Designer.cs">
+      <DependentUpon>AddPogoda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddProtokol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddProtokol.Designer.cs">
+      <DependentUpon>AddProtokol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Сотрудники\AddSotrud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Сотрудники\AddSotrud.Designer.cs">
+      <DependentUpon>AddSotrud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddSotrudnik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddSotrudnik.Designer.cs">
+      <DependentUpon>AddSotrudnik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddSpec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddSpec.Designer.cs">
+      <DependentUpon>AddSpec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Сотрудники\AddSpecMen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Сотрудники\AddSpecMen.Designer.cs">
+      <DependentUpon>AddSpecMen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddSvet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddSvet.Designer.cs">
+      <DependentUpon>AddSvet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddTexSred.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddTexSred.Designer.cs">
+      <DependentUpon>AddTexSred.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddYpak.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddYpak.Designer.cs">
+      <DependentUpon>AddYpak.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Справочники\AddZvanie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Справочники\AddZvanie.Designer.cs">
+      <DependentUpon>AddZvanie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddAct.resx">
+      <DependentUpon>AddAct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddAdres.resx">
+      <DependentUpon>AddAdres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddDojnost.resx">
+      <DependentUpon>AddDojnost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddDolgnost.resx">
+      <DependentUpon>AddDolgnost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddGorod.resx">
+      <DependentUpon>AddGorod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddMaterial.resx">
+      <DependentUpon>AddMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Сотрудники\AddOper.resx">
+      <DependentUpon>AddOper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Сотрудники\AddPeredal.resx">
+      <DependentUpon>AddPeredal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddPogoda.resx">
+      <DependentUpon>AddPogoda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddProtokol.resx">
+      <DependentUpon>AddProtokol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Сотрудники\AddSotrud.resx">
+      <DependentUpon>AddSotrud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddSotrudnik.resx">
+      <DependentUpon>AddSotrudnik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddSpec.resx">
+      <DependentUpon>AddSpec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Сотрудники\AddSpecMen.resx">
+      <DependentUpon>AddSpecMen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddSvet.resx">
+      <DependentUpon>AddSvet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddTexSred.resx">
+      <DependentUpon>AddTexSred.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddYpak.resx">
+      <DependentUpon>AddYpak.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Справочники\AddZvanie.resx">
+      <DependentUpon>AddZvanie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
