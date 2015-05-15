@@ -59,10 +59,10 @@
     <Compile Include="dellete\AddAdres.Designer.cs">
       <DependentUpon>AddAdres.cs</DependentUpon>
     </Compile>
-    <Compile Include="old\AddDojnost.cs">
+    <Compile Include="Справочники\AddDojnost.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="old\AddDojnost.Designer.cs">
+    <Compile Include="Справочники\AddDojnost.Designer.cs">
       <DependentUpon>AddDojnost.cs</DependentUpon>
     </Compile>
     <Compile Include="dellete\AddDolgnost.cs">
@@ -169,7 +169,7 @@
     <EmbeddedResource Include="dellete\AddAdres.resx">
       <DependentUpon>AddAdres.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="old\AddDojnost.resx">
+    <EmbeddedResource Include="Справочники\AddDojnost.resx">
       <DependentUpon>AddDojnost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dellete\AddDolgnost.resx">
@@ -241,7 +241,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Сотрудники\" />
-    <Folder Include="Справочники\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
