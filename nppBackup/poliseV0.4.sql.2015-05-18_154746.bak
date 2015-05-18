@@ -143,12 +143,21 @@ Create table Peoples (
  Primary Key (PK_people)) ENGINE = MyISAM
 COMMENT = 'Лицо в постановлении (другие лица)';
 
-Create table Spravochnik_Pod (
+Create table SpravochnikPod (
 	PK_Raiona Double NOT NULL AUTO_INCREMENT,
 	Nazv Varchar(200),
 	Raion Varchar(200),
 	pk_gorod Int NOT NULL,
 	id_number Varchar(500),
+ Primary Key (PK_Raiona)) ENGINE = MyISAM
+COMMENT = 'Справочник подразделений следственного комитета';
+
+Create table SpravochnikPod (
+	PK_Raiona Int NOT NULL AUTO_INCREMENT,
+	Nazv Varchar(200),
+	Raion Varchar(200),
+	id_number Int,
+	pk_gorod Int NOT NULL,
  Primary Key (PK_Raiona)) ENGINE = MyISAM
 COMMENT = 'Справочник подразделений следственного комитета';
 

@@ -101,14 +101,14 @@ namespace MyDiplomProject
 
         private void справочникЗванийToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddZvanie(User, Password);
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip,false, "Справочник званий", "spravochnik_zvanii", new string[] { "Звание", "Идентификационный номер" }, new string[] { "pk_zvanie", "nazvanie", "id_number" });
             f.ShowDialog();
         }
 
         private void справочникСпособовУпаковкиВещДокToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddYpak(User, Password);
-            f.ShowDialog();
+            //Form f = new AddDojnost(User, Password, Database, Ip, "Справочник способов упаковки вещественных доказательств", "ypakovka", new string[] { "Способ" }, new string[] { "pk_ypakovka", "sposob" });
+           // f.ShowDialog();
         }
 
         private void справочникТехническихСредствToolStripMenuItem_Click(object sender, EventArgs e)
@@ -150,8 +150,8 @@ namespace MyDiplomProject
 
         private void справочникДолжностныхЛицToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddDojnost(User, Password, Database,Ip);
-            f.ShowDialog();
+            //Form f = new AddDojnost(User, Password, Database, Ip, "Справочник должностей", "spravochnik_dolgnostei", new string[] { "Должность", "Идентификационный номер" }, new string[] { "pk_dolgnost", "nazvanie", "id_number" });
+            //f.ShowDialog();
         }
 
         private void справочникТабкльныхНомеровToolStripMenuItem_Click(object sender, EventArgs e)

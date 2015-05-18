@@ -16,27 +16,39 @@ namespace MyDiplomProject
         public MySqlConnection mycon;   // коннектор б/д
         public MySqlCommand cmd;        // sql комманды для работы с б/д
 
-        int items;
-        bool Lock = true;
+        int items;          // количество записей в таблице на форме
+        bool Lock = true;   // блокировка действий пользователя до полной загрузки формы
         string User;        // имя пользователя, для доступа к б/д
         string Password;    // пароль пользователя
         string Database;    // название б/д
         string Ip;          // ip сервера
-        int lastIndex = 0;
-        int count = 0;
-        int rSize = 1;
+        int lastIndex = 0;  // для корректного постраничного отображения
+        int count = 0;      // количество записей в таблице БД
+        int rSize = 1;      // иправление бага WS
+        string table;       // ТАБЛИЦА БАЗЫ ДАННЫХ
+        string[] HeaderText;// название полей в таблице для отображения
+        string[] DBHeader;  // название полей в таблице для sql запросов
+        string FormName;    // название формы
+        public string PC_rezult;   // "возвращаемое" формаой значение
+        bool IsSelect;      // true - форма вызвана для выбора элемента
+
 
         public AddDojnost()
         {
             InitializeComponent();
         }
 
-        public AddDojnost(string _user, string _pass, string _database, string _ip)
+        public AddDojnost(string _user, string _pass, string _database, string _ip, bool _Select, string _FormName, string _Table, string[] _HeaderText, string[] _DBHeader)
         {
             User = _user;
             Password = _pass;
             Database = _database;
             Ip = _ip;
+            table = _Table;
+            HeaderText = _HeaderText;
+            DBHeader = _DBHeader;
+            FormName = _FormName;
+            IsSelect = _Select;
             InitializeComponent();
         }
 
@@ -56,9 +68,15 @@ namespace MyDiplomProject
                 Lock = true;
                 if (mycon.State == ConnectionState.Open)
                 {
-                    //sql запрос
-                    string a = "select * from spravochnik_dolgnostei where nazvanie like '%" + textBox1.Text + "%' and id_number like '%" + textBox2.Text + "%'";
-                    cmd = new MySqlCommand(a, mycon);
+                    //генерация sql запроса, для подсчёта кол-ва элементов в БД
+                    string sql;
+                    sql = "";
+                    sql += "select * from " + table + " where ";
+                    sql += DBHeader[1] + " like '%" + textBox1.Text + "%' ";
+                    if (DBHeader.Length > 2)
+                        sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
+
+                    cmd = new MySqlCommand(sql, mycon);
 
                     //вополнение запроса
                     cmd.ExecuteNonQuery();
@@ -73,9 +91,15 @@ namespace MyDiplomProject
                     dr.Close();
 
 
-                    //sql запрос
-                    a = "select * from spravochnik_dolgnostei where nazvanie like '%" + textBox1.Text + "%' and id_number like '%" + textBox2.Text + "%' limit " + lastIndex.ToString() + ", " + comboBox1.SelectedItem.ToString();
-                    cmd = new MySqlCommand(a, mycon);
+                    //генерация sql запроса, для отображения данных из БД на форму
+                    sql = "";
+                    sql += "select * from " + table + " where ";
+                    sql += DBHeader[1] + " like '%" + textBox1.Text + "%' ";
+                    if (DBHeader.Length > 2)
+                        sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
+                    sql += "limit " + lastIndex.ToString() + ", " + comboBox1.SelectedItem.ToString();
+
+                    cmd = new MySqlCommand(sql, mycon);
 
                     //вополнение запроса
                     cmd.ExecuteNonQuery();
@@ -96,8 +120,10 @@ namespace MyDiplomProject
                         dataGridView1.Rows.Add();
                         dataGridView1.Rows[i].Cells[0].Value = dr[0].ToString();    //PC
                         dataGridView1.Rows[i].Cells[1].Value = dr[1].ToString();    //название
-                        dataGridView1.Rows[i].Cells[2].Value = dr[2].ToString();    //id номер
+                        if (DBHeader.Length > 2)
+                            dataGridView1.Rows[i].Cells[2].Value = dr[2].ToString();    //id номер
                         dataGridView1.Rows[i].Cells[3].Value = "Удалить";           //Удаление
+                        dataGridView1.Rows[i].Cells[4].Value = "Выбрать";           //Выбор
                         
                         i++;
                         toolStripProgressBar1.Value = (i * 100) / count;
@@ -141,7 +167,27 @@ namespace MyDiplomProject
 
                 //открытие подключения
                 mycon.Open();
+
+                //авто выбор кол-ва элементов, для отображения
                 comboBox1.SelectedIndex = 0;
+
+                //зполнение шапки таблици
+                for (int i = 0; i < HeaderText.Length; i++)
+                {
+                    dataGridView1.Columns[i + 1].HeaderText = HeaderText[i];
+                }
+
+                //скрытие лишних полей таблици
+                if (HeaderText.Length == 1)
+                {
+                    for (int i = 2; i < dataGridView1.ColumnCount - 1; i++)
+                        dataGridView1.Columns[i].Visible = false;
+                    textBox2.Visible = false;
+                }
+
+                this.Text = FormName;
+
+                this.Column5.Visible = IsSelect;
 
                 if (mycon.State != ConnectionState.Open)
                 {
@@ -162,10 +208,10 @@ namespace MyDiplomProject
 	    */
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //MessageBox.Show(dataGridView1.Rows.Count.ToString() + Lock.ToString());
-            string str = "";
+            string str = "";    // ячейки табл. на форме
+            string DBH = "";    // поля в табл. в БД 
             bool isNull = false;
-           //* 
+            
             try
             {
                 if (!Lock)
@@ -173,40 +219,73 @@ namespace MyDiplomProject
                     // добавление информации
                     if (items != dataGridView1.Rows.Count)
                     {
-                        for (int i = 1; i < dataGridView1.ColumnCount - 1; i++)
-                            if (dataGridView1.Rows[e.RowIndex].Cells[i].Value == null)
+                        for (int i = 0; i < DBHeader.Length - 1; i++)
+                            if (dataGridView1.Rows[e.RowIndex].Cells[i + 1].Value == null)
                                 isNull = true;
 
                         if (!isNull)
                         {
-                            for (int i = 1; i < dataGridView1.ColumnCount - 1; i++)
+                            str = "";
+                            DBH = "";
+                            for (int i = 0; i < DBHeader.Length - 1; i++)
                             {
-                                if (i == 1)
-                                    str += "'" + dataGridView1.Rows[e.RowIndex].Cells[i].Value.ToString() + "'";
+                                if (i == 0)
+                                    str += "'" + dataGridView1.Rows[e.RowIndex].Cells[i + 1].Value.ToString() + "'";
                                 else
-                                    str += ",'" + dataGridView1.Rows[e.RowIndex].Cells[i].Value.ToString() + "'";
+                                    str += ",'" + dataGridView1.Rows[e.RowIndex].Cells[i + 1].Value.ToString() + "'";
                             }
 
-                            string a = "insert into spravochnik_dolgnostei (nazvanie, id_number) values (" + str + ")";
-                            cmd = new MySqlCommand(a, mycon);
+                            for (int i = 1; i < DBHeader.Length; i++)
+                            {
+                                if (i == 1)
+                                    DBH += DBHeader[i];
+                                else
+                                    DBH += ", " + DBHeader[i];
+                            }
+
+                            string sql = "insert into " + table + " (" + DBH + ") values (" + str + ")";
+                            cmd = new MySqlCommand(sql, mycon);
                             cmd.ExecuteNonQuery();
+                            MessageBox.Show("Данные " + str + " успешно добавлены!", "Добавление", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             lastIndex = count - Convert.ToInt32(comboBox1.SelectedItem) + 1;
+                            if (lastIndex < 0)
+                                lastIndex = 0;
                             LoadData();
                         }
                     }
                     else
                     //редактирование информации
                     {
-                        string a = "update spravochnik_dolgnostei set nazvanie = '" + dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() + "', id_number = '" + dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() + "' where pk_dolgnost = '" + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + "'";
-                        cmd = new MySqlCommand(a, mycon);
+                        str = "";
+                        DBH = "";
+
+                        for (int i = 1; i < DBHeader.Length; i++)
+                        {
+                            if (i == 1)
+                                if (dataGridView1.Rows[e.RowIndex].Cells[i].Value == null)
+                                    str += DBHeader[i] + " = ''";
+                                else
+                                    str += DBHeader[i] + " = '" + dataGridView1.Rows[e.RowIndex].Cells[i].Value.ToString() + "'";
+                            else
+                                if (dataGridView1.Rows[e.RowIndex].Cells[i].Value == null)
+                                    str += ", " + DBHeader[i] + " = ''";
+                                else
+                                    str += ", " + DBHeader[i] + " = '" + dataGridView1.Rows[e.RowIndex].Cells[i].Value.ToString() + "'";
+                        }
+
+                        DBH = DBHeader[0] + " = '" + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + "'";
+
+                        string sql = "update " + table + " set " + str + " where " + DBH;
+                        cmd = new MySqlCommand(sql, mycon);
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show("Данные " + str + " успешно изменены!", "Редактирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadData();
                     }
-                }//*/
+                }
             }
             catch
             {
-                MessageBox.Show("Ошибка при изменении / добавлении данных!\nИзменения не были сохранены!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка при изменении / добавлении данных!\nИзменения не были сохранены!\nПустые поля в таблице не допускаются!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LoadData();
             }
         }
@@ -246,7 +325,7 @@ namespace MyDiplomProject
 
         private void AddDojnost_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar != 32 && e.KeyChar != 8 && (e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 'А' || e.KeyChar > 'Я') && (e.KeyChar < 'а' || e.KeyChar > 'я') && e.KeyChar != 'ё' && e.KeyChar != 'Ё' && e.KeyChar != 17 && e.KeyChar != '.' && e.KeyChar != ',')
+            if (e.KeyChar != 32 && e.KeyChar != 8 && (e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 'А' || e.KeyChar > 'Я') && (e.KeyChar < 'а' || e.KeyChar > 'я') && e.KeyChar != 'ё' && e.KeyChar != 'Ё' && e.KeyChar != 17 && e.KeyChar != '.' && e.KeyChar != ',' && e.KeyChar != 3 && e.KeyChar != 22 && e.KeyChar != 26)
                 e.Handled = true;
         }
 
@@ -254,7 +333,13 @@ namespace MyDiplomProject
         {
             if (e.ColumnIndex == 3 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
-                MessageBox.Show("Delete");
+                MessageBox.Show("Delete " + e.RowIndex.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+            }
+
+            if (e.ColumnIndex == 4 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            {
+                PC_rezult = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                this.Close();
             }
         }
 
