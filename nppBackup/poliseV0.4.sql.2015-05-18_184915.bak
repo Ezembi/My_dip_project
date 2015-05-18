@@ -20,10 +20,8 @@ COMMENT = 'Вещественное доказательство';
 
 Create table Polise (
 	pk_polise Int NOT NULL AUTO_INCREMENT,
+	fio Varchar(200),
 	Number Char(200),
-	surname Varchar(200),
-	Pname Varchar(200),
-	second_name Varchar(200),
 	pk_zvanie Int NOT NULL,
 	pk_dolgnost Int NOT NULL,
 	pk_chin Int NOT NULL,
@@ -60,9 +58,7 @@ COMMENT = 'Протокол';
 
 Create table ponatoi (
 	pk_ponatoi Int NOT NULL AUTO_INCREMENT,
-	surname Varchar(200),
-	Pname Varchar(200),
-	second_name Char(20),
+	fio Varchar(200),
 	street Varchar(1000),
 	house Varchar(200),
 	room Varchar(200),
@@ -78,13 +74,10 @@ COMMENT = 'Справочник протоколов';
 
 Create table specialist (
 	pk_spec Int NOT NULL AUTO_INCREMENT,
-	surname Varchar(200),
-	Pname Varchar(200),
-	second_name Varchar(200),
+	fio Varchar(200),
 	pk_special Int NOT NULL,
  Primary Key (pk_spec)) ENGINE = MyISAM
 COMMENT = 'Специалист';
-
 
 Create table Spravochnik_dolgnostei (
 	pk_dolgnost Int NOT NULL AUTO_INCREMENT,
@@ -143,21 +136,19 @@ COMMENT = 'Справочник_областей_специализации';
 
 Create table Peoples (
 	PK_people Int NOT NULL AUTO_INCREMENT,
+	FIO Varchar(200),
 	primichanie Varchar(1000),
-	surname Varchar(200),
-	Pname Varchar(200),
-	second_name Varchar(200),
-	pk_postanov Int,
 	pk_protokol Int NOT NULL,
+	pk_postanov Int,
  Primary Key (PK_people)) ENGINE = MyISAM
 COMMENT = 'Лицо в постановлении (другие лица)';
 
 Create table Spravochnik_Pod (
 	PK_Raiona Double NOT NULL AUTO_INCREMENT,
 	Nazv Varchar(200),
-	id_number Varchar(500),
 	Raion Varchar(200),
 	pk_gorod Int NOT NULL,
+	id_number Varchar(500),
  Primary Key (PK_Raiona)) ENGINE = MyISAM
 COMMENT = 'Справочник подразделений следственного комитета';
 

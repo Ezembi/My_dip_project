@@ -472,8 +472,8 @@ namespace MyDiplomProject
 
         private void справочникСпециалистовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddSpecMen(User, Password);
-            f.ShowDialog();
+            //Form f = new AddSpecMen(User, Password);
+            //f.ShowDialog();
 
            // UpdateSpec();
         }

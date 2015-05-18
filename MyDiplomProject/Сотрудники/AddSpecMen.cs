@@ -9,10 +9,12 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using MySql;
 
+
 namespace MyDiplomProject
 {
-    public partial class AddDojnost : Form
+    public partial class AddSpecMen : Form
     {
+
         public MySqlConnection mycon;   // коннектор б/д
         public MySqlCommand cmd;        // sql комманды для работы с б/д
 
@@ -31,14 +33,15 @@ namespace MyDiplomProject
         string FormName;    // название формы
         public string PC_rezult;   // "возвращаемое" формаой значение
         bool IsSelect;      // true - форма вызвана для выбора элемента
+        string STable;      // ТАБЛИЦА БАЗЫ ДАННЫХ для сопудствующей информации
+        string[] DBSHeader; // название полей в таблице для sql запросов, для сопудствующей информации
 
-
-        public AddDojnost()
+        public AddSpecMen()
         {
             InitializeComponent();
         }
 
-        public AddDojnost(string _user, string _pass, string _database, string _ip, bool _Select, string _FormName, string _Table, string[] _HeaderText, string[] _DBHeader)
+        public AddSpecMen(string _user, string _pass, string _database, string _ip, bool _Select, string _FormName, string _Table, string[] _HeaderText, string[] _DBHeader, string _STable, string[] _DBSHeader)
         {
             User = _user;
             Password = _pass;
@@ -49,18 +52,17 @@ namespace MyDiplomProject
             DBHeader = _DBHeader;
             FormName = _FormName;
             IsSelect = _Select;
+            STable = _STable;
+            DBSHeader = _DBSHeader;
             InitializeComponent();
         }
 
-        /**
-        @brief загрузка информации из бд
-        @return Функция не возвращает значение
-        @param Указыватся без параметров
-        */
         void LoadData()
         {
             MySqlDataAdapter da;
             MySqlDataReader dr;
+            MySqlDataAdapter da2;
+            MySqlDataReader dr2;
             //проверка подключения к бд
             try
             {
@@ -73,8 +75,11 @@ namespace MyDiplomProject
                     sql = "";
                     sql += "select * from " + table + " where ";
                     sql += DBHeader[1] + " like '%" + textBox1.Text + "%' ";
-                    if (DBHeader.Length > 2)
-                        sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
+                    sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
+                    sql += "and " + DBHeader[3] + " like '%" + textBox3.Text + "%' ";
+
+                    if(textBox4.Text != "")
+                        sql += "and " + DBHeader[4] + " = '" + textBox4.Text + "' ";
 
                     cmd = new MySqlCommand(sql, mycon);
 
@@ -95,8 +100,10 @@ namespace MyDiplomProject
                     sql = "";
                     sql += "select * from " + table + " where ";
                     sql += DBHeader[1] + " like '%" + textBox1.Text + "%' ";
-                    if (DBHeader.Length > 2)
-                        sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
+                    sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
+                    sql += "and " + DBHeader[3] + " like '%" + textBox3.Text + "%' ";
+                    if (textBox4.Text != "")
+                        sql += "and " + DBHeader[4] + " = '" + textBox4.Text + "' ";
                     sql += "limit " + lastIndex.ToString() + ", " + comboBox1.SelectedItem.ToString();
 
                     cmd = new MySqlCommand(sql, mycon);
@@ -107,6 +114,7 @@ namespace MyDiplomProject
                     //выборка по запросу
                     da = new MySqlDataAdapter(cmd);
                     dr = cmd.ExecuteReader();
+                    
 
                     toolStripProgressBar1.Visible = true;
                     toolStripProgressBar1.Value = 0;
@@ -119,20 +127,46 @@ namespace MyDiplomProject
                     {
                         dataGridView1.Rows.Add();
                         dataGridView1.Rows[i].Cells[0].Value = dr[0].ToString();    //PC
-                        dataGridView1.Rows[i].Cells[1].Value = dr[1].ToString();    //название
-                        if (DBHeader.Length > 2)
-                            dataGridView1.Rows[i].Cells[2].Value = dr[2].ToString();    //id номер
-                        dataGridView1.Rows[i].Cells[3].Value = "Удалить";           //Удаление
-                        dataGridView1.Rows[i].Cells[4].Value = "Выбрать";           //Выбор
-                        
+                        dataGridView1.Rows[i].Cells[1].Value = dr[1].ToString();    //фамилия
+                        dataGridView1.Rows[i].Cells[2].Value = dr[2].ToString();    //имя
+                        dataGridView1.Rows[i].Cells[3].Value = dr[3].ToString();    //отчество
+                        dataGridView1.Rows[i].Cells[4].Value = dr[4].ToString();    //id_spec
+
+                        dataGridView1.Rows[i].Cells[6].Value = "Удалить";           //Удаление
+                        dataGridView1.Rows[i].Cells[7].Value = "Выбрать";           //Выбор
+
                         i++;
                         toolStripProgressBar1.Value = (i * 100) / count;
                     }
                     dr.Close();
 
+                    // специализация
+                    for (int ii = 0; ii < dataGridView1.Rows.Count - 1; ii++)
+                    {
+                        sql = "select ";
+                        for (int j = 1; j < DBSHeader.Length; j++)
+                        {
+                            if (j == 1)
+                                sql += DBSHeader[j];
+                            else
+                                sql += ", " + DBSHeader[j];
+                        }
+                        sql += " from " + STable + " where " + DBSHeader[0] + " = " + dataGridView1.Rows[ii].Cells[4].Value.ToString();
+ 
+
+                        //sql = "select nazvanie from " + STable + " where " + DBSHeader[0] + " = " + dataGridView1.Rows[ii].Cells[4].Value.ToString();
+                        cmd = new MySqlCommand(sql, mycon);
+                        cmd.ExecuteNonQuery();
+                        da2 = new MySqlDataAdapter(cmd);
+                        dr2 = cmd.ExecuteReader();
+                        if (dr2.Read())
+                            dataGridView1.Rows[ii].Cells[5].Value = dr2[0].ToString();
+                        dr2.Close();
+                    }
+
                     dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[1];     //делаем последнюю ячейку активной
                     toolStripProgressBar1.Value = 100;
-                    
+
                     toolStripProgressBar1.Visible = false;                          // убераем прогресс бар
 
                     dataGridView1.Enabled = true;                                   // делаем таблицу доступной
@@ -148,16 +182,13 @@ namespace MyDiplomProject
                 dataGridView1.Enabled = true;
                 CheackButton();
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Ошибка при загрузке данных!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        /**
-		@brief Подключение к б/д
-	    */
-        private void AddDojnost_Load(object sender, EventArgs e)
+        private void AddSpecMen_Load(object sender, EventArgs e)
         {
             try
             {
@@ -176,6 +207,7 @@ namespace MyDiplomProject
                 {
                     dataGridView1.Columns[i + 1].HeaderText = HeaderText[i];
                 }
+                dataGridView1.Columns[HeaderText.Length+1].HeaderText = HeaderText[HeaderText.Length - 1];
 
                 //скрытие лишних полей таблици
                 if (HeaderText.Length == 1)
@@ -184,6 +216,8 @@ namespace MyDiplomProject
                         dataGridView1.Columns[i].Visible = false;
                     textBox2.Visible = false;
                 }
+
+                button7.Text = HeaderText[HeaderText.Length - 1];
 
                 this.Text = FormName;
 
@@ -202,16 +236,33 @@ namespace MyDiplomProject
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //button1.Enabled = false;
+            //if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
+            //{
+            //    cmd.CommandText = "SELECT * FROM SPECIALIST, PROTOKOL WHERE PROTOKOL.PK_SPEC = SPECIALIST.PK_SPEC AND SPECIALIST.FIO = '" + oldCell0 + "' AND SPECIALIST.PK_SPECIAL = (SELECT SPRAVOCHNIK_OBLASTEI_SPEC.PK_SPECIAL FROM SPRAVOCHNIK_OBLASTEI_SPEC WHERE SPRAVOCHNIK_OBLASTEI_SPEC.NAZVANIE = '" + oldCell1 + "')";
+            //    dr = cmd.ExecuteReader();
+            //    if (!dr.Read())
+            //    {
+            //        cmd.CommandText = "DELETE FROM SPECIALIST WHERE SPECIALIST.FIO = '" + oldCell0 + "' AND SPECIALIST.PK_SPECIAL = (SELECT SPRAVOCHNIK_OBLASTEI_SPEC.PK_SPECIAL FROM SPRAVOCHNIK_OBLASTEI_SPEC WHERE SPRAVOCHNIK_OBLASTEI_SPEC.NAZVANIE = '" + oldCell1 + "')";
+            //        cmd.ExecuteNonQuery();
 
-        /**
-		@brief добавление / редактирование информации в бд
-	    */
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+            //        Lock = true;
+            //        UpDate();
+            //        Lock = false;
+            //    }
+            //    else
+            //        MessageBox.Show("Необходимо удалить или изменить все протоколы с данным специалистом!", "Удаление данного специалиста невозможно!");
+            //}
+        }
+
+        private void dataGridView1_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
         {
             string str = "";    // ячейки табл. на форме
             string DBH = "";    // поля в табл. в БД 
             bool isNull = false;
-            
+
             try
             {
                 if (!Lock)
@@ -290,40 +341,7 @@ namespace MyDiplomProject
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*button1.Enabled = false;
-
-            if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
-            {
-                cmd.CommandText = "SELECT * FROM SPRAVOCHNIK_DOLGNOSTNIX_LIC, POLISE WHERE POLISE.PK_DOLGNOSTOE_LICO = SPRAVOCHNIK_DOLGNOSTNIX_LIC.PK_DOLGNOSTOE_LICO AND SPRAVOCHNIK_DOLGNOSTNIX_LIC.NAZVANIE = '" + oldValue + "'";
-                dr = cmd.ExecuteReader();
-                if (!dr.Read())
-                {
-                    cmd.CommandText = " DELETE FROM SPRAVOCHNIK_DOLGNOSTNIX_LIC WHERE NAZVANIE = '" + oldValue + "'";
-                    cmd.ExecuteNonQuery();
-
-                    dataGridView1.Rows.Clear();
-
-                    cmd.CommandText = "SELECT NAZVANIE from SPRAVOCHNIK_DOLGNOSTNIX_LIC";
-                    dr = cmd.ExecuteReader();
-                    int i = 0;
-                    Lock = true;
-                    while (dr.Read())
-                    {
-                        dataGridView1.Rows.Add();
-                        dataGridView1.Rows[i].Cells[0].Value = dr[0].ToString();
-                        i++;
-                    }
-                    items = dataGridView1.Rows.Count;
-                    Lock = false;
-                }
-                else
-                    MessageBox.Show("Необходимо удалить или изменить всех уполномоченных с данным должностным лицом!", "Удаление данного должностного лица невозможно!");
-            }*/
-        }
-
-        private void AddDojnost_KeyPress(object sender, KeyPressEventArgs e)
+        private void AddSpecMen_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 32 && e.KeyChar != 8 && (e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 'А' || e.KeyChar > 'Я') && (e.KeyChar < 'а' || e.KeyChar > 'я') && e.KeyChar != 'ё' && e.KeyChar != 'Ё' && e.KeyChar != 17 && e.KeyChar != '.' && e.KeyChar != ',' && e.KeyChar != 3 && e.KeyChar != 22 && e.KeyChar != 26)
                 e.Handled = true;
@@ -331,22 +349,41 @@ namespace MyDiplomProject
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 3 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
                 MessageBox.Show("Delete " + e.RowIndex.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
 
-            if (e.ColumnIndex == 4 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 7 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
                 PC_rezult = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
                 this.Close();
             }
+
+            if (e.ColumnIndex == 5 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            {
+                AddDojnost f;
+                switch (STable)
+                {
+                    case "spravochnik_oblastei_spec": f = new AddDojnost(User, Password, Database, Ip, true, "Справочник областей специализации", "spravochnik_oblastei_spec", new string[] { "Название", "Идентификационный номер" }, new string[] { "pk_special", "nazvanie", "id_number" }); break;
+                    case "spravochnik_gorodov": f = new AddDojnost(User, Password, Database, Ip, true, "Справочник городов", "spravochnik_gorodov", new string[] { "Город", "Идентификационный номер" }, new string[] { "pk_gorod", "nazvanie", "id_number" }); break;
+                    default: f = new AddDojnost(User, Password, Database, Ip, true, "Справочник городов", "spravochnik_gorodov", new string[] { "Город", "Идентификационный номер" }, new string[] { "pk_gorod", "nazvanie", "id_number" }); break;
+                }
+                
+                f.ShowDialog();
+                string rezult = "";
+                rezult = f.PC_rezult;
+                if (rezult != null)
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells[4].Value = rezult;
+                }
+                else
+                    if (dataGridView1.Rows[e.RowIndex].Cells[4].Value != null)
+                        rezult = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            }
         }
 
-        /**
-		@brief загрузка формы
-	    */
-        private void AddDojnost_Shown(object sender, EventArgs e)
+        private void AddSpecMen_Shown(object sender, EventArgs e)
         {
             //загрузка информации
             LoadData();
@@ -412,6 +449,33 @@ namespace MyDiplomProject
 
         private void button2_Click(object sender, EventArgs e)
         {
+            LoadData();
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            AddDojnost f;
+            switch (STable)
+            {
+                case "spravochnik_oblastei_spec": f = new AddDojnost(User, Password, Database, Ip, true, "Справочник областей специализации", "spravochnik_oblastei_spec", new string[] { "Название", "Идентификационный номер" }, new string[] { "pk_special", "nazvanie", "id_number" }); break;
+                case "spravochnik_gorodov": f = new AddDojnost(User, Password, Database, Ip, true, "Справочник городов", "spravochnik_gorodov", new string[] { "Город", "Идентификационный номер" }, new string[] { "pk_gorod", "nazvanie", "id_number" }); break;
+                default: f = new AddDojnost(User, Password, Database, Ip, true, "Справочник городов", "spravochnik_gorodov", new string[] { "Город", "Идентификационный номер" }, new string[] { "pk_gorod", "nazvanie", "id_number" }); break;
+            }
+
+            f.ShowDialog();
+            string rezult = "";
+            rezult = f.PC_rezult;
+            if (rezult != null)
+            {
+                textBox4.Text = rezult;
+            }
+            else
+                textBox4.Text = "";
             LoadData();
         }
     }

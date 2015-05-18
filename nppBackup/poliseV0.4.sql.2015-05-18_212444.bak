@@ -155,9 +155,9 @@ COMMENT = 'Лицо в постановлении (другие лица)';
 Create table Spravochnik_Pod (
 	PK_Raiona Double NOT NULL AUTO_INCREMENT,
 	Nazv Varchar(200),
-	id_number Varchar(500),
 	Raion Varchar(200),
 	pk_gorod Int NOT NULL,
+	id_number Varchar(500),
  Primary Key (PK_Raiona)) ENGINE = MyISAM
 COMMENT = 'Справочник подразделений следственного комитета';
 

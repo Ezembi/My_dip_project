@@ -125,10 +125,10 @@
     <Compile Include="old\AddSpec.Designer.cs">
       <DependentUpon>AddSpec.cs</DependentUpon>
     </Compile>
-    <Compile Include="old\AddSpecMen.cs">
+    <Compile Include="Сотрудники\AddSpecMen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="old\AddSpecMen.Designer.cs">
+    <Compile Include="Сотрудники\AddSpecMen.Designer.cs">
       <DependentUpon>AddSpecMen.cs</DependentUpon>
     </Compile>
     <Compile Include="old\AddSvet.cs">
@@ -202,7 +202,7 @@
     <EmbeddedResource Include="old\AddSpec.resx">
       <DependentUpon>AddSpec.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="old\AddSpecMen.resx">
+    <EmbeddedResource Include="Сотрудники\AddSpecMen.resx">
       <DependentUpon>AddSpecMen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="old\AddSvet.resx">
@@ -239,9 +239,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Сотрудники\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

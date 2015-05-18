@@ -101,14 +101,14 @@ namespace MyDiplomProject
 
         private void справочникЗванийToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddDojnost f = new AddDojnost(User, Password, Database, Ip,false, "Справочник званий", "spravochnik_zvanii", new string[] { "Звание", "Идентификационный номер" }, new string[] { "pk_zvanie", "nazvanie", "id_number" });
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник званий", "spravochnik_zvanii", new string[] { "Звание", "Идентификационный номер" }, new string[] { "pk_zvanie", "nazvanie", "id_number" });
             f.ShowDialog();
         }
 
         private void справочникСпособовУпаковкиВещДокToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Form f = new AddDojnost(User, Password, Database, Ip, "Справочник способов упаковки вещественных доказательств", "ypakovka", new string[] { "Способ" }, new string[] { "pk_ypakovka", "sposob" });
-           // f.ShowDialog();
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник способов упаковки вещественных доказательств", "ypakovka", new string[] { "Способ" }, new string[] { "pk_ypakovka", "sposob" });
+            f.ShowDialog();
         }
 
         private void справочникТехническихСредствToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,7 +119,7 @@ namespace MyDiplomProject
 
         private void справочникОбластейСпециализацииToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddSpec(User, Password);
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник областей специализации", "spravochnik_oblastei_spec", new string[] { "Название", "Идентификационный номер" }, new string[] { "pk_special", "nazvanie", "id_number" });
             f.ShowDialog();
         }
 
@@ -138,7 +138,7 @@ namespace MyDiplomProject
 
         private void справочникГоробовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddGorod(User, Password);
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник городов", "spravochnik_gorodov", new string[] { "Город", "Идентификационный номер" }, new string[] { "pk_gorod", "nazvanie", "id_number" });
             f.ShowDialog();
         }
 
@@ -186,7 +186,7 @@ namespace MyDiplomProject
 
         private void справочникСпециалистовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddSpecMen(User, Password);
+            AddSpecMen f = new AddSpecMen(User, Password, Database, Ip, false, "Справочник специалистов", "specialist", new string[] { "Фамилия", "Имя", "Отчество", "Область специализации" }, new string[] { "pk_spec", "surname", "Pname", "second_name", "pk_special" }, "spravochnik_oblastei_spec", new string[] { "pk_special", "nazvanie" });
             f.ShowDialog();
         }
 
@@ -235,6 +235,12 @@ namespace MyDiplomProject
         {
             button2.Enabled = true;
             index = listBox1.SelectedItem.ToString();
+        }
+
+        private void справочникПодразделенийСледственногоКомитетаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddSpecMen f = new AddSpecMen(User, Password, Database, Ip, false, "Справочник подразделений следственного комитета", "spravochnik_pod", new string[] { "Название", "Идентификационный номер", "Район", "Город" }, new string[] { "PK_Raiona", "Nazv", "id_number", "Raion", "pk_gorod" }, "spravochnik_gorodov", new string[] { "pk_gorod", "nazvanie" });
+            f.ShowDialog();
         }
     }
 }
