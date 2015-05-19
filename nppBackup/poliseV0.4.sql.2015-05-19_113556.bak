@@ -20,7 +20,7 @@ COMMENT = 'Вещественное доказательство';
 
 Create table Polise (
 	pk_polise Int NOT NULL AUTO_INCREMENT,
-	id_number Varchar(200),
+	Number Char(200),
 	surname Varchar(200),
 	Pname Varchar(200),
 	second_name Varchar(200),
@@ -153,7 +153,7 @@ Create table Peoples (
 COMMENT = 'Лицо в постановлении (другие лица)';
 
 Create table Spravochnik_Pod (
-	PK_Raiona Int NOT NULL AUTO_INCREMENT,
+	PK_Raiona Double NOT NULL AUTO_INCREMENT,
 	Nazv Varchar(200),
 	id_number Varchar(500),
 	Raion Varchar(200),
@@ -171,7 +171,7 @@ Create table Delo (
 	DateofClose Date,
 	Comment Varchar(500),
 	pk_polise Int NOT NULL,
-	PK_Raiona Int NOT NULL,
+	PK_Raiona Double NOT NULL,
  Primary Key (PK_Dela)) ENGINE = MyISAM
 COMMENT = 'Уголовное дело (материал проверки)';
 

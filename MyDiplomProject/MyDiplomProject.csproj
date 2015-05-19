@@ -34,6 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,59 +49,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="old\AddAct.cs">
+    <Compile Include="CriminalAffair.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="old\AddAct.Designer.cs">
-      <DependentUpon>AddAct.cs</DependentUpon>
+    <Compile Include="CriminalAffair.Designer.cs">
+      <DependentUpon>CriminalAffair.cs</DependentUpon>
     </Compile>
-    <Compile Include="dellete\AddAdres.cs">
+    <Compile Include="Справочники\Directories.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dellete\AddAdres.Designer.cs">
-      <DependentUpon>AddAdres.cs</DependentUpon>
+    <Compile Include="Справочники\Directories.Designer.cs">
+      <DependentUpon>Directories.cs</DependentUpon>
     </Compile>
-    <Compile Include="Справочники\AddDojnost.cs">
+    <Compile Include="Сотрудники\Policeman.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Справочники\AddDojnost.Designer.cs">
-      <DependentUpon>AddDojnost.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dellete\AddDolgnost.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dellete\AddDolgnost.Designer.cs">
-      <DependentUpon>AddDolgnost.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\AddGorod.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddGorod.Designer.cs">
-      <DependentUpon>AddGorod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\AddMaterial.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddMaterial.Designer.cs">
-      <DependentUpon>AddMaterial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\AddOper.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddOper.Designer.cs">
-      <DependentUpon>AddOper.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dellete\AddPeredal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dellete\AddPeredal.Designer.cs">
-      <DependentUpon>AddPeredal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\AddPogoda.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddPogoda.Designer.cs">
-      <DependentUpon>AddPogoda.cs</DependentUpon>
+    <Compile Include="Сотрудники\Policeman.Designer.cs">
+      <DependentUpon>Policeman.cs</DependentUpon>
     </Compile>
     <Compile Include="old\AddProtokol.cs">
       <SubType>Form</SubType>
@@ -107,53 +73,11 @@
     <Compile Include="old\AddProtokol.Designer.cs">
       <DependentUpon>AddProtokol.cs</DependentUpon>
     </Compile>
-    <Compile Include="old\AddSotrud.cs">
+    <Compile Include="Сотрудники\SpecOrPodrazd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="old\AddSotrud.Designer.cs">
-      <DependentUpon>AddSotrud.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dellete\AddSotrudnik.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dellete\AddSotrudnik.Designer.cs">
-      <DependentUpon>AddSotrudnik.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\AddSpec.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddSpec.Designer.cs">
-      <DependentUpon>AddSpec.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Сотрудники\AddSpecMen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Сотрудники\AddSpecMen.Designer.cs">
-      <DependentUpon>AddSpecMen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\AddSvet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddSvet.Designer.cs">
-      <DependentUpon>AddSvet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\AddTexSred.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddTexSred.Designer.cs">
-      <DependentUpon>AddTexSred.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\AddYpak.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddYpak.Designer.cs">
-      <DependentUpon>AddYpak.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\AddZvanie.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddZvanie.Designer.cs">
-      <DependentUpon>AddZvanie.cs</DependentUpon>
+    <Compile Include="Сотрудники\SpecOrPodrazd.Designer.cs">
+      <DependentUpon>SpecOrPodrazd.cs</DependentUpon>
     </Compile>
     <Compile Include="old\Form1.cs">
       <SubType>Form</SubType>
@@ -163,59 +87,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="old\AddAct.resx">
-      <DependentUpon>AddAct.cs</DependentUpon>
+    <EmbeddedResource Include="CriminalAffair.resx">
+      <DependentUpon>CriminalAffair.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dellete\AddAdres.resx">
-      <DependentUpon>AddAdres.cs</DependentUpon>
+    <EmbeddedResource Include="Справочники\Directories.resx">
+      <DependentUpon>Directories.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Справочники\AddDojnost.resx">
-      <DependentUpon>AddDojnost.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dellete\AddDolgnost.resx">
-      <DependentUpon>AddDolgnost.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\AddGorod.resx">
-      <DependentUpon>AddGorod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\AddMaterial.resx">
-      <DependentUpon>AddMaterial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\AddOper.resx">
-      <DependentUpon>AddOper.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dellete\AddPeredal.resx">
-      <DependentUpon>AddPeredal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\AddPogoda.resx">
-      <DependentUpon>AddPogoda.cs</DependentUpon>
+    <EmbeddedResource Include="Сотрудники\Policeman.resx">
+      <DependentUpon>Policeman.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="old\AddProtokol.resx">
       <DependentUpon>AddProtokol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="old\AddSotrud.resx">
-      <DependentUpon>AddSotrud.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dellete\AddSotrudnik.resx">
-      <DependentUpon>AddSotrudnik.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\AddSpec.resx">
-      <DependentUpon>AddSpec.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Сотрудники\AddSpecMen.resx">
-      <DependentUpon>AddSpecMen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\AddSvet.resx">
-      <DependentUpon>AddSvet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\AddTexSred.resx">
-      <DependentUpon>AddTexSred.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\AddYpak.resx">
-      <DependentUpon>AddYpak.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\AddZvanie.resx">
-      <DependentUpon>AddZvanie.cs</DependentUpon>
+    <EmbeddedResource Include="Сотрудники\SpecOrPodrazd.resx">
+      <DependentUpon>SpecOrPodrazd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="old\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

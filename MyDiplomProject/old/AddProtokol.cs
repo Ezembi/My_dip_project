@@ -371,62 +371,46 @@ namespace MyDiplomProject
 
         private void справочникЗванийToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddZvanie(User, Password);
-            f.ShowDialog();
         }
 
         private void справочникСпособовУпаковкиВещДокToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddYpak(User, Password);
-            f.ShowDialog();
 
           //  UpdateSposobYpacovki();
         }
 
         private void справочникТехническихСредствToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddTexSred(User, Password);
-            f.ShowDialog();
 
           //  UpdateTexCredstvo();
         }
 
         private void справочникОбластейСпециализацииToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddSpec(User, Password);
-            f.ShowDialog();
 
           //  UpdateSpec();
         }
 
         private void справочникПогодныхУсловийToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddPogoda(User, Password);
-            f.ShowDialog();
 
            // UpdatePodoga();
         }
 
         private void справочникМатериаловУпаковкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddMaterial(User, Password);
-            f.ShowDialog();
 
            // UpdateYpacovka();
         }
 
         private void справочникГоробовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddGorod(User, Password);
-            f.ShowDialog();
 
           //  UpdateGorod();
         }
 
         private void справочникДолжностейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddDolgnost(User, Password);
-            f.ShowDialog();
         }
 
         private void справочникДолжностныхЛицToolStripMenuItem_Click(object sender, EventArgs e)
@@ -439,35 +423,25 @@ namespace MyDiplomProject
 
         private void справочникТабкльныхНомеровToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddSotrudnik(User, Password);
-            f.ShowDialog();
         }
 
         private void справочникОсвещённостиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddSvet(User, Password);
-            f.ShowDialog();
 
           //  UpdateSvet();
         }
 
         private void справочникАдресовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddAdres(User, Password);
-            f.ShowDialog();
            // UpdateAdress();
         }
 
         private void справочникЛицПередавшихВещДокНаХранниеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddPeredal(User, Password);
-            f.ShowDialog();
         }
 
         private void справочникХранителейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddSotrud(User, Password);
-            f.ShowDialog();
         }
 
         private void справочникСпециалистовToolStripMenuItem_Click(object sender, EventArgs e)
@@ -480,8 +454,8 @@ namespace MyDiplomProject
 
         private void справочникToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new AddOper(User, Password);
-            f.ShowDialog();
+            //Form f = new AddOper(User, Password);
+            //f.ShowDialog();
            // UpdatePolise();
         }
 

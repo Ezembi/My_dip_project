@@ -116,7 +116,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(312, 48);
+            this.dateTimePicker1.Location = new System.Drawing.Point(244, 48);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(352, 20);
             this.dateTimePicker1.TabIndex = 1;
@@ -213,7 +213,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(652, 59);
+            this.textBox1.Size = new System.Drawing.Size(584, 59);
             this.textBox1.TabIndex = 10;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -235,7 +235,7 @@
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(652, 56);
+            this.textBox2.Size = new System.Drawing.Size(584, 56);
             this.textBox2.TabIndex = 13;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
@@ -335,7 +335,7 @@
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox5.Size = new System.Drawing.Size(652, 49);
+            this.textBox5.Size = new System.Drawing.Size(584, 49);
             this.textBox5.TabIndex = 24;
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
@@ -369,7 +369,7 @@
             this.Column8});
             this.dataGridView2.Location = new System.Drawing.Point(11, 670);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(487, 134);
+            this.dataGridView2.Size = new System.Drawing.Size(419, 134);
             this.dataGridView2.TabIndex = 28;
             this.dataGridView2.TabStop = false;
             this.dataGridView2.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellEnter);
@@ -458,7 +458,7 @@
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Location = new System.Drawing.Point(145, 813);
             this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(353, 21);
+            this.comboBox7.Size = new System.Drawing.Size(285, 21);
             this.comboBox7.TabIndex = 35;
             this.comboBox7.SelectedValueChanged += new System.EventHandler(this.comboBox7_SelectedValueChanged);
             // 
@@ -481,7 +481,7 @@
             this.Column7});
             this.dataGridView3.Location = new System.Drawing.Point(11, 866);
             this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(487, 107);
+            this.dataGridView3.Size = new System.Drawing.Size(419, 107);
             this.dataGridView3.TabIndex = 37;
             this.dataGridView3.TabStop = false;
             this.dataGridView3.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellEnter);
@@ -674,7 +674,7 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(504, 670);
+            this.button2.Location = new System.Drawing.Point(436, 670);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 23);
             this.button2.TabIndex = 40;
@@ -686,7 +686,7 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(504, 866);
+            this.button3.Location = new System.Drawing.Point(436, 866);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(161, 23);
             this.button3.TabIndex = 41;
@@ -701,7 +701,7 @@
             this.comboBox8.FormattingEnabled = true;
             this.comboBox8.Location = new System.Drawing.Point(216, 625);
             this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(207, 21);
+            this.comboBox8.Size = new System.Drawing.Size(139, 21);
             this.comboBox8.TabIndex = 42;
             this.comboBox8.SelectedValueChanged += new System.EventHandler(this.comboBox8_SelectedValueChanged);
             // 
@@ -717,7 +717,7 @@
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
             this.textBox6.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox6.Size = new System.Drawing.Size(651, 58);
+            this.textBox6.Size = new System.Drawing.Size(583, 58);
             this.textBox6.TabIndex = 43;
             this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 

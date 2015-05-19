@@ -322,6 +322,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
+            this.KeyPreview = true;
             this.Name = "AddSpecMen";
             this.Text = "Список специалистов";
             this.Load += new System.EventHandler(this.AddSpecMen_Load);

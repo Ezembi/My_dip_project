@@ -29,17 +29,25 @@ namespace MyDiplomProject
         string[] HeaderText;// название полей в таблице для отображения
         string[] DBHeader;  // название полей в таблице для sql запросов
         string FormName;    // название формы
-        public string PC_rezult;   // "возвращаемое" формаой значение
+        public string PC_rezult;   // "возвращаемое" формаой значение первичного ключа
+        public string Rezult;   // "возвращаемое" формаой значение полей
         bool IsSelect;      // true - форма вызвана для выбора элемента
-        string STable;      // ТАБЛИЦА БАЗЫ ДАННЫХ для сопудствующей информации
-        string[] DBSHeader; // название полей в таблице для sql запросов, для сопудствующей информации
+
+        string STable1;      // ТАБЛИЦА1 БАЗЫ ДАННЫХ для сопудствующей информации
+        string[] DBSHeader1; // название полей в таблице1 для sql запросов, для сопудствующей информации
+
+        string STable2;      // ТАБЛИЦА2 БАЗЫ ДАННЫХ для сопудствующей информации
+        string[] DBSHeader2; // название полей в таблице2 для sql запросов, для сопудствующей информации
+
+        string STable3;      // ТАБЛИЦА3 БАЗЫ ДАННЫХ для сопудствующей информации
+        string[] DBSHeader3; // название полей в таблице3 для sql запросов, для сопудствующей информации
 
         public AddOper()
         {
             InitializeComponent();
         }
 
-        public AddOper(string _user, string _pass, string _database, string _ip, bool _Select, string _FormName, string _Table, string[] _HeaderText, string[] _DBHeader, string _STable, string[] _DBSHeader)
+        public AddOper(string _user, string _pass, string _database, string _ip, bool _Select, string _FormName, string _Table, string[] _HeaderText, string[] _DBHeader, string _STable1, string[] _DBSHeader1, string _STable2, string[] _DBSHeader2, string _STable3, string[] _DBSHeader3)
         {
             User = _user;
             Password = _pass;
@@ -50,8 +58,12 @@ namespace MyDiplomProject
             DBHeader = _DBHeader;
             FormName = _FormName;
             IsSelect = _Select;
-            STable = _STable;
-            DBSHeader = _DBSHeader;
+            STable1 = _STable1;
+            DBSHeader1 = _DBSHeader1;
+            STable2 = _STable2;
+            DBSHeader2 = _DBSHeader2;
+            STable3 = _STable3;
+            DBSHeader3 = _DBSHeader3;
             InitializeComponent();
         }
 
@@ -59,8 +71,7 @@ namespace MyDiplomProject
         {
             MySqlDataAdapter da;
             MySqlDataReader dr;
-            MySqlDataAdapter da2;
-            MySqlDataReader dr2;
+
             //проверка подключения к бд
             try
             {
@@ -75,9 +86,14 @@ namespace MyDiplomProject
                     sql += DBHeader[1] + " like '%" + textBox1.Text + "%' ";
                     sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
                     sql += "and " + DBHeader[3] + " like '%" + textBox3.Text + "%' ";
+                    sql += "and " + DBHeader[4] + " like '%" + textBox4.Text + "%' ";
 
-                    if (textBox4.Text != "")
-                        sql += "and " + DBHeader[4] + " = '" + textBox4.Text + "' ";
+                    if (textBox8.Text != "")
+                        sql += "and " + DBHeader[5] + " = '" + textBox8.Text + "' ";
+                    if (textBox9.Text != "")
+                        sql += "and " + DBHeader[6] + " = '" + textBox9.Text + "' ";
+                    if (textBox10.Text != "")
+                        sql += "and " + DBHeader[7] + " = '" + textBox10.Text + "' ";
 
                     cmd = new MySqlCommand(sql, mycon);
 
@@ -100,8 +116,15 @@ namespace MyDiplomProject
                     sql += DBHeader[1] + " like '%" + textBox1.Text + "%' ";
                     sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
                     sql += "and " + DBHeader[3] + " like '%" + textBox3.Text + "%' ";
-                    if (textBox4.Text != "")
-                        sql += "and " + DBHeader[4] + " = '" + textBox4.Text + "' ";
+                    sql += "and " + DBHeader[4] + " like '%" + textBox4.Text + "%' ";
+
+                    if (textBox8.Text != "")
+                        sql += "and " + DBHeader[5] + " = '" + textBox8.Text + "' ";
+                    if (textBox9.Text != "")
+                        sql += "and " + DBHeader[6] + " = '" + textBox9.Text + "' ";
+                    if (textBox10.Text != "")
+                        sql += "and " + DBHeader[7] + " = '" + textBox10.Text + "' ";
+
                     sql += "limit " + lastIndex.ToString() + ", " + comboBox1.SelectedItem.ToString();
 
                     cmd = new MySqlCommand(sql, mycon);
@@ -141,28 +164,86 @@ namespace MyDiplomProject
                     }
                     dr.Close();
 
-                    // специализация
+                    // звание
                     for (int ii = 0; ii < dataGridView1.Rows.Count - 1; ii++)
                     {
                         sql = "select ";
-                        for (int j = 1; j < DBSHeader.Length; j++)
+                        for (int j = 1; j < DBSHeader1.Length; j++)
                         {
                             if (j == 1)
-                                sql += DBSHeader[j];
+                                sql += DBSHeader1[j];
                             else
-                                sql += ", " + DBSHeader[j];
+                                sql += ", " + DBSHeader1[j];
                         }
-                        sql += " from " + STable + " where " + DBSHeader[0] + " = " + dataGridView1.Rows[ii].Cells[4].Value.ToString();
+                        // генерация sql комманды
+                        sql += " from " + STable1 + " where " + DBSHeader1[0] + " = " + dataGridView1.Rows[ii].Cells[5].Value.ToString();
 
-
-                        //sql = "select nazvanie from " + STable + " where " + DBSHeader[0] + " = " + dataGridView1.Rows[ii].Cells[4].Value.ToString();
+                        //получение комманды и коннекта
                         cmd = new MySqlCommand(sql, mycon);
+
+                        //вополнение запроса
                         cmd.ExecuteNonQuery();
-                        da2 = new MySqlDataAdapter(cmd);
-                        dr2 = cmd.ExecuteReader();
-                        if (dr2.Read())
-                            dataGridView1.Rows[ii].Cells[5].Value = dr2[0].ToString();
-                        dr2.Close();
+                        da = new MySqlDataAdapter(cmd);
+
+                        //получение выборки
+                        dr = cmd.ExecuteReader();
+
+                        // заполнения поля 
+                        if (dr.Read())
+                            dataGridView1.Rows[ii].Cells[8].Value = dr[0].ToString();
+                        dr.Close();
+                    }
+
+                    // должность
+                    for (int ii = 0; ii < dataGridView1.Rows.Count - 1; ii++)
+                    {
+                        sql = "select ";
+                        for (int j = 1; j < DBSHeader2.Length; j++)
+                        {
+                            if (j == 1)
+                                sql += DBSHeader2[j];
+                            else
+                                sql += ", " + DBSHeader2[j];
+                        }
+                        // генерация sql комманды
+                        sql += " from " + STable2 + " where " + DBSHeader2[0] + " = " + dataGridView1.Rows[ii].Cells[6].Value.ToString();
+                        //получение комманды и коннекта
+                        cmd = new MySqlCommand(sql, mycon);
+                        //вополнение запроса
+                        cmd.ExecuteNonQuery();
+                        da = new MySqlDataAdapter(cmd);
+                        //получение выборки
+                        dr = cmd.ExecuteReader();
+                        // заполнения поля
+                        if (dr.Read())
+                            dataGridView1.Rows[ii].Cells[9].Value = dr[0].ToString();
+                        dr.Close();
+                    }
+
+                    // чин
+                    for (int ii = 0; ii < dataGridView1.Rows.Count - 1; ii++)
+                    {
+                        sql = "select ";
+                        for (int j = 1; j < DBSHeader3.Length; j++)
+                        {
+                            if (j == 1)
+                                sql += DBSHeader3[j];
+                            else
+                                sql += ", " + DBSHeader3[j];
+                        }
+                        // генерация sql комманды
+                        sql += " from " + STable3 + " where " + DBSHeader3[0] + " = " + dataGridView1.Rows[ii].Cells[7].Value.ToString();
+                        //получение комманды и коннекта
+                        cmd = new MySqlCommand(sql, mycon);
+                        //вополнение запроса
+                        cmd.ExecuteNonQuery();
+                        da = new MySqlDataAdapter(cmd);
+                        //получение выборки
+                        dr = cmd.ExecuteReader();
+                        // заполнения поля
+                        if (dr.Read())
+                            dataGridView1.Rows[ii].Cells[10].Value = dr[0].ToString();
+                        dr.Close();
                     }
 
                     dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[1];     //делаем последнюю ячейку активной
@@ -204,11 +285,15 @@ namespace MyDiplomProject
                 comboBox1.SelectedIndex = 0;
 
                 //зполнение шапки таблици
-                for (int i = 0; i < HeaderText.Length; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     dataGridView1.Columns[i + 1].HeaderText = HeaderText[i];
                 }
-                dataGridView1.Columns[HeaderText.Length + 1].HeaderText = HeaderText[HeaderText.Length - 1];
+
+                for (int i = 4; i < HeaderText.Length; i++)
+                {
+                    dataGridView1.Columns[i + 4].HeaderText = HeaderText[i];
+                }
 
                 //скрытие лишних полей таблици
                 if (HeaderText.Length == 1)
@@ -218,7 +303,7 @@ namespace MyDiplomProject
                     textBox2.Visible = false;
                 }
 
-                button7.Text = HeaderText[HeaderText.Length - 1];
+                //button7.Text = HeaderText[HeaderText.Length - 1];
 
                 this.Text = FormName;
 
@@ -350,37 +435,87 @@ namespace MyDiplomProject
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 11 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
                 MessageBox.Show("Delete " + e.RowIndex.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
 
-            if (e.ColumnIndex == 7 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 12 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
                 PC_rezult = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                Rezult = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
                 this.Close();
             }
 
-            if (e.ColumnIndex == 5 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 8 && e.RowIndex < dataGridView1.Rows.Count - 1)    //звание
             {
-                AddDojnost f;
-                switch (STable)
-                {
-                    case "spravochnik_oblastei_spec": f = new AddDojnost(User, Password, Database, Ip, true, "Справочник областей специализации", "spravochnik_oblastei_spec", new string[] { "Название", "Идентификационный номер" }, new string[] { "pk_special", "nazvanie", "id_number" }); break;
-                    case "spravochnik_gorodov": f = new AddDojnost(User, Password, Database, Ip, true, "Справочник городов", "spravochnik_gorodov", new string[] { "Город", "Идентификационный номер" }, new string[] { "pk_gorod", "nazvanie", "id_number" }); break;
-                    default: f = new AddDojnost(User, Password, Database, Ip, true, "Справочник городов", "spravochnik_gorodov", new string[] { "Город", "Идентификационный номер" }, new string[] { "pk_gorod", "nazvanie", "id_number" }); break;
-                }
-
+                AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник званий", "spravochnik_zvanii", new string[] { "Звание", "Идентификационный номер" }, new string[] { "pk_zvanie", "nazvanie", "id_number" });
                 f.ShowDialog();
-                string rezult = "";
-                rezult = f.PC_rezult;
-                if (rezult != null)
+
+                string PC_rezult = "";  //значение первичного ключа
+                string Rezult = "";     // соответствующее текстовое значение
+
+                PC_rezult = f.PC_rezult;
+                Rezult = f.Rezult;
+
+                if (PC_rezult != null)
                 {
-                    dataGridView1.Rows[e.RowIndex].Cells[4].Value = rezult;
+                    dataGridView1.Rows[e.RowIndex].Cells[5].Value = PC_rezult;
+                    dataGridView1.Rows[e.RowIndex].Cells[8].Value = Rezult;
                 }
                 else
-                    if (dataGridView1.Rows[e.RowIndex].Cells[4].Value != null)
-                        rezult = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    if (dataGridView1.Rows[e.RowIndex].Cells[5].Value != null)
+                    {
+                        LoadData();
+                    }
+                
+            }
+
+            if (e.ColumnIndex == 9 && e.RowIndex < dataGridView1.Rows.Count - 1)    //должность
+            {
+                AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник должностей", "spravochnik_dolgnostei", new string[] { "Должность", "Идентификационный номер" }, new string[] { "pk_dolgnost", "nazvanie", "id_number" });
+                f.ShowDialog();
+
+                string PC_rezult = "";  //значение первичного ключа
+                string Rezult = "";     // соответствующее текстовое значение
+
+                PC_rezult = f.PC_rezult;
+                Rezult = f.Rezult;
+
+                if (PC_rezult != null)
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells[6].Value = PC_rezult;
+                    dataGridView1.Rows[e.RowIndex].Cells[9].Value = Rezult;
+                }
+                else
+                    if (dataGridView1.Rows[e.RowIndex].Cells[6].Value != null)
+                    {
+                        LoadData();
+                    }
+                
+            }
+
+            if (e.ColumnIndex == 10 && e.RowIndex < dataGridView1.Rows.Count - 1)    //чин
+            {
+                AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник классных чинов", "chin", new string[] { "Название", "Идентификационный номер" }, new string[] { "pk_chin", "nazvanie", "id_number" });
+                f.ShowDialog();
+
+                string PC_rezult = "";  //значение первичного ключа
+                string Rezult = "";     // соответствующее текстовое значение
+
+                PC_rezult = f.PC_rezult;
+                Rezult = f.Rezult;
+
+                if (PC_rezult != null)
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells[7].Value = PC_rezult;
+                    dataGridView1.Rows[e.RowIndex].Cells[10].Value = Rezult;
+                }
+                else
+                    if (dataGridView1.Rows[e.RowIndex].Cells[7].Value != null)
+                    {
+                        LoadData();
+                    }
             }
         }
 
@@ -392,6 +527,7 @@ namespace MyDiplomProject
 
         private void button5_Click(object sender, EventArgs e)
         {
+            // >
             lastIndex += Convert.ToInt32(comboBox1.SelectedItem);
             if (count - lastIndex < 0)
                 lastIndex = count - Convert.ToInt32(comboBox1.SelectedItem);
@@ -400,12 +536,14 @@ namespace MyDiplomProject
 
         private void button6_Click(object sender, EventArgs e)
         {
+            // >>
             lastIndex = count - Convert.ToInt32(comboBox1.SelectedItem);
             LoadData();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            // <
             lastIndex -= Convert.ToInt32(comboBox1.SelectedItem);
             if (lastIndex <= 0)
                 lastIndex = 0;
@@ -415,6 +553,7 @@ namespace MyDiplomProject
 
         private void button3_Click(object sender, EventArgs e)
         {
+            // <<
             lastIndex = 0;
             LoadData();
         }
@@ -455,6 +594,83 @@ namespace MyDiplomProject
 
         private void button2_Click(object sender, EventArgs e)
         {
+            LoadData();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void textBox5_Enter(object sender, EventArgs e) //звание
+        {
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник званий", "spravochnik_zvanii", new string[] { "Звание", "Идентификационный номер" }, new string[] { "pk_zvanie", "nazvanie", "id_number" });
+            f.ShowDialog();
+
+            string PC_rezult = "";  //значение первичного ключа
+            string Rezult = "";     // соответствующее текстовое значение
+
+            PC_rezult = f.PC_rezult;
+            Rezult = f.Rezult;
+
+            if (PC_rezult != null)
+            {
+                textBox8.Text = PC_rezult;
+                textBox5.Text = Rezult;
+            }
+            else
+            {
+                textBox8.Text = "";
+                textBox5.Text = "";
+            }
+            LoadData();
+        }
+
+        private void textBox6_Enter(object sender, EventArgs e) //должность
+        {
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник должностей", "spravochnik_dolgnostei", new string[] { "Должность", "Идентификационный номер" }, new string[] { "pk_dolgnost", "nazvanie", "id_number" });
+            f.ShowDialog();
+
+            string PC_rezult = "";  //значение первичного ключа
+            string Rezult = "";     // соответствующее текстовое значение
+
+            PC_rezult = f.PC_rezult;
+            Rezult = f.Rezult;
+
+            if (PC_rezult != null)
+            {
+                textBox9.Text = PC_rezult;
+                textBox6.Text = Rezult;
+            }
+            else
+            {
+                textBox9.Text = "";
+                textBox6.Text = "";
+            }
+            LoadData();
+        }
+
+        private void textBox7_Enter(object sender, EventArgs e)    //чин
+        {
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник классных чинов", "chin", new string[] { "Название", "Идентификационный номер" }, new string[] { "pk_chin", "nazvanie", "id_number" });
+            f.ShowDialog();
+
+            string PC_rezult = "";  //значение первичного ключа
+            string Rezult = "";     // соответствующее текстовое значение
+
+            PC_rezult = f.PC_rezult;
+            Rezult = f.Rezult;
+
+            if (PC_rezult != null)
+            {
+                textBox10.Text = PC_rezult;
+                textBox7.Text = Rezult;
+            }
+            else
+            {
+                textBox10.Text = "";
+                textBox7.Text = "";
+            }
             LoadData();
         }
     }
