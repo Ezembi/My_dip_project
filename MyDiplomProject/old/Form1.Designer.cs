@@ -106,6 +106,7 @@
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
+            this.файлToolStripMenuItem.Click += new System.EventHandler(this.файлToolStripMenuItem_Click);
             // 
             // создатьМатериалПроверкиУголовноеДелоToolStripMenuItem
             // 
@@ -441,6 +442,7 @@
             // 
             this.Column2.HeaderText = "id";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Visible = false;
             // 
             // Column9
@@ -448,6 +450,7 @@
             this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column9.HeaderText = "Номер материала";
             this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
             // 
             // Column1
             // 
@@ -455,6 +458,7 @@
             this.Column1.HeaderText = "Дата поступления материала";
             this.Column1.MaxInputLength = 200;
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column3
             // 
@@ -462,23 +466,27 @@
             this.Column3.HeaderText = "Номер дела";
             this.Column3.MaxInputLength = 200;
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column6
             // 
             this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column6.HeaderText = "Дата возбуждения дела";
             this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // Column8
             // 
             this.Column8.HeaderText = "pk_polise";
             this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
             this.Column8.Visible = false;
             // 
             // Column10
             // 
             this.Column10.HeaderText = "PK_Raiona";
             this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
             this.Column10.Visible = false;
             // 
             // Column7
@@ -486,22 +494,26 @@
             this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column7.HeaderText = "Уполномоченный";
             this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
             // 
             // Column12
             // 
             this.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column12.HeaderText = "Подразделение";
             this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "Удаление";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Column5
             // 
             this.Column5.HeaderText = "Открыть";
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 

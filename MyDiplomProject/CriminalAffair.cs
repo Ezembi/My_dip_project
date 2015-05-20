@@ -125,7 +125,7 @@ namespace MyDiplomProject
                             textBox1.Text = dr[1].ToString();
                             dateTimePicker1.Value = Convert.ToDateTime(dr[2].ToString());
 
-                            if (dr[3].ToString() != "01.01.0001 0:00:00")
+                            if (dr[4].ToString() != "01.01.0001 0:00:00")
                             {
                                 checkBox1.Checked = true;
                                 // дело
@@ -657,6 +657,12 @@ namespace MyDiplomProject
         private void dateTimePicker4_ValueChanged(object sender, EventArgs e)
         {
             FileChange();
+        }
+
+        private void пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           Resolution f = new Resolution(User, Password, Database, Ip, PK_Dela, "5", "1");
+            f.ShowDialog();
         }
     }
 }

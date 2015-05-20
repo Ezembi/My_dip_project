@@ -472,5 +472,10 @@ namespace MyDiplomProject
             this.Visible = true;
             LoadData();
         }
+
+        private void файлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

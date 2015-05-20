@@ -178,13 +178,11 @@ Create table Postanovlenie (
 	house Varchar(20),
 	room Varchar(200),
 	id_post Int,
-	pk_polise Int NOT NULL,
-	pk_gorod Int NOT NULL,
-	pk_prosecutor1 Int NOT NULL,
-	pk_court1 Int NOT NULL,
-	pk_prosecutor2 Int NOT NULL,
-	pk_court2 Int NOT NULL,
-	pk_dolgnost Int NOT NULL,
+	pk_polise Int,
+	pk_gorod Int,
+	pk_prosecutor Int,
+	pk_court Int,
+	pk_dolgnost Int,
  Primary Key (pk_postanov)) ENGINE = MyISAM
 COMMENT = 'Постановление';
 

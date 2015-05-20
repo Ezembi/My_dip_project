@@ -62,6 +62,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьПротоколToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.протоколОсмотраМетаПроисшествияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.протоколОсмотраТрупаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -148,6 +154,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dateTimePicker4);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.checkBox3);
@@ -168,6 +176,8 @@
             // 
             // dateTimePicker4
             // 
+            this.dateTimePicker4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker4.Location = new System.Drawing.Point(205, 224);
             this.dateTimePicker4.Name = "dateTimePicker4";
             this.dateTimePicker4.Size = new System.Drawing.Size(157, 20);
@@ -196,6 +206,8 @@
             // 
             // dateTimePicker3
             // 
+            this.dateTimePicker3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker3.Location = new System.Drawing.Point(205, 135);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(155, 20);
@@ -224,6 +236,8 @@
             // 
             // dateTimePicker2
             // 
+            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker2.Location = new System.Drawing.Point(205, 44);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(158, 20);
@@ -241,6 +255,8 @@
             // 
             // textBox2
             // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(142, 20);
             this.textBox2.MaxLength = 200;
             this.textBox2.Name = "textBox2";
@@ -271,6 +287,8 @@
             // 
             // lineShape2
             // 
+            this.lineShape2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape2.Name = "lineShape2";
             this.lineShape2.X1 = 0;
             this.lineShape2.X2 = 365;
@@ -279,6 +297,8 @@
             // 
             // lineShape1
             // 
+            this.lineShape1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape1.Name = "lineShape1";
             this.lineShape1.X1 = -2;
             this.lineShape1.X2 = 363;
@@ -382,7 +402,8 @@
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.сохранитьToolStripMenuItem});
+            this.сохранитьToolStripMenuItem,
+            this.добавитьПротоколToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
@@ -390,9 +411,52 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
+            // добавитьПротоколToolStripMenuItem
+            // 
+            this.добавитьПротоколToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.протоколОсмотраМетаПроисшествияToolStripMenuItem,
+            this.протоколОсмотраТрупаToolStripMenuItem,
+            this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem,
+            this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem,
+            this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem});
+            this.добавитьПротоколToolStripMenuItem.Name = "добавитьПротоколToolStripMenuItem";
+            this.добавитьПротоколToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.добавитьПротоколToolStripMenuItem.Text = "Добавить протокол";
+            // 
+            // протоколОсмотраМетаПроисшествияToolStripMenuItem
+            // 
+            this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Name = "протоколОсмотраМетаПроисшествияToolStripMenuItem";
+            this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Text = "Протокол осмотра мета происшествия";
+            // 
+            // протоколОсмотраТрупаToolStripMenuItem
+            // 
+            this.протоколОсмотраТрупаToolStripMenuItem.Name = "протоколОсмотраТрупаToolStripMenuItem";
+            this.протоколОсмотраТрупаToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.протоколОсмотраТрупаToolStripMenuItem.Text = "Протокол осмотра трупа";
+            // 
+            // протоколЛичногоОбыскаПостановлениеToolStripMenuItem
+            // 
+            this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Name = "протоколЛичногоОбыскаПостановлениеToolStripMenuItem";
+            this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Text = "Протокол личного обыска + постановление";
+            // 
+            // пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem
+            // 
+            this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.Name = "пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem";
+            this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.Text = "Протокол обыска (выемки) + постановление";
+            this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.Click += new System.EventHandler(this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem_Click);
+            // 
+            // пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem
+            // 
+            this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Name = "пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem";
+            this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Text = "Протокол осмотра местности, жилища, иного помещения + постановление";
             // 
             // dataGridView1
             // 
@@ -549,5 +613,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewButtonColumn Column4;
         private System.Windows.Forms.DataGridViewButtonColumn Column5;
+        private System.Windows.Forms.ToolStripMenuItem добавитьПротоколToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem протоколОсмотраМетаПроисшествияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem протоколОсмотраТрупаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem протоколЛичногоОбыскаПостановлениеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem;
     }
 }

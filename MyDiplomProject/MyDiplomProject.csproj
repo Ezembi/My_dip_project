@@ -55,6 +55,12 @@
     <Compile Include="CriminalAffair.Designer.cs">
       <DependentUpon>CriminalAffair.cs</DependentUpon>
     </Compile>
+    <Compile Include="Resolution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resolution.Designer.cs">
+      <DependentUpon>Resolution.cs</DependentUpon>
+    </Compile>
     <Compile Include="Справочники\Directories.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CriminalAffair.resx">
       <DependentUpon>CriminalAffair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resolution.resx">
+      <DependentUpon>Resolution.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Справочники\Directories.resx">
       <DependentUpon>Directories.cs</DependentUpon>
