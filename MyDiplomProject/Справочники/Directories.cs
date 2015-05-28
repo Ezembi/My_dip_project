@@ -247,7 +247,7 @@ namespace MyDiplomProject
                             string sql = "insert into " + table + " (" + DBH + ") values (" + str + ")";
                             cmd = new MySqlCommand(sql, mycon);
                             cmd.ExecuteNonQuery();
-                            MessageBox.Show("Данные " + str + " успешно добавлены!", "Добавление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Данные успешно добавлены!", "Добавление", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             lastIndex = count - Convert.ToInt32(comboBox1.SelectedItem) + 1;
                             if (lastIndex < 0)
                                 lastIndex = 0;
@@ -332,10 +332,77 @@ namespace MyDiplomProject
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 3 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            try
             {
-                MessageBox.Show("Delete " + e.RowIndex.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                if (e.ColumnIndex == 3 && e.RowIndex < dataGridView1.Rows.Count - 1)
+                {
+                    DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?\nДанное действие необратимо!", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (del == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        MySqlDataAdapter da;
+                        MySqlDataReader dr;
+                        string DTable1 = ""; //таблица1 для проверки
+                        string DTable2 = ""; //таблица2 для проверки
+                        string DTable3 = ""; //таблица3 для проверки
+                        string DPK1 = "";    //поле для проверки в табл 1
+                        string DPK2 = "";    //поле для проверки в табл 2
+                        string DPK3 = "";    //поле для проверки в табл 2
+                        string sql;
+                        bool delette = true;
+                        int koll = 0;
+
+                        switch (table)
+                        {
+                            case "spravochnik_zvanii": DTable1 = "Polise"; DPK1 = "pk_zvanie"; koll = 1; break;
+                            case "chin": DTable1 = "Polise"; DPK1 = "pk_chin"; koll = 1; break;
+                            case "spravochnik_oblastei_spec": DTable1 = "specialist"; DPK1 = "pk_special"; koll = 1; break;
+                            case "sp_pro_pol": DTable1 = "Peoples"; DPK1 = "pk_pol"; koll = 1; break;
+
+                            case "prosecutor": DTable1 = "Postanovlenie"; DTable2 = "Postanovlenie"; DPK1 = "pk_prosecutor1"; DPK2 = "pk_prosecutor2"; koll = 2; break;
+                            case "court": DTable1 = "Postanovlenie"; DTable2 = "Postanovlenie"; DPK1 = "pk_court1"; DPK2 = "pk_court2"; koll = 2; break;
+                            case "spravochnik_dolgnostei": DTable1 = "Polise"; DTable2 = "Postanovlenie"; DPK1 = "pk_dolgnost"; DPK2 = "pk_dolgnost"; koll = 2; break;
+                        }
+
+                        if(koll == 1)
+                            delette = !DontUse(DTable1,DPK1, e);
+
+                        if (koll == 2)
+                        {
+                            if (!DontUse(DTable1, DPK1, e) && !DontUse(DTable2, DPK2, e))
+                                delette = true;
+                            else
+                                delette = false;
+                        }
+
+                        if (koll == 3)
+                        {
+                            if (!DontUse(DTable1, DPK1, e) && !DontUse(DTable2, DPK2, e) && !DontUse(DTable3, DPK3, e))
+                                delette = true;
+                            else
+                                delette = false;
+                        }
+
+                        
+                        
+                        if (delette)
+                        {
+                            sql = "delete from " + table + " where " + DBHeader[0] + " = " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Данные успешно удалены!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadData();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Удаление невозможно!\nНарушение целостности данных!", "Отказ удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        
+
+                    }
+                }
             }
+            catch { MessageBox.Show("При удаление произошла ошибка!", "Удаление невозможно", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
             if (e.ColumnIndex == 4 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
@@ -343,6 +410,25 @@ namespace MyDiplomProject
                 Rezult = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                 this.Close();
             }
+        }
+
+        private bool DontUse(string DTable, string DPK, DataGridViewCellEventArgs e)
+        {
+            MySqlDataAdapter da;
+            MySqlDataReader dr;
+            bool DellRezylt;
+            string sql = "select * from " + DTable + " where " + DPK + " = " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            cmd = new MySqlCommand(sql, mycon);
+            //вополнение запроса
+            cmd.ExecuteNonQuery();
+            //выборка по запросу
+            da = new MySqlDataAdapter(cmd);
+            dr = cmd.ExecuteReader();
+            DellRezylt = dr.Read();
+            dr.Close();
+            // true - используется в др табл
+            // false - не используется в др табл
+            return DellRezylt;
         }
 
         /**

@@ -287,12 +287,14 @@ namespace MyDiplomProject
 
         private void справочникСпособовУпаковкиВещДокToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник способов упаковки вещественных доказательств", "ypakovka", new string[] { "Способ" }, new string[] { "pk_ypakovka", "sposob" });
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник способов упаковки вещественных доказательств", "ypakovka", new string[] { "Способ" }, new string[] { "pk_ypakovka", "nazvanie" });
             f.ShowDialog();
         }
 
         private void справочникТехническихСредствToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник технических средств", "Spravochnik_tex_sredstv", new string[] { "Техническое средство", "Идентификационный номер" }, new string[] { "pk_tex_sredstvo", "nazvanie", "id_number" });
+            f.ShowDialog();
         }
 
         private void справочникОбластейСпециализацииToolStripMenuItem_Click(object sender, EventArgs e)
@@ -303,11 +305,14 @@ namespace MyDiplomProject
 
         private void справочникПогодныхУсловийToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник погодных условий", "Spravochnik_pogodi", new string[] { "Погода" }, new string[] { "pk_pogoda", "nazvanie" });
+            f.ShowDialog();
         }
 
         private void справочникМатериаловУпаковкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник материалов упаковки", "Spravochnik_materialov", new string[] { "Маериал", "Идентификационный номер" }, new string[] { "pk_material", "material", "id_number" });
+            f.ShowDialog();
         }
 
         private void справочникГоробовToolStripMenuItem_Click(object sender, EventArgs e)
@@ -318,32 +323,14 @@ namespace MyDiplomProject
 
         private void справочникДолжностейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        }
-
-        private void справочникДолжностныхЛицToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Form f = new AddDojnost(User, Password, Database, Ip, "Справочник должностей", "spravochnik_dolgnostei", new string[] { "Должность", "Идентификационный номер" }, new string[] { "pk_dolgnost", "nazvanie", "id_number" });
-            //f.ShowDialog();
-        }
-
-        private void справочникТабкльныхНомеровToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник должностей", "spravochnik_dolgnostei", new string[] { "Должность", "Идентификационный номер" }, new string[] { "pk_dolgnost", "nazvanie", "id_number" });
+            f.ShowDialog();
         }
 
         private void справочникОсвещённостиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        }
-
-        private void справочникАдресовToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void справочникЛицПередавшихВещДокНаХранниеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void справочникХранителейToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник освещённости", "Spravochnik_osveshennosti", new string[] { "Освещённость" }, new string[] { "pk_osveshennost", "nazvanie" });
+            f.ShowDialog();
         }
 
         private void справочникСпециалистовToolStripMenuItem_Click(object sender, EventArgs e)
@@ -367,6 +354,12 @@ namespace MyDiplomProject
         private void справочникКлассныхЧиновToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник классных чинов", "chin", new string[] { "Название", "Идентификационный номер" }, new string[] { "pk_chin", "nazvanie", "id_number" });
+            f.ShowDialog();
+        }
+
+        private void справочникПроцессуальныхПоложенийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник ппроцессуальных положений", "sp_pro_pol", new string[] { "Наименование положения", "Идентификационный номер" }, new string[] { "pk_pol", "nazvanie", "id_number" });
             f.ShowDialog();
         }
 
@@ -477,5 +470,7 @@ namespace MyDiplomProject
         {
 
         }
+
+        
     }
 }

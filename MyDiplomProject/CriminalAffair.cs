@@ -90,7 +90,7 @@ namespace MyDiplomProject
             }
             catch
             {
-                MessageBox.Show("Нет доступа к базе данных!", "Ошибка подключения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error:1\nНет доступа к базе данных!", "Ошибка подключения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -240,7 +240,7 @@ namespace MyDiplomProject
             }
             catch
             {
-                MessageBox.Show("Ошибка при загрузке данных!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error:2\nОшибка при загрузке данных!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -361,7 +361,7 @@ namespace MyDiplomProject
             }
             catch
             {
-                MessageBox.Show("Ошибка при загрузке данных в таблицу!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error:3\nОшибка при загрузке данных в таблицу!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -661,7 +661,19 @@ namespace MyDiplomProject
 
         private void пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           Resolution f = new Resolution(User, Password, Database, Ip, PK_Dela, "5", "1");
+           Resolution f = new Resolution(User, Password, Database, Ip, PK_Dela, "5", "1","666666");
+           f.ShowDialog();
+        }
+
+        private void протоколЛичногоОбыскаПостановлениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Resolution f = new Resolution(User, Password, Database, Ip, PK_Dela, "2", "6","666666666");
+            f.ShowDialog();
+        }
+
+        private void пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Resolution f = new Resolution(User, Password, Database, Ip, PK_Dela, "1", "10","6666666");
             f.ShowDialog();
         }
     }

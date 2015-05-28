@@ -444,6 +444,7 @@
             this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Name = "протоколЛичногоОбыскаПостановлениеToolStripMenuItem";
             this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
             this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Text = "Протокол личного обыска + постановление";
+            this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Click += new System.EventHandler(this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem_Click);
             // 
             // пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem
             // 
@@ -457,6 +458,7 @@
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Name = "пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem";
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Text = "Протокол осмотра местности, жилища, иного помещения + постановление";
+            this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Click += new System.EventHandler(this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 

@@ -235,23 +235,7 @@ namespace MyDiplomProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //button1.Enabled = false;
-            //if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
-            //{
-            //    cmd.CommandText = "SELECT * FROM SPECIALIST, PROTOKOL WHERE PROTOKOL.PK_SPEC = SPECIALIST.PK_SPEC AND SPECIALIST.FIO = '" + oldCell0 + "' AND SPECIALIST.PK_SPECIAL = (SELECT SPRAVOCHNIK_OBLASTEI_SPEC.PK_SPECIAL FROM SPRAVOCHNIK_OBLASTEI_SPEC WHERE SPRAVOCHNIK_OBLASTEI_SPEC.NAZVANIE = '" + oldCell1 + "')";
-            //    dr = cmd.ExecuteReader();
-            //    if (!dr.Read())
-            //    {
-            //        cmd.CommandText = "DELETE FROM SPECIALIST WHERE SPECIALIST.FIO = '" + oldCell0 + "' AND SPECIALIST.PK_SPECIAL = (SELECT SPRAVOCHNIK_OBLASTEI_SPEC.PK_SPECIAL FROM SPRAVOCHNIK_OBLASTEI_SPEC WHERE SPRAVOCHNIK_OBLASTEI_SPEC.NAZVANIE = '" + oldCell1 + "')";
-            //        cmd.ExecuteNonQuery();
 
-            //        Lock = true;
-            //        UpDate();
-            //        Lock = false;
-            //    }
-            //    else
-            //        MessageBox.Show("Необходимо удалить или изменить все протоколы с данным специалистом!", "Удаление данного специалиста невозможно!");
-            //}
         }
 
         private void dataGridView1_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
@@ -346,10 +330,40 @@ namespace MyDiplomProject
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            try
             {
-                MessageBox.Show("Delete " + e.RowIndex.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1)
+                {
+                    DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?\nДанное действие необратимо!", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (del == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        string DTable1 = ""; //таблица1 для проверки
+                        string DPK1 = "";    //поле для проверки в табл 1
+                        string sql;
+
+                        switch (table)
+                        {
+                            case "spravochnik_pod": DTable1 = "Delo"; DPK1 = "PK_Raiona"; break;
+                        }
+
+                        if (!DontUse(DTable1, DPK1, e))
+                        {
+                            sql = "delete from " + table + " where " + DBHeader[0] + " = " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Данные успешно удалены!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadData();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Удаление невозможно!\nНарушение целостности данных!", "Отказ удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
             }
+            catch { MessageBox.Show("При удаление произошла ошибка!", "Удаление невозможно", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
 
             if (e.ColumnIndex == 7 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
@@ -379,6 +393,25 @@ namespace MyDiplomProject
                     if (dataGridView1.Rows[e.RowIndex].Cells[4].Value != null)
                         rezult = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
             }
+        }
+
+        private bool DontUse(string DTable, string DPK, DataGridViewCellEventArgs e)
+        {
+            MySqlDataAdapter da;
+            MySqlDataReader dr;
+            bool DellRezylt;
+            string sql = "select * from " + DTable + " where " + DPK + " = " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            cmd = new MySqlCommand(sql, mycon);
+            //вополнение запроса
+            cmd.ExecuteNonQuery();
+            //выборка по запросу
+            da = new MySqlDataAdapter(cmd);
+            dr = cmd.ExecuteReader();
+            DellRezylt = dr.Read();
+            dr.Close();
+            // true - используется в др табл
+            // false - не используется в др табл
+            return DellRezylt;
         }
 
         private void AddSpecMen_Shown(object sender, EventArgs e)

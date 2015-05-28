@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -81,12 +82,12 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label21 = new System.Windows.Forms.Label();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.label21 = new System.Windows.Forms.Label();
-            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -111,6 +112,13 @@
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -128,6 +136,7 @@
             this.textBox1.Size = new System.Drawing.Size(299, 20);
             this.textBox1.TabIndex = 2;
             this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
@@ -152,6 +161,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 5;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // textBox4
             // 
@@ -169,6 +179,7 @@
             this.textBox3.Size = new System.Drawing.Size(275, 20);
             this.textBox3.TabIndex = 15;
             this.textBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox3_MouseClick);
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label7
             // 
@@ -195,6 +206,7 @@
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(176, 20);
             this.textBox5.TabIndex = 18;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label4
             // 
@@ -218,6 +230,7 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(829, 156);
             this.textBox6.TabIndex = 20;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // label5
             // 
@@ -246,6 +259,7 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(602, 20);
             this.textBox7.TabIndex = 23;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // label8
             // 
@@ -264,6 +278,7 @@
             this.textBox8.Size = new System.Drawing.Size(580, 20);
             this.textBox8.TabIndex = 25;
             this.textBox8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox8_MouseClick);
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // label9
             // 
@@ -299,6 +314,7 @@
             this.textBox10.Size = new System.Drawing.Size(785, 20);
             this.textBox10.TabIndex = 29;
             this.textBox10.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox10_MouseClick);
+            this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
             // 
             // label11
             // 
@@ -334,6 +350,7 @@
             this.textBox12.Size = new System.Drawing.Size(542, 20);
             this.textBox12.TabIndex = 33;
             this.textBox12.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox12_MouseClick);
+            this.textBox12.TextChanged += new System.EventHandler(this.textBox12_TextChanged);
             // 
             // statusStrip1
             // 
@@ -359,6 +376,7 @@
             this.textBox14.Size = new System.Drawing.Size(735, 20);
             this.textBox14.TabIndex = 36;
             this.textBox14.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox14_MouseClick);
+            this.textBox14.TextChanged += new System.EventHandler(this.textBox14_TextChanged);
             // 
             // textBox15
             // 
@@ -376,6 +394,7 @@
             this.textBox16.Size = new System.Drawing.Size(735, 20);
             this.textBox16.TabIndex = 38;
             this.textBox16.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox16_MouseClick);
+            this.textBox16.TextChanged += new System.EventHandler(this.textBox16_TextChanged);
             // 
             // textBox17
             // 
@@ -419,6 +438,7 @@
             this.textBox22.Name = "textBox22";
             this.textBox22.Size = new System.Drawing.Size(161, 20);
             this.textBox22.TabIndex = 41;
+            this.textBox22.TextChanged += new System.EventHandler(this.textBox22_TextChanged);
             // 
             // label16
             // 
@@ -437,6 +457,7 @@
             this.textBox21.Name = "textBox21";
             this.textBox21.Size = new System.Drawing.Size(161, 20);
             this.textBox21.TabIndex = 6;
+            this.textBox21.TextChanged += new System.EventHandler(this.textBox21_TextChanged);
             // 
             // textBox20
             // 
@@ -445,6 +466,7 @@
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(161, 20);
             this.textBox20.TabIndex = 5;
+            this.textBox20.TextChanged += new System.EventHandler(this.textBox20_TextChanged);
             // 
             // label15
             // 
@@ -483,6 +505,8 @@
             this.textBox18.ReadOnly = true;
             this.textBox18.Size = new System.Drawing.Size(146, 20);
             this.textBox18.TabIndex = 1;
+            this.textBox18.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox18_MouseClick);
+            this.textBox18.TextChanged += new System.EventHandler(this.textBox18_TextChanged);
             // 
             // label13
             // 
@@ -525,6 +549,7 @@
             this.textBox23.Name = "textBox23";
             this.textBox23.Size = new System.Drawing.Size(161, 20);
             this.textBox23.TabIndex = 41;
+            this.textBox23.TextChanged += new System.EventHandler(this.textBox23_TextChanged);
             // 
             // label19
             // 
@@ -543,6 +568,7 @@
             this.textBox24.Name = "textBox24";
             this.textBox24.Size = new System.Drawing.Size(161, 20);
             this.textBox24.TabIndex = 6;
+            this.textBox24.TextChanged += new System.EventHandler(this.textBox24_TextChanged);
             // 
             // textBox25
             // 
@@ -551,6 +577,7 @@
             this.textBox25.Name = "textBox25";
             this.textBox25.Size = new System.Drawing.Size(161, 20);
             this.textBox25.TabIndex = 5;
+            this.textBox25.TextChanged += new System.EventHandler(this.textBox25_TextChanged);
             // 
             // label20
             // 
@@ -579,6 +606,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column5,
             this.Column1,
             this.Column2,
             this.Column3,
@@ -587,6 +615,26 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(821, 135);
             this.dataGridView1.TabIndex = 44;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(16, 514);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(261, 13);
+            this.label21.TabIndex = 45;
+            this.label21.Text = "Проживающие в данном жилом помещении лица:";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "id";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Visible = false;
             // 
             // Column1
             // 
@@ -610,22 +658,7 @@
             // 
             this.Column4.HeaderText = "Удалить";
             this.Column4.Name = "Column4";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(16, 514);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(261, 13);
-            this.label21.TabIndex = 45;
-            this.label21.Text = "Проживающие в данном жилом помещении лица:";
-            // 
-            // сохранитьToolStripMenuItem
-            // 
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.сохранитьToolStripMenuItem.Text = "Сохранить";
-            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            this.Column4.Text = "Удалить";
             // 
             // Resolution
             // 
@@ -671,9 +704,11 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Resolution";
-            this.Text = "Resolution";
+            this.Text = "Постановление";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Resolution_FormClosing);
             this.Load += new System.EventHandler(this.Resolution_Load);
             this.Shown += new System.EventHandler(this.Resolution_Shown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Resolution_KeyPress);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -742,10 +777,11 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewButtonColumn Column4;
-        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
     }
 }
