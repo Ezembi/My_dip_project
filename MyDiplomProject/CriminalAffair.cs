@@ -676,5 +676,11 @@ namespace MyDiplomProject
             Resolution f = new Resolution(User, Password, Database, Ip, PK_Dela, "1", "10","6666666");
             f.ShowDialog();
         }
+
+        private void протоколОсмотраМетаПроисшествияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, "1", "10", "666");
+            f.ShowDialog();
+        }
     }
 }

@@ -376,6 +376,7 @@
             this.textBox7.MaxLength = 500;
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
+            this.textBox7.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox7.Size = new System.Drawing.Size(415, 72);
             this.textBox7.TabIndex = 16;
             this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
@@ -432,6 +433,7 @@
             this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Name = "протоколОсмотраМетаПроисшествияToolStripMenuItem";
             this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
             this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Text = "Протокол осмотра мета происшествия";
+            this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Click += new System.EventHandler(this.протоколОсмотраМетаПроисшествияToolStripMenuItem_Click);
             // 
             // протоколОсмотраТрупаToolStripMenuItem
             // 

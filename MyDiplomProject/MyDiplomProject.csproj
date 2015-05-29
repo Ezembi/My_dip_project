@@ -55,6 +55,12 @@
     <Compile Include="CriminalAffair.Designer.cs">
       <DependentUpon>CriminalAffair.cs</DependentUpon>
     </Compile>
+    <Compile Include="Protocol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Protocol.Designer.cs">
+      <DependentUpon>Protocol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resolution.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CriminalAffair.resx">
       <DependentUpon>CriminalAffair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Protocol.resx">
+      <DependentUpon>Protocol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resolution.resx">
       <DependentUpon>Resolution.cs</DependentUpon>

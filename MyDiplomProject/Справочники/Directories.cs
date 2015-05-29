@@ -358,6 +358,8 @@ namespace MyDiplomProject
                             case "chin": DTable1 = "Polise"; DPK1 = "pk_chin"; koll = 1; break;
                             case "spravochnik_oblastei_spec": DTable1 = "specialist"; DPK1 = "pk_special"; koll = 1; break;
                             case "sp_pro_pol": DTable1 = "Peoples"; DPK1 = "pk_pol"; koll = 1; break;
+                            case "spravochnik_materialov": DTable1 = "vesh_dok"; DPK1 = "pk_material"; koll = 1; break;
+                            case "ypakovka": DTable1 = "vesh_dok"; DPK1 = "pk_ypakovka"; koll = 1; break;
 
                             case "prosecutor": DTable1 = "Postanovlenie"; DTable2 = "Postanovlenie"; DPK1 = "pk_prosecutor1"; DPK2 = "pk_prosecutor2"; koll = 2; break;
                             case "court": DTable1 = "Postanovlenie"; DTable2 = "Postanovlenie"; DPK1 = "pk_court1"; DPK2 = "pk_court2"; koll = 2; break;

@@ -293,7 +293,7 @@ namespace MyDiplomProject
 
         private void справочникТехническихСредствToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник технических средств", "Spravochnik_tex_sredstv", new string[] { "Техническое средство", "Идентификационный номер" }, new string[] { "pk_tex_sredstvo", "nazvanie", "id_number" });
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник технических средств", "spravochnik_tex_sredstv", new string[] { "Техническое средство", "Идентификационный номер" }, new string[] { "pk_tex_sredstvo", "nazvanie", "id_number" });
             f.ShowDialog();
         }
 
@@ -305,13 +305,13 @@ namespace MyDiplomProject
 
         private void справочникПогодныхУсловийToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник погодных условий", "Spravochnik_pogodi", new string[] { "Погода" }, new string[] { "pk_pogoda", "nazvanie" });
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник погодных условий", "spravochnik_pogodi", new string[] { "Погода" }, new string[] { "pk_pogoda", "nazvanie" });
             f.ShowDialog();
         }
 
         private void справочникМатериаловУпаковкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник материалов упаковки", "Spravochnik_materialov", new string[] { "Маериал", "Идентификационный номер" }, new string[] { "pk_material", "material", "id_number" });
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник материалов упаковки", "spravochnik_materialov", new string[] { "Маериал", "Идентификационный номер" }, new string[] { "pk_material", "material", "id_number" });
             f.ShowDialog();
         }
 
@@ -329,7 +329,7 @@ namespace MyDiplomProject
 
         private void справочникОсвещённостиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник освещённости", "Spravochnik_osveshennosti", new string[] { "Освещённость" }, new string[] { "pk_osveshennost", "nazvanie" });
+            AddDojnost f = new AddDojnost(User, Password, Database, Ip, false, "Справочник освещённости", "spravochnik_osveshennosti", new string[] { "Освещённость" }, new string[] { "pk_osveshennost", "nazvanie" });
             f.ShowDialog();
         }
 
