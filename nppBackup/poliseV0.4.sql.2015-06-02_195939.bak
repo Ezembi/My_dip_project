@@ -36,18 +36,18 @@ Create table Protokol (
 	Vremya_nachala Datetime,
 	vremya_okonch Datetime,
 	mesto_peibitiya Varchar(1000),
-	coobshenie Varchar(1000),
+	coobshenie Varchar(5000),
 	predmet_osmotra Varchar(1000),
 	id_prot Int,
-	Organ Varchar(1000),
+	Organ Varchar(5000),
 	Zayavleniya Varchar(5000),
 	zamechaniya Varchar(5000),
 	I_look Varchar(200),
 	Sposob_izyatiya Varchar(200),
 	temperature Varchar(200),
-	dead_go Varchar(1000),
+	dead_go Varchar(5000),
 	cel_obiska Varchar(5000),
-	otdali Varchar(1000),
+	otdali Varchar(5000),
 	pk_gorod Int,
 	pk_pogoda Int,
 	pk_osveshennost Int,
@@ -216,9 +216,3 @@ Create table court (
 	id_number Varchar(200),
  Primary Key (pk_court)) ENGINE = MyISAM
 COMMENT = 'Наименование суда';
-
-Create table r_tex_sredstv (
-	pc_r Int NOT NULL AUTO_INCREMENT,
-	pk_tex_sredstvo Int NOT NULL,
-	pk_protokol Int NOT NULL,
- Primary Key (pc_r,pk_tex_sredstvo,pk_protokol)) ENGINE = MyISAM;

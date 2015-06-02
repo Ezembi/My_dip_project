@@ -679,7 +679,7 @@ namespace MyDiplomProject
 
         private void протоколОсмотраМетаПроисшествияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, "1", "10", "666");
+            Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, "5", "6", "666");
             f.ShowDialog();
         }
     }

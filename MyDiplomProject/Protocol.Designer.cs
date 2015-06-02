@@ -36,9 +36,7 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.textBox35 = new System.Windows.Forms.TextBox();
             this.textBox36 = new System.Windows.Forms.TextBox();
-            this.textBox37 = new System.Windows.Forms.TextBox();
             this.textBox38 = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
@@ -73,9 +71,6 @@
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
@@ -110,6 +105,8 @@
             this.Column9 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label14 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBox40 = new System.Windows.Forms.TextBox();
+            this.textBox39 = new System.Windows.Forms.TextBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -158,8 +155,12 @@
             this.label34 = new System.Windows.Forms.Label();
             this.textBox27 = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
-            this.textBox39 = new System.Windows.Forms.TextBox();
-            this.textBox40 = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -222,6 +223,10 @@
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.Controls.Add(this.panel8);
+            this.tabPage1.Controls.Add(this.panel6);
+            this.tabPage1.Controls.Add(this.textBox35);
+            this.tabPage1.Controls.Add(this.label48);
+            this.tabPage1.Controls.Add(this.panel7);
             this.tabPage1.Controls.Add(this.panel5);
             this.tabPage1.Controls.Add(this.panel4);
             this.tabPage1.Controls.Add(this.panel3);
@@ -261,16 +266,15 @@
             // 
             // panel8
             // 
-            this.panel8.Location = new System.Drawing.Point(6, 263);
+            this.panel8.Location = new System.Drawing.Point(6, 260);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(927, 79);
+            this.panel8.Size = new System.Drawing.Size(930, 82);
             this.panel8.TabIndex = 66;
             // 
             // panel5
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.Controls.Add(this.panel7);
             this.panel5.Controls.Add(this.label41);
             this.panel5.Controls.Add(this.label42);
             this.panel5.Controls.Add(this.label43);
@@ -287,25 +291,15 @@
             // 
             this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel7.Controls.Add(this.textBox35);
             this.panel7.Controls.Add(this.textBox36);
-            this.panel7.Controls.Add(this.textBox37);
             this.panel7.Controls.Add(this.textBox38);
             this.panel7.Controls.Add(this.label45);
             this.panel7.Controls.Add(this.label46);
             this.panel7.Controls.Add(this.label47);
-            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Location = new System.Drawing.Point(3, 96);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(927, 79);
+            this.panel7.Size = new System.Drawing.Size(927, 82);
             this.panel7.TabIndex = 39;
-            // 
-            // textBox35
-            // 
-            this.textBox35.Location = new System.Drawing.Point(190, 49);
-            this.textBox35.Name = "textBox35";
-            this.textBox35.Size = new System.Drawing.Size(20, 20);
-            this.textBox35.TabIndex = 65;
-            this.textBox35.Visible = false;
             // 
             // textBox36
             // 
@@ -314,14 +308,7 @@
             this.textBox36.ReadOnly = true;
             this.textBox36.Size = new System.Drawing.Size(120, 20);
             this.textBox36.TabIndex = 64;
-            // 
-            // textBox37
-            // 
-            this.textBox37.Location = new System.Drawing.Point(190, 23);
-            this.textBox37.Name = "textBox37";
-            this.textBox37.Size = new System.Drawing.Size(20, 20);
-            this.textBox37.TabIndex = 63;
-            this.textBox37.Visible = false;
+            this.textBox36.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox9_MouseClick);
             // 
             // textBox38
             // 
@@ -330,6 +317,7 @@
             this.textBox38.ReadOnly = true;
             this.textBox38.Size = new System.Drawing.Size(159, 20);
             this.textBox38.TabIndex = 62;
+            this.textBox38.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox6_MouseClick);
             // 
             // label45
             // 
@@ -422,7 +410,6 @@
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.Controls.Add(this.panel6);
             this.panel4.Controls.Add(this.radioButton2);
             this.panel4.Controls.Add(this.radioButton1);
             this.panel4.Controls.Add(this.label38);
@@ -440,9 +427,9 @@
             this.panel6.Controls.Add(this.radioButton3);
             this.panel6.Controls.Add(this.radioButton4);
             this.panel6.Controls.Add(this.label44);
-            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Location = new System.Drawing.Point(6, 263);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(924, 161);
+            this.panel6.Size = new System.Drawing.Size(930, 161);
             this.panel6.TabIndex = 66;
             // 
             // radioButton3
@@ -565,7 +552,7 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.dateTimePicker4);
             this.panel2.Controls.Add(this.label39);
-            this.panel2.Location = new System.Drawing.Point(336, 6);
+            this.panel2.Location = new System.Drawing.Point(360, 11);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(236, 86);
             this.panel2.TabIndex = 64;
@@ -654,6 +641,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column16,
             this.Column1,
             this.Column2,
             this.Column3});
@@ -661,25 +649,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(917, 165);
             this.dataGridView1.TabIndex = 60;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Техническое средство";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Удалить";
-            this.Column3.Name = "Column3";
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // label13
             // 
@@ -705,6 +675,7 @@
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(120, 20);
             this.textBox9.TabIndex = 57;
+            this.textBox9.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox9_MouseClick);
             // 
             // textBox7
             // 
@@ -721,11 +692,12 @@
             this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(159, 20);
             this.textBox6.TabIndex = 55;
+            this.textBox6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox6_MouseClick);
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(357, 65);
+            this.label17.Location = new System.Drawing.Point(357, 66);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(83, 13);
             this.label17.TabIndex = 54;
@@ -825,6 +797,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(213, 20);
             this.textBox1.TabIndex = 14;
+            this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
             // 
             // dateTimePicker3
             // 
@@ -916,6 +889,7 @@
             this.dataGridView2.TabIndex = 30;
             this.dataGridView2.TabStop = false;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            this.dataGridView2.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView2_RowsAdded);
             // 
             // Column5
             // 
@@ -1027,6 +1001,24 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Лица";
             // 
+            // textBox40
+            // 
+            this.textBox40.Location = new System.Drawing.Point(31, 126);
+            this.textBox40.Name = "textBox40";
+            this.textBox40.ReadOnly = true;
+            this.textBox40.Size = new System.Drawing.Size(16, 20);
+            this.textBox40.TabIndex = 60;
+            this.textBox40.Visible = false;
+            // 
+            // textBox39
+            // 
+            this.textBox39.Location = new System.Drawing.Point(31, 87);
+            this.textBox39.Name = "textBox39";
+            this.textBox39.ReadOnly = true;
+            this.textBox39.Size = new System.Drawing.Size(16, 20);
+            this.textBox39.TabIndex = 59;
+            this.textBox39.Visible = false;
+            // 
             // dataGridView3
             // 
             this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1044,6 +1036,8 @@
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.Size = new System.Drawing.Size(925, 377);
             this.dataGridView3.TabIndex = 58;
+            this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
+            this.dataGridView3.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView3_RowsAdded);
             // 
             // Column10
             // 
@@ -1108,6 +1102,7 @@
             this.textBox25.ReadOnly = true;
             this.textBox25.Size = new System.Drawing.Size(451, 20);
             this.textBox25.TabIndex = 54;
+            this.textBox25.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox25_MouseClick);
             // 
             // label31
             // 
@@ -1372,6 +1367,7 @@
             this.textBox12.ReadOnly = true;
             this.textBox12.Size = new System.Drawing.Size(472, 20);
             this.textBox12.TabIndex = 16;
+            this.textBox12.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox12_MouseClick);
             // 
             // label7
             // 
@@ -1434,23 +1430,47 @@
             this.label32.TabIndex = 0;
             this.label32.Text = "Замечания (дополнения, уточнения)";
             // 
-            // textBox39
+            // label48
             // 
-            this.textBox39.Location = new System.Drawing.Point(31, 87);
-            this.textBox39.Name = "textBox39";
-            this.textBox39.ReadOnly = true;
-            this.textBox39.Size = new System.Drawing.Size(16, 20);
-            this.textBox39.TabIndex = 59;
-            this.textBox39.Visible = false;
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(357, 89);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(74, 13);
+            this.label48.TabIndex = 67;
+            this.label48.Text = "Температура";
             // 
-            // textBox40
+            // textBox35
             // 
-            this.textBox40.Location = new System.Drawing.Point(31, 126);
-            this.textBox40.Name = "textBox40";
-            this.textBox40.ReadOnly = true;
-            this.textBox40.Size = new System.Drawing.Size(16, 20);
-            this.textBox40.TabIndex = 60;
-            this.textBox40.Visible = false;
+            this.textBox35.Location = new System.Drawing.Point(444, 88);
+            this.textBox35.Name = "textBox35";
+            this.textBox35.Size = new System.Drawing.Size(120, 20);
+            this.textBox35.TabIndex = 68;
+            // 
+            // Column16
+            // 
+            this.Column16.HeaderText = "id_in_r";
+            this.Column16.Name = "Column16";
+            this.Column16.ReadOnly = true;
+            this.Column16.Visible = false;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "id_t_s";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "Техническое средство";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Удалить";
+            this.Column3.Name = "Column3";
             // 
             // Protocol
             // 
@@ -1465,6 +1485,7 @@
             this.Text = "Protocol";
             this.Load += new System.EventHandler(this.Protocol_Load);
             this.Shown += new System.EventHandler(this.Protocol_Shown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Protocol_KeyPress);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1533,9 +1554,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewButtonColumn Column3;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
@@ -1622,9 +1640,7 @@
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.TextBox textBox35;
         private System.Windows.Forms.TextBox textBox36;
-        private System.Windows.Forms.TextBox textBox37;
         private System.Windows.Forms.TextBox textBox38;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label label46;
@@ -1632,5 +1648,11 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.TextBox textBox40;
         private System.Windows.Forms.TextBox textBox39;
+        private System.Windows.Forms.TextBox textBox35;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewButtonColumn Column3;
     }
 }

@@ -82,12 +82,12 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label21 = new System.Windows.Forms.Label();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label21 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -620,15 +620,6 @@
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(16, 514);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(261, 13);
-            this.label21.TabIndex = 45;
-            this.label21.Text = "Проживающие в данном жилом помещении лица:";
-            // 
             // Column5
             // 
             this.Column5.HeaderText = "id";
@@ -659,6 +650,15 @@
             this.Column4.HeaderText = "Удалить";
             this.Column4.Name = "Column4";
             this.Column4.Text = "Удалить";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(16, 514);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(261, 13);
+            this.label21.TabIndex = 45;
+            this.label21.Text = "Проживающие в данном жилом помещении лица:";
             // 
             // Resolution
             // 

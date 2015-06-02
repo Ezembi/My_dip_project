@@ -218,7 +218,6 @@ Create table court (
 COMMENT = 'Наименование суда';
 
 Create table r_tex_sredstv (
-	pc_r Int NOT NULL AUTO_INCREMENT,
 	pk_tex_sredstvo Int NOT NULL,
 	pk_protokol Int NOT NULL,
- Primary Key (pc_r,pk_tex_sredstvo,pk_protokol)) ENGINE = MyISAM;
+ Primary Key (pk_tex_sredstvo,pk_protokol)) ENGINE = MyISAM;

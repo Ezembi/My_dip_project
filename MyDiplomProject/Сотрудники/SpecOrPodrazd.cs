@@ -334,6 +334,7 @@ namespace MyDiplomProject
             {
                 if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1)
                 {
+                    // удалеие
                     DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?\nДанное действие необратимо!", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (del == System.Windows.Forms.DialogResult.Yes)
@@ -367,13 +368,20 @@ namespace MyDiplomProject
 
             if (e.ColumnIndex == 7 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
+                // выбор
                 PC_rezult = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                Rezult = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                switch (table)
+                {
+                    case "spravochnik_pod": Rezult = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString(); break;
+                    case "specialist": Rezult = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString(); break;
+                }
+               
                 this.Close();
             }
 
             if (e.ColumnIndex == 5 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
+                // загрузка доп. информации
                 AddDojnost f;
                 switch (STable)
                 {

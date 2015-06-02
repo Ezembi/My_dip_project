@@ -33,28 +33,27 @@ COMMENT = 'Уполномоченный';
 Create table Protokol (
 	pk_protokol Int NOT NULL AUTO_INCREMENT,
 	data_sostav Date,
-	Vremya_nachala Datetime,
-	vremya_okonch Datetime,
-	mesto_peibitiya Varchar(1000),
-	coobshenie Varchar(1000),
-	predmet_osmotra Varchar(1000),
+	Vremya_nachala Date,
+	vremya_okonch Date,
+	mesto_peibitiya Varchar(300),
+	soobshil Varchar(200),
+	coobshenie Varchar(500),
+	predmet_osmotra Varchar(300),
 	id_prot Int,
-	Organ Varchar(1000),
-	Zayavleniya Varchar(5000),
-	zamechaniya Varchar(5000),
+	Organ Varchar(5000),
+	Zayavleniya Varchar(500),
 	I_look Varchar(200),
 	Sposob_izyatiya Varchar(200),
 	temperature Varchar(200),
-	dead_go Varchar(1000),
-	cel_obiska Varchar(5000),
-	otdali Varchar(1000),
-	pk_gorod Int,
-	pk_pogoda Int,
-	pk_osveshennost Int,
-	pk_spec Int,
-	pk_polise Int,
+	dead_go Varchar(5000),
+	pk_gorod Int NOT NULL,
+	pk_pogoda Int NOT NULL,
+	pk_osveshennost Int NOT NULL,
+	pk_tex_sredstvo Int NOT NULL,
+	pk_spec Int NOT NULL,
+	pk_polise Int NOT NULL,
 	pk_postanov Int,
-	PK_Dela Int,
+	PK_Dela Int NOT NULL,
  Primary Key (pk_protokol)) ENGINE = MyISAM
 COMMENT = 'Протокол';
 
@@ -216,9 +215,3 @@ Create table court (
 	id_number Varchar(200),
  Primary Key (pk_court)) ENGINE = MyISAM
 COMMENT = 'Наименование суда';
-
-Create table r_tex_sredstv (
-	pc_r Int NOT NULL AUTO_INCREMENT,
-	pk_tex_sredstvo Int NOT NULL,
-	pk_protokol Int NOT NULL,
- Primary Key (pc_r,pk_tex_sredstvo,pk_protokol)) ENGINE = MyISAM;
