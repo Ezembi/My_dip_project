@@ -70,12 +70,14 @@
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -198,9 +200,9 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(13, 201);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(154, 17);
+            this.checkBox3.Size = new System.Drawing.Size(99, 17);
             this.checkBox3.TabIndex = 7;
-            this.checkBox3.Text = "Уголовное дело закрыто";
+            this.checkBox3.Text = "Дело закрыто";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
@@ -425,8 +427,8 @@
             this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem,
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem});
             this.добавитьПротоколToolStripMenuItem.Name = "добавитьПротоколToolStripMenuItem";
-            this.добавитьПротоколToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.добавитьПротоколToolStripMenuItem.Text = "Добавить протокол";
+            this.добавитьПротоколToolStripMenuItem.Size = new System.Drawing.Size(314, 22);
+            this.добавитьПротоколToolStripMenuItem.Text = "Сохранить изменения и добавить протокол";
             // 
             // протоколОсмотраМетаПроисшествияToolStripMenuItem
             // 
@@ -440,6 +442,7 @@
             this.протоколОсмотраТрупаToolStripMenuItem.Name = "протоколОсмотраТрупаToolStripMenuItem";
             this.протоколОсмотраТрупаToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
             this.протоколОсмотраТрупаToolStripMenuItem.Text = "Протокол осмотра трупа";
+            this.протоколОсмотраТрупаToolStripMenuItem.Click += new System.EventHandler(this.протоколОсмотраТрупаToolStripMenuItem_Click);
             // 
             // протоколЛичногоОбыскаПостановлениеToolStripMenuItem
             // 
@@ -470,17 +473,20 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column2,
-            this.Column9,
             this.Column1,
+            this.Column3,
             this.Column8,
             this.Column7,
             this.Column4,
-            this.Column5});
+            this.Column5,
+            this.Column6,
+            this.Column9});
             this.dataGridView1.Location = new System.Drawing.Point(12, 307);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(793, 345);
             this.dataGridView1.TabIndex = 39;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // Column2
             // 
@@ -489,13 +495,6 @@
             this.Column2.ReadOnly = true;
             this.Column2.Visible = false;
             // 
-            // Column9
-            // 
-            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column9.HeaderText = "Номер материала";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            // 
             // Column1
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -503,6 +502,13 @@
             this.Column1.MaxInputLength = 200;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.HeaderText = "Тип протокола";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column8
             // 
@@ -531,6 +537,20 @@
             this.Column5.ReadOnly = true;
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "pk_post";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Visible = false;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "id_prot";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Visible = false;
             // 
             // CriminalAffair
             // 
@@ -610,18 +630,20 @@
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewButtonColumn Column4;
-        private System.Windows.Forms.DataGridViewButtonColumn Column5;
         private System.Windows.Forms.ToolStripMenuItem добавитьПротоколToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem протоколОсмотраМетаПроисшествияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem протоколОсмотраТрупаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem протоколЛичногоОбыскаПостановлениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewButtonColumn Column4;
+        private System.Windows.Forms.DataGridViewButtonColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
     }
 }

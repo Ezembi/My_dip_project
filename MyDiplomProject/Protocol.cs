@@ -20,55 +20,59 @@ namespace MyDiplomProject
         List<string> delPeoples;        // список лиц для удаления
         List<string> delDevise;         // список тех средств для удаления
 
-        int items;          // количество записей в таблице на форме
         bool Lock = true;   // блокировка действий пользователя до полной загрузки формы
         string User;        // имя пользователя, для доступа к б/д
         string Password;    // пароль пользователя
         string Database;    // название б/д
         string Ip;          // ip сервера
-        int lastIndex = 0;  // для корректного постраничного отображения
-        int count = 0;      // количество записей в таблице БД
         int rSize = 1;      // иправление бага WS
         string table;       // ТАБЛИЦА БАЗЫ ДАННЫХ
-        string[] HeaderText;// название полей в таблице для отображения
         string[] DBHeader;  // название полей в таблице для sql запросов
 
         string PK_Dela;     // внешний ключ уголовного дела / материала проверки для выборки
         string id_prot;     // номер варианта протокола
+        string id_psot;     // номер варианта постановления
         string pk_postanov; // первичный ключ постановления
         string pk_protokol; // пномер протокола
 
-        string STable1;      // ТАБЛИЦА1 БАЗЫ ДАННЫХ для сопудствующей информации (уполномоченный)
-        string[] DBSHeader1; // название полей в таблице1 для sql запросов, для сопудствующей информации
+        string STable0;      // ТАБЛИЦА3 БАЗЫ ДАННЫХ для сопудствующей информации (город)
+        string[] DBSHeader0; // название полей в таблице для sql запросов, для сопудствующей информации
 
-        string STable2;      // ТАБЛИЦА2 БАЗЫ ДАННЫХ для сопудствующей информации (города)
-        string[] DBSHeader2; // название полей в таблице2 для sql запросов, для сопудствующей информации
+        string STable1;      // ТАБЛИЦА3 БАЗЫ ДАННЫХ для сопудствующей информации (погода)
+        string[] DBSHeader1; // название полей в таблице для sql запросов, для сопудствующей информации
+
+        string STable2;      // ТАБЛИЦА3 БАЗЫ ДАННЫХ для сопудствующей информации (освещённость)
+        string[] DBSHeader2; // название полей в таблице для sql запросов, для сопудствующей информации
 
         string STable3;      // ТАБЛИЦА3 БАЗЫ ДАННЫХ для сопудствующей информации (Вещественное доказательство)
-        string[] DBSHeader3; // название полей в таблице3 для sql запросов, для сопудствующей информации
+        string[] DBSHeader3; // название полей в таблице для sql запросов, для сопудствующей информации
 
         string STable4;      // ТАБЛИЦА4 БАЗЫ ДАННЫХ для сопудствующей информации (Способы упаковки вещественных доказательств)
-        string[] DBSHeader4; // название полей в таблице3 для sql запросов, для сопудствующей информации
+        string[] DBSHeader4; // название полей в таблице для sql запросов, для сопудствующей информации
 
         string STable5;      // ТАБЛИЦА5 БАЗЫ ДАННЫХ для сопудствующей информации (Справочник материалов, в которые упаковываю вещественные доказательства (полиэтилен, бумага и т.д.))
-        string[] DBSHeader5; // название полей в таблице5 для sql запросов, для сопудствующей информации
+        string[] DBSHeader5; // название полей в таблице для sql запросов, для сопудствующей информации
 
         string STable6;      // ТАБЛИЦА6 БАЗЫ ДАННЫХ для сопудствующей информации (другие люди)
-        string[] DBSHeader6; // название полей в таблице6 для sql запросов, для сопудствующей информации
+        string[] DBSHeader6; // название полей в таблице для sql запросов, для сопудствующей информации
 
-        string STable7;      // ТАБЛИЦА7 БАЗЫ ДАННЫХ для сопудствующей информации (проц. положение)
+        string STable7;      // ТАБЛИЦА6 БАЗЫ ДАННЫХ для сопудствующей информации (уполномоченный)
+        string[] DBSHeader7; // название полей в таблице для sql запросов, для сопудствующей информации
 
         string STable8;      // ТАБЛИЦА6 БАЗЫ ДАННЫХ для сопудствующей информации (понятой)
-        string[] DBSHeader8; // название полей в таблице6 для sql запросов, для сопудствующей информации
+        string[] DBSHeader8; // название полей в таблице для sql запросов, для сопудствующей информации
 
         string STable9;      // ТАБЛИЦА6 БАЗЫ ДАННЫХ для сопудствующей информации (постановление)
-        string[] DBSHeader9; // название полей в таблице6 для sql запросов, для сопудствующей информации
+        string[] DBSHeader9; // название полей в таблице для sql запросов, для сопудствующей информации
 
         string STable10;      // ТАБЛИЦА6 БАЗЫ ДАННЫХ для сопудствующей информации (разшивачная таблица с тех средствами)
-        string[] DBSHeader10; // название полей в таблице6 для sql запросов, для сопудствующей информации
+        string[] DBSHeader10; // название полей в таблице для sql запросов, для сопудствующей информации
 
         string STable11;      // ТАБЛИЦА6 БАЗЫ ДАННЫХ для сопудствующей информации (тех средства)
-        string[] DBSHeader11; // название полей в таблице6 для sql запросов, для сопудствующей информации
+        string[] DBSHeader11; // название полей в таблице для sql запросов, для сопудствующей информации
+
+        string STable12;      // ТАБЛИЦА6 БАЗЫ ДАННЫХ для сопудствующей информации (специалист)
+        string[] DBSHeader12; // название полей в таблице для sql запросов, для сопудствующей информации
 
         bool change = false;
 
@@ -89,35 +93,35 @@ namespace MyDiplomProject
             pk_postanov = _pk_postanov;
             pk_protokol = _pk_protokol;
 
-            table = "postanovlenie";
-            DBHeader = new string[] { "Obosnovanie", "DateOfCreate", "plase", "street", "house", "room", "id_post", "pk_polise", "pk_gorod", "pk_prosecutor1", "pk_court1", "pk_prosecutor2", "pk_court2", "pk_dolgnost" };
-            STable1 = "polise";
-            DBSHeader1 = new string[] { "pk_polise", "surname", "Pname", "second_name" };
-            STable2 = "spravochnik_gorodov";
-            DBSHeader2 = new string[] { "pk_gorod", "nazvanie", "id_number" };
+            table = "protokol";
+            DBHeader = new string[] { "pk_protokol", "data_sostav", "Vremya_nachala", "vremya_okonch", "mesto_peibitiya", "coobshenie", "predmet_osmotra", "id_prot", "Zayavleniya", "zamechaniya", "I_look", "Sposob_izyatiya", "temperature", "dead_go", "cel_obiska", "otdali", "pk_gorod", "pk_pogoda", "pk_osveshennost", "pk_spec", "pk_polise", "pk_postanov", "PK_Dela", "install" };
+
+            STable0 = "spravochnik_gorodov";
+            DBSHeader0 = new string[] { "pk_gorod", "nazvanie", "id_number" };
+            STable1 = "spravochnik_pogodi";
+            DBSHeader1 = new string[] { "pk_pogoda", "nazvanie" };
+            STable2 = "spravochnik_osveshennosti";
+            DBSHeader2 = new string[] { "pk_osveshennost", "nazvanie" };
             STable3 = "vesh_dok";
             DBSHeader3 = new string[] { "pk_vesh_dok", "priznaki", "naiminovanie", "pk_material", "pk_ypakovka", "pk_protokol" };
             STable4 = "ypakovka";
             DBSHeader4 = new string[] { "pk_ypakovka", "nazvanie" };
             STable5 = "spravochnik_materialov";
             DBSHeader5 = new string[] { "pk_material", "material", "id_number" };
-
             STable6 = "peoples";
             DBSHeader6 = new string[] { "PK_people", "surname", "Pname", "second_name", "primichanie", "mystate", "pk_postanov", "pk_protokol", "pk_pol" };
-
-            STable7 = "sp_pro_pol";
-
+            STable7 = "polise";
+            DBSHeader7 = new string[] { "pk_polise","surname", "Pname", "second_name"};
             STable8 = "ponatoi";
             DBSHeader8 = new string[] { "pk_ponatoi", "surname", "Pname", "second_name", "street", "house", "room", "pk_protokol" };
-
             STable9 = "postanovlenie";
             DBSHeader9 = new string[] { "Obosnovanie", "DateOfCreate", "plase", "street", "house", "room", "id_post", "pk_polise", "pk_gorod", "pk_prosecutor1", "pk_court1", "pk_prosecutor2", "pk_court2", "pk_dolgnost" };
-
             STable10 = "r_tex_sredstv";
             DBSHeader10 = new string[] { "pc_r", "pk_tex_sredstvo", "pk_protokol" };
-
             STable11 = "spravochnik_tex_sredstv";
             DBSHeader11 = new string[] { "pk_tex_sredstvo", "nazvanie", "id_number" };
+            STable12 = "specialist";
+            DBSHeader12 = new string[] { "pk_spec", "surname", "Pname", "second_name" };
 
             delVeshDokList = new List<string>();
             delPeoples = new List<string>();
@@ -136,11 +140,7 @@ namespace MyDiplomProject
 
                 //открытие подключения
                 mycon.Open();
-                if (PK_Dela == "")
-                    this.Text = "Уголовное дело / материал проверки: Новый документ";
-                else
-                    this.Text = "Уголовное дело / материал проверки: " + PK_Dela;
-
+                
                 if (mycon.State != ConnectionState.Open)
                 {
                     MessageBox.Show("Нет подключениея к базе данных!");
@@ -236,36 +236,39 @@ namespace MyDiplomProject
             bool LocLock = Lock;
             try
             {
-                Lock = true;
-                MyDataGridView.Rows.Clear();
-                Lock = LocLock;
-
-                //грузим проживающих в данном жилом помещении лиц
-                sql = "select * from " + STable + " where pk_protokol = " + pk_protokol;
-                //получение комманды и коннекта
-                cmd = new MySqlCommand(sql, mycon);
-                //вополнение запроса
-                cmd.ExecuteNonQuery();
-                da = new MySqlDataAdapter(cmd);
-                //получение выборки
-                dr = cmd.ExecuteReader();
-                // заполнения поля 
-                while (dr.Read())
+                if (pk_protokol != "")
                 {
-                    MyDataGridView.Rows.Add();
-                    MyDataGridView.Rows[i].Cells[0].Value = dr[0].ToString();    // PC
-                    MyDataGridView.Rows[i].Cells[1].Value = dr[1].ToString();    // признаки
-                    MyDataGridView.Rows[i].Cells[2].Value = dr[2].ToString();    // наименование
-                    MyDataGridView.Rows[i].Cells[3].Value = dr[3].ToString();    // pk_material
-                    MyDataGridView.Rows[i].Cells[4].Value = dr[4].ToString();    // pk_ypakovka
-                    MyDataGridView.Rows[i].Cells[7].Value = "Удалить";           // Удаление
+                    Lock = true;
+                    MyDataGridView.Rows.Clear();
+                    Lock = LocLock;
 
-                    i++;
+                    //грузим проживающих в данном жилом помещении лиц
+                    sql = "select * from " + STable + " where pk_protokol = " + pk_protokol;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля 
+                    while (dr.Read())
+                    {
+                        MyDataGridView.Rows.Add();
+                        MyDataGridView.Rows[i].Cells[0].Value = dr[0].ToString();    // PC
+                        MyDataGridView.Rows[i].Cells[1].Value = dr[1].ToString();    // признаки
+                        MyDataGridView.Rows[i].Cells[2].Value = dr[2].ToString();    // наименование
+                        MyDataGridView.Rows[i].Cells[3].Value = dr[3].ToString();    // pk_material
+                        MyDataGridView.Rows[i].Cells[4].Value = dr[4].ToString();    // pk_ypakovka
+                        MyDataGridView.Rows[i].Cells[7].Value = "Удалить";           // Удаление
+
+                        i++;
+                    }
+                    dr.Close();
+
+                    loadFromOtherTable(STable4, DBSHeader4, MyDataGridView, 4, 6);  //Способы упаковки вещественных доказательств
+                    loadFromOtherTable(STable5, DBSHeader5, MyDataGridView, 3, 5);  //Справочник материалов, в которые упаковываю вещественные доказательства
                 }
-                dr.Close();
-
-                loadFromOtherTable(STable4, DBSHeader4, MyDataGridView, 4, 6);  //Способы упаковки вещественных доказательств
-                loadFromOtherTable(STable5, DBSHeader5, MyDataGridView, 3, 5);  //Справочник материалов, в которые упаковываю вещественные доказательства
 
 
             }
@@ -281,35 +284,38 @@ namespace MyDiplomProject
             bool LocLock = Lock;
             try
             {
-                Lock = true;
-                dataGridView3.Rows.Clear();
-                Lock = LocLock;
-
-                //грузим проживающих в данном жилом помещении лиц
-                sql = "select * from " + STable6 + " where pk_protokol = " + pk_protokol;
-                //получение комманды и коннекта
-                cmd = new MySqlCommand(sql, mycon);
-                //вополнение запроса
-                cmd.ExecuteNonQuery();
-                da = new MySqlDataAdapter(cmd);
-                //получение выборки
-                dr = cmd.ExecuteReader();
-                // заполнения поля 
-                while (dr.Read())
+                if (pk_protokol != "")
                 {
-                    dataGridView3.Rows.Add();
-                    dataGridView3.Rows[i].Cells[0].Value = dr[0].ToString();    // PC
-                    dataGridView3.Rows[i].Cells[1].Value = dr[1].ToString();    // фамилия
-                    dataGridView3.Rows[i].Cells[2].Value = dr[2].ToString();    // имя
-                    dataGridView3.Rows[i].Cells[3].Value = dr[3].ToString();    // отчество
-                    dataGridView3.Rows[i].Cells[4].Value = dr[4].ToString();    // примечание
-                    dataGridView3.Rows[i].Cells[5].Value = "Удалить";           // Удаление
+                    Lock = true;
+                    dataGridView3.Rows.Clear();
+                    Lock = LocLock;
 
-                    i++;
+                    //грузим проживающих в данном жилом помещении лиц
+                    sql = "select * from " + STable6 + " where pk_protokol = " + pk_protokol;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля 
+                    while (dr.Read())
+                    {
+                        dataGridView3.Rows.Add();
+                        dataGridView3.Rows[i].Cells[0].Value = dr[0].ToString();    // PC
+                        dataGridView3.Rows[i].Cells[1].Value = dr[1].ToString();    // фамилия
+                        dataGridView3.Rows[i].Cells[2].Value = dr[2].ToString();    // имя
+                        dataGridView3.Rows[i].Cells[3].Value = dr[3].ToString();    // отчество
+                        dataGridView3.Rows[i].Cells[4].Value = dr[4].ToString();    // примечание
+                        dataGridView3.Rows[i].Cells[5].Value = "Удалить";           // Удаление
+
+                        i++;
+                    }
+                    dr.Close();
                 }
-                dr.Close();
             }
-            catch (Exception e) { MessageBox.Show(e.ToString()); }
+            catch  { MessageBox.Show("\nНе удалось загрузить других лиц!\nВозможно у Вас нет доступа к базе данных!", "Ошибка сохранения!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void SavePonyatoi(TextBox surname, TextBox pname, TextBox second_name, TextBox street, TextBox house, TextBox room, TextBox pk_ponatoi) // сохранение понятого
@@ -375,42 +381,45 @@ namespace MyDiplomProject
             string sql = "";
             try
             {
-                //грузим проживающих в данном жилом помещении лиц
-                sql = "select * from " + STable8 + " where pk_protokol = " + pk_protokol;
-                //получение комманды и коннекта
-                cmd = new MySqlCommand(sql, mycon);
-                //вополнение запроса
-                cmd.ExecuteNonQuery();
-                da = new MySqlDataAdapter(cmd);
-                //получение выборки
-                dr = cmd.ExecuteReader();
-                // заполнения поля 
-                if (dr.Read())
+                if (pk_protokol != "")
                 {
-                    //первый понятой
-                    textBox39.Text = dr[0].ToString();    // PC
-                    textBox13.Text = dr[1].ToString();    // фамилия
-                    textBox14.Text = dr[2].ToString();    // имя
-                    textBox15.Text = dr[3].ToString();    // отчество
-                    textBox16.Text = dr[4].ToString();    // улица
-                    textBox17.Text = dr[5].ToString();    // дом
-                    textBox18.Text = dr[6].ToString();    // квартира
-                }
+                    //грузим проживающих в данном жилом помещении лиц
+                    sql = "select * from " + STable8 + " where pk_protokol = " + pk_protokol;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля 
+                    if (dr.Read())
+                    {
+                        //первый понятой
+                        textBox39.Text = dr[0].ToString();    // PC
+                        textBox13.Text = dr[1].ToString();    // фамилия
+                        textBox14.Text = dr[2].ToString();    // имя
+                        textBox15.Text = dr[3].ToString();    // отчество
+                        textBox16.Text = dr[4].ToString();    // улица
+                        textBox17.Text = dr[5].ToString();    // дом
+                        textBox18.Text = dr[6].ToString();    // квартира
+                    }
 
-                if (dr.Read())
-                {
-                    //второй понятой
-                    textBox40.Text = dr[0].ToString();    // PC
-                    textBox24.Text = dr[1].ToString();    // фамилия
-                    textBox23.Text = dr[2].ToString();    // имя
-                    textBox22.Text = dr[3].ToString();    // отчество
-                    textBox21.Text = dr[4].ToString();    // улица
-                    textBox20.Text = dr[5].ToString();    // дом
-                    textBox19.Text = dr[6].ToString();    // квартира
+                    if (dr.Read())
+                    {
+                        //второй понятой
+                        textBox40.Text = dr[0].ToString();    // PC
+                        textBox24.Text = dr[1].ToString();    // фамилия
+                        textBox23.Text = dr[2].ToString();    // имя
+                        textBox22.Text = dr[3].ToString();    // отчество
+                        textBox21.Text = dr[4].ToString();    // улица
+                        textBox20.Text = dr[5].ToString();    // дом
+                        textBox19.Text = dr[6].ToString();    // квартира
+                    }
+                    dr.Close();
                 }
-                dr.Close();
             }
-            catch (Exception e) { MessageBox.Show(e.ToString()); }
+            catch { MessageBox.Show("\nНе удалось загрузить понятых!\nВозможно у Вас нет доступа к базе данных!", "Ошибка сохранения!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void LoadCrimeMan() //загрузка подозреваемого
@@ -420,24 +429,27 @@ namespace MyDiplomProject
             string sql = "";
             try
             {
-                //грузим проживающих в данном жилом помещении лиц
-                sql = "select * from " + STable6 + " where pk_postanov = " + pk_postanov;
-                //получение комманды и коннекта
-                cmd = new MySqlCommand(sql, mycon);
-                //вополнение запроса
-                cmd.ExecuteNonQuery();
-                da = new MySqlDataAdapter(cmd);
-                //получение выборки
-                dr = cmd.ExecuteReader();
-                // заполнения поля 
-                if (dr.Read())
+                if (pk_postanov != "")
                 {
-                    textBox34.Text = dr[1].ToString();    // фамилия
-                    textBox33.Text = dr[2].ToString();    // имя
-                    textBox32.Text = dr[3].ToString();    // отчество
+                    //грузим проживающих в данном жилом помещении лиц
+                    sql = "select * from " + STable6 + " where pk_postanov = " + pk_postanov;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля 
+                    if (dr.Read())
+                    {
+                        textBox34.Text = dr[1].ToString();    // фамилия
+                        textBox33.Text = dr[2].ToString();    // имя
+                        textBox32.Text = dr[3].ToString();    // отчество
 
+                    }
+                    dr.Close();
                 }
-                dr.Close();
             }
             catch (Exception e) { MessageBox.Show(e.ToString()); }
         }
@@ -449,32 +461,118 @@ namespace MyDiplomProject
             string sql = "";
             try
             {
-                //грузим проживающих в данном жилом помещении лиц
-                sql = "select " + DBSHeader9[1] + " from " + STable9 + " where pk_postanov = " + pk_postanov;
-                //получение комманды и коннекта
-                cmd = new MySqlCommand(sql, mycon);
-                //вополнение запроса
-                cmd.ExecuteNonQuery();
-                da = new MySqlDataAdapter(cmd);
-                //получение выборки
-                dr = cmd.ExecuteReader();
-                // заполнения поля 
-                if (dr.Read())
+                if (pk_postanov != "")
                 {
-                    if (dr[0].ToString() != "01.01.0001 0:00:00")   //дата составления
-                        dateTimePicker4.Value = Convert.ToDateTime(dr[0].ToString());
+                    //грузим проживающих в данном жилом помещении лиц
+                    sql = "select " + DBSHeader9[1] + ", " + DBSHeader9[7] + " from " + STable9 + " where pk_postanov = " + pk_postanov;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля 
+                    if (dr.Read())
+                    {
+                        if (dr[0].ToString() != "01.01.0001 0:00:00")   //дата составления
+                            dateTimePicker4.Value = Convert.ToDateTime(dr[0].ToString());
+                        id_psot = dr[0].ToString();
+                    }
+                    dr.Close();
                 }
-                dr.Close();
             }
             catch (Exception e) { MessageBox.Show(e.ToString()); }
         }
 
+        private void loadFromOtherFormOneItem(string STable_, string[] DBSHeader_, TextBox from, TextBox to)
+        {
+            try
+            {
+                if (from.Text != "")
+                {
+                    MySqlDataAdapter da;
+                    MySqlDataReader dr;
+                    string sql;
+                    sql = "select ";
+                    for (int j = 1; j < DBSHeader_.Length; j++)
+                    {
+                        if (j == 1)
+                            sql += DBSHeader_[j];
+                        else
+                            sql += ", " + DBSHeader_[j];
+                    }
+                    // генерация sql комманды
+                    sql += " from " + STable_ + " where " + DBSHeader_[0] + " = " + from.Text;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля
+                    if (dr.Read())
+                        to.Text = dr[0].ToString();
+                    dr.Close();
+                }
+            }
+            catch
+            { }
+        }
+
+        private void loadFromOtherFormMultiItems(string STable_, string[] DBSHeader_, TextBox from, TextBox to)
+        {
+            try
+            {
+                if (from.Text != "")
+                {
+                    MySqlDataAdapter da;
+                    MySqlDataReader dr;
+                    string sql;
+                    sql = "select ";
+                    for (int j = 1; j < DBSHeader_.Length; j++)
+                    {
+                        if (j == 1)
+                            sql += DBSHeader_[j];
+                        else
+                            sql += ", " + DBSHeader_[j];
+                    }
+                    // генерация sql комманды
+                    sql += " from " + STable_ + " where " + DBSHeader_[0] + " = " + from.Text;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля
+                    if (dr.Read())
+                        to.Text = dr[0].ToString() + " " + dr[1].ToString() + " " + dr[2].ToString();
+                    dr.Close();
+                }
+            }
+            catch
+            { }
+        }
+
         private void LoadData()
         {
+            LoadProtocol();
             LoadVeshDok(STable3, dataGridView2);
             LoadPeopels();
             LoadPonyatoi();
             LoadDevise();
+            loadFromOtherFormOneItem(STable0, DBSHeader0, textBox2, textBox1);          // загрузка города
+            loadFromOtherFormOneItem(STable1, DBSHeader1, textBox7, textBox6);          // загрузка погоды
+            loadFromOtherFormOneItem(STable1, DBSHeader1, textBox7, textBox38);         // загрузка погоды
+            loadFromOtherFormOneItem(STable2, DBSHeader2, textBox8, textBox9);          // загрузка освещённости
+            loadFromOtherFormOneItem(STable2, DBSHeader2, textBox8, textBox36);         // загрузка освещённости
+
+            loadFromOtherFormMultiItems(STable7, DBSHeader7, textBox11, textBox12);     // загрузка уполномоченного
+            loadFromOtherFormMultiItems(STable12, DBSHeader12, textBox26, textBox25);   // загрузка специалиста
+
 
             switch (id_prot)
             {
@@ -518,7 +616,7 @@ namespace MyDiplomProject
             }
         }
 
-        private void SaveDevise()
+        private void SaveDevise()   // сохранение списка тех средств
         {
             try
             {
@@ -579,70 +677,309 @@ namespace MyDiplomProject
             }
         }
 
-        private void LoadDevise()
+        private void LoadDevise()   // загрузка списка тех средств
         {
             MySqlDataAdapter da;
             MySqlDataReader dr;
             //проверка подключения к бд
             try
             {
-                if (mycon.State == ConnectionState.Open)
+                if (pk_protokol != "")
                 {
-                    string sql;
-                    //генерация sql запроса, для отображения данных из БД на форму
-                    sql = "";
-                    sql += "select * from " + STable10 + " where pk_protokol = " + pk_protokol;
-
-                    cmd = new MySqlCommand(sql, mycon);
-
-                    //вополнение запроса
-                    cmd.ExecuteNonQuery();
-
-                    //выборка по запросу
-                    da = new MySqlDataAdapter(cmd);
-                    dr = cmd.ExecuteReader();
-
-                    //запролене dataGridView1
-                    int i = 0;
-                    dataGridView1.Rows.Clear();
-                    while (dr.Read())
+                    if (mycon.State == ConnectionState.Open)
                     {
-                        dataGridView1.Rows.Add();
-                        dataGridView1.Rows[i].Cells[0].Value = dr[0].ToString();    //PC
-                        dataGridView1.Rows[i].Cells[1].Value = dr[1].ToString();    //фамилия
-                        dataGridView1.Rows[i].Cells[3].Value = "Удалить";           //Удаление
-                        i++;
-                    }
-                    dr.Close();
-
-                    // название тех средства (выборка информации из другой таблице)
-                    for (int ii = 0; ii < dataGridView1.Rows.Count - 1; ii++)
-                    {
-                        sql = "select " + DBSHeader11[1];
-
-                        sql += " from " + STable11 + " where " + DBSHeader11[0] + " = " + dataGridView1.Rows[ii].Cells[1].Value.ToString();
+                        string sql;
+                        //генерация sql запроса, для отображения данных из БД на форму
+                        sql = "";
+                        sql += "select * from " + STable10 + " where pk_protokol = " + pk_protokol;
 
                         cmd = new MySqlCommand(sql, mycon);
+
+                        //вополнение запроса
                         cmd.ExecuteNonQuery();
+
+                        //выборка по запросу
                         da = new MySqlDataAdapter(cmd);
                         dr = cmd.ExecuteReader();
-                        if (dr.Read())
-                            dataGridView1.Rows[ii].Cells[2].Value = dr[0].ToString();
+
+                        //запролене dataGridView1
+                        int i = 0;
+                        dataGridView1.Rows.Clear();
+                        while (dr.Read())
+                        {
+                            dataGridView1.Rows.Add();
+                            dataGridView1.Rows[i].Cells[0].Value = dr[0].ToString();    //PC
+                            dataGridView1.Rows[i].Cells[1].Value = dr[1].ToString();    //фамилия
+                            dataGridView1.Rows[i].Cells[3].Value = "Удалить";           //Удаление
+                            i++;
+                        }
                         dr.Close();
+
+                        // название тех средства (выборка информации из другой таблице)
+                        for (int ii = 0; ii < dataGridView1.Rows.Count - 1; ii++)
+                        {
+                            sql = "select " + DBSHeader11[1];
+
+                            sql += " from " + STable11 + " where " + DBSHeader11[0] + " = " + dataGridView1.Rows[ii].Cells[1].Value.ToString();
+
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+                            da = new MySqlDataAdapter(cmd);
+                            dr = cmd.ExecuteReader();
+                            if (dr.Read())
+                                dataGridView1.Rows[ii].Cells[2].Value = dr[0].ToString();
+                            dr.Close();
+                        }
+
+                        // иправление бага WS
+                        rSize = (rSize > 0) ? -1 : 1;
+                        this.ClientSize = new System.Drawing.Size(this.ClientSize.Width + rSize, this.ClientSize.Height);
+                    }
+                    else
+                        MessageBox.Show("Нет подключениея к базе данных!");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при загрузке списка технических средств!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SaveProtocol() //сохранение протокола
+        {
+            MySqlDataAdapter da;
+            MySqlDataReader dr;
+
+            try
+            {
+                if (pk_protokol == "")
+                {
+                    // добавление
+                    string sql = "";
+
+                    sql = "insert into " + table + "(";
+
+                    for (int i = 1; i < DBHeader.Length; i++)
+                    {
+                        if (i == 1)
+                            sql += DBHeader[i];
+                        else
+                            sql += ", " + DBHeader[i];
                     }
 
-                    // иправление бага WS
-                    rSize = (rSize > 0) ? -1 : 1;
-                    this.ClientSize = new System.Drawing.Size(this.ClientSize.Width + rSize, this.ClientSize.Height);
+                    sql += ") values (";
+
+                    sql += "STR_TO_DATE('" + dateTimePicker1.Value.ToShortDateString() + "', '%d.%m.%Y')" + ", ";       //data_sostav
+                    sql += "STR_TO_DATE('" + dateTimePicker2.Value.ToLongTimeString() + "', '%k:%i:%s')" + ", ";        //Vremya_nachala
+                    sql += "STR_TO_DATE('" + dateTimePicker3.Value.ToLongTimeString() + "', '%k:%i:%s')" + ", ";        //vremya_okonch
+                    sql += "'" + textBox4.Text + "', ";                                                                 //mesto_peibitiya
+                    sql += "'" + textBox3.Text + "', ";                                                                 //coobshenie
+                    sql += "'" + textBox5.Text + "', ";                                                                 //predmet_osmotra
+                    sql += "'" + id_prot + "', ";                                                                       //id_prot
+                    sql += "'" + textBox28.Text + "', ";                                                                //Zayavleniya
+                    sql += "'" + textBox27.Text + "', ";                                                                //zamechaniya
+                    sql += "'" + textBox37.Text + "', ";                                                                //I_look
+                    if(radioButton1.Checked)
+                        sql += "'0', ";                                                                                 //Sposob_izyatiya
+                    else
+                        sql += "'1', ";                                                                                 //Sposob_izyatiya
+                    sql += "'" + textBox35.Text + "', ";                                                                //temperature
+                    sql += "'" + textBox29.Text + "', ";                                                                //dead_go
+                    sql += "'" + textBox30.Text + "', ";                                                                //cel_obiska
+                    sql += "'" + textBox31.Text + "', ";                                                                //otdali
+
+                    if (textBox2.Text != "")
+                        sql += "'" + textBox2.Text + "', ";                                                                 //pk_gorod
+                    else
+                        sql += "NULL, ";
+
+                    if (textBox7.Text != "")
+                        sql += "'" + textBox7.Text + "', ";                                                                 //pk_pogoda
+                    else
+                        sql += "NULL, ";
+
+                    if (textBox8.Text != "")
+                        sql += "'" + textBox8.Text + "', ";                                                                 //pk_osveshennost
+                    else
+                        sql += "NULL, ";
+
+                    if (textBox26.Text != "")
+                        sql += "'" + textBox26.Text + "', ";                                                                 //pk_spec
+                    else
+                        sql += "NULL, ";
+
+                    if (textBox11.Text != "")
+                        sql += "'" + textBox11.Text + "', ";                                                                 //pk_polise
+                    else
+                        sql += "NULL, ";
+
+                    if (pk_postanov == "")
+                        sql += "NULL, ";                                                                                //pk_postanov
+                    else
+                        sql += "'" + pk_postanov + "', ";
+                    sql += "'" + PK_Dela + "', ";                                                                         //PK_Dela
+                    sql += "'" + textBox10.Text + "'";
+
+
+                    sql += ")";
+
+                    // внесение информации в БД
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+
+
+                    sql = "SELECT last_insert_id()";    // получение последнего внесённого первичного ключа
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        pk_protokol = dr[0].ToString();
+                    }
+                    else
+                        MessageBox.Show("Error:3\nСохранение не удалось!\nНе удалось получить первичный ключ!", "Ошибка сохранения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    dr.Close();
+
                 }
                 else
-                    MessageBox.Show("Нет подключениея к базе данных!");
+                {
+                    string sql = "";
+
+                    //редактирование
+
+                    sql = "";
+                    sql = "update " + table + " set ";
+                    sql += DBHeader[1] + " = STR_TO_DATE('" + dateTimePicker1.Value.ToShortDateString() + "', '%d.%m.%Y')" + ", ";       //data_sostav
+                    sql += DBHeader[2] + " = STR_TO_DATE('" + dateTimePicker2.Value.ToLongTimeString() + "', '%k:%i:%s')" + ", ";        //Vremya_nachala
+                    sql += DBHeader[3] + " = STR_TO_DATE('" + dateTimePicker3.Value.ToLongTimeString() + "', '%k:%i:%s')" + ", ";        //vremya_okonch
+                    sql += DBHeader[4] + " = '" + textBox4.Text + "', ";                                                                 //mesto_peibitiya
+                    sql += DBHeader[5] + " = '" + textBox3.Text + "', ";                                                                 //coobshenie
+                    sql += DBHeader[6] + " = '" + textBox5.Text + "', ";                                                                 //predmet_osmotra
+                    sql += DBHeader[7] + " = '" + id_prot + "', ";                                                                       //id_prot
+                    sql += DBHeader[8] + " = '" + textBox28.Text + "', ";                                                                //Zayavleniya
+                    sql += DBHeader[9] + " = '" + textBox27.Text + "', ";                                                                //zamechaniya
+                    sql += DBHeader[10] + " = '" + textBox37.Text + "', ";                                                                //I_look
+                    if (radioButton1.Checked)
+                        sql += DBHeader[11] + " = '0', ";                                                                                 //Sposob_izyatiya
+                    else
+                        sql += DBHeader[11] + " = '1', ";                                                                                 //Sposob_izyatiya
+                    sql += DBHeader[12] + " = '" + textBox35.Text + "', ";                                                                //temperature
+                    sql += DBHeader[13] + " = '" + textBox29.Text + "', ";                                                                //dead_go
+                    sql += DBHeader[14] + " = '" + textBox30.Text + "', ";                                                                //cel_obiska
+                    sql += DBHeader[15] + " = '" + textBox31.Text + "', ";                                                                //otdali
+
+                    if (textBox2.Text != "")
+                        sql += DBHeader[16] + " = '" + textBox2.Text + "', ";                                                                 //pk_gorod
+                    else
+                        sql += DBHeader[16] + " = NULL,";
+
+                    if (textBox7.Text != "")
+                        sql += DBHeader[17] + " = '" + textBox7.Text + "', ";                                                                 //pk_pogoda
+                    else
+                        sql += DBHeader[17] + " = NULL,";
+
+                    if (textBox8.Text != "")
+                        sql += DBHeader[18] + " = '" + textBox8.Text + "', ";                                                                 //pk_osveshennost
+                    else
+                        sql += DBHeader[18] + " = NULL,";
+
+                    if (textBox26.Text != "")
+                        sql += DBHeader[19] + " = '" + textBox26.Text + "', ";                                                                 //pk_spec
+                    else
+                        sql += DBHeader[19] + " = NULL,";
+
+                    if (textBox11.Text != "")
+                        sql += DBHeader[20] + " = '" + textBox11.Text + "', ";                                                                 //pk_polise
+                    else
+                        sql += DBHeader[20] + " = NULL,";
+
+                    if (pk_postanov == "")
+                        sql += DBHeader[21] + " = NULL, ";                                                                                //pk_postanov
+                    else
+                        sql += DBHeader[21] + " = '" + pk_postanov + "', ";
+                    sql += DBHeader[22] + " = '" + PK_Dela + "', ";                                                                         //PK_Dela
+                    sql += DBHeader[23] + " = '" + textBox10.Text + "'"; 
+
+                    sql += " where pk_protokol = " + pk_protokol;
+
+                    // внесение информации в БД
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Error:4\nСохранение не удалось!\nВозможно у Вас нет доступа к базе данных!", "Ошибка сохранения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadProtocol()   // загрузка протокола
+        {
+            MySqlDataAdapter da;
+            MySqlDataReader dr;
+            //проверка подключения к бд
+            try
+            {
+                if (pk_protokol != "")
+                {
+                    if (mycon.State == ConnectionState.Open)
+                    {
+                        string sql;
+                        //генерация sql запроса, для отображения данных из БД на форму
+                        sql = "";
+                        sql += "select * from " + table + " where pk_protokol = " + pk_protokol;
+                        cmd = new MySqlCommand(sql, mycon);
+                        //вополнение запроса
+                        cmd.ExecuteNonQuery();
+                        //выборка по запросу
+                        da = new MySqlDataAdapter(cmd);
+                        dr = cmd.ExecuteReader();
+                        //запролене протокола
+                        if (dr.Read())
+                        {
+                            dateTimePicker1.Value = Convert.ToDateTime(dr[1].ToString());   //data_sostav
+                            dateTimePicker2.Value = Convert.ToDateTime(dr[2].ToString());   //Vremya_nachala
+                            dateTimePicker3.Value = Convert.ToDateTime(dr[3].ToString());   //vremya_okonch
+                            textBox4.Text = dr[4].ToString();                               //mesto_peibitiya
+                            textBox3.Text = dr[5].ToString();                               //coobshenie
+                            textBox5.Text = dr[6].ToString();                               //predmet_osmotra
+                            id_prot = dr[7].ToString();                                     //id_prot
+                            textBox28.Text = dr[8].ToString();                              //Zayavleniya
+                            textBox27.Text = dr[9].ToString();                              //zamechaniya
+
+                            textBox37.Text = dr[10].ToString();                               //I_look
+
+                            if (dr[11].ToString() == "0")                                    //Sposob_izyatiya
+                                radioButton1.Checked = radioButton4.Checked = true;
+                            else
+                                radioButton3.Checked = radioButton2.Checked = true;
+
+                            textBox35.Text = dr[12].ToString();                               //temperature
+                            textBox29.Text = dr[13].ToString();                               //dead_go
+                            textBox30.Text = dr[14].ToString();                               //cel_obiska
+                            textBox31.Text = dr[15].ToString();                               //otdali
+                            textBox2.Text = dr[16].ToString();                                //pk_gorod
+                            textBox7.Text = dr[17].ToString();                                //pk_pogoda
+                            textBox8.Text = dr[18].ToString();                               //pk_osveshennost
+                            textBox26.Text = dr[19].ToString();                               //pk_spec
+                            textBox11.Text = dr[20].ToString();                               //pk_polise
+                            pk_postanov = dr[21].ToString();                               //pk_postanov
+                            PK_Dela = dr[22].ToString();                               //PK_Dela
+                            textBox10.Text = dr[23].ToString(); 
+                        }
+                        dr.Close();
+                    }
+                    else
+                        MessageBox.Show("Нет подключениея к базе данных!");
+                }
             }
             catch
             {
                 MessageBox.Show("Ошибка при загрузке данных!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }       
 
         private void loadFromOtherTable(string STable_, string[] DBSHeader_, System.Windows.Forms.DataGridView MyDataGridView, int from, int to)
         {
@@ -694,8 +1031,11 @@ namespace MyDiplomProject
             { MessageBox.Show(e.ToString() + "Error in table " + STable_); }
         }
 
-        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveData()
         {
+            SaveProtocol();
+            LoadProtocol();
+
             SaveTables(STable3, DBSHeader3, "pk_protokol", pk_protokol, delVeshDokList, dataGridView2, 5);   //сохранение вещественных дказательств (изьятого имущетсва)
             LoadVeshDok(STable3, dataGridView2);
 
@@ -707,6 +1047,13 @@ namespace MyDiplomProject
 
             SaveDevise();
             LoadDevise();
+
+            FileSave();
+        }
+
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveData();
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -754,6 +1101,7 @@ namespace MyDiplomProject
         {
             //загрузка информации
             LoadData();
+            FileSave();
         }
 
         private void dataGridView3_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -859,6 +1207,8 @@ namespace MyDiplomProject
                         delDevise.Add(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                         dataGridView1.Rows.RemoveAt(e.RowIndex);
                     }
+
+                    FileSave();
                 }
             }
 
@@ -880,6 +1230,7 @@ namespace MyDiplomProject
                     dataGridView1.Rows[e.RowIndex].Cells[3].Value = "Удалить";
                     dataGridView1.Rows[e.RowIndex].Cells[1].Value = f.PC_rezult;
                     dataGridView1.Rows[e.RowIndex].Cells[2].Value = f.Rezult;
+                    FileSave();
                 }
 
                 if(dataGridView1.Rows[e.RowIndex].Cells[1].Value != null && f.PC_rezult != null)
@@ -887,10 +1238,184 @@ namespace MyDiplomProject
                     dataGridView1.Rows[e.RowIndex].Cells[3].Value = "Удалить";
                     dataGridView1.Rows[e.RowIndex].Cells[1].Value = f.PC_rezult;
                     dataGridView1.Rows[e.RowIndex].Cells[2].Value = f.Rezult;
+                    FileSave();
                 }
             }
+        }
 
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton2.Checked = radioButton3.Checked;
+            FileChange();
+        }
 
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton1.Checked = radioButton4.Checked;
+            FileChange();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton4.Checked = radioButton1.Checked;
+            FileChange();
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton3.Checked = radioButton2.Checked;
+            FileChange();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Resolution r = new Resolution(User, Password, Database, Ip, PK_Dela, id_psot, pk_postanov, pk_protokol);
+            r.ShowDialog();
+
+            switch (id_prot)
+            {
+                case "3":
+                    {
+                        // протокол личного обыска
+                        LoadCrimeMan();
+                        LoadDataResolution();
+                    } break;
+                case "4":
+                    {
+                        // протокол осмотра местности, жилища, иного помещения
+                        LoadDataResolution();
+                    } break;
+                case "5":
+                    {
+                        // протокол обыска (выемки)
+                        LoadDataResolution();
+                    } break;
+            }
+        }
+
+        private void Protocol_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            if (pk_postanov != "" && pk_protokol == "")
+            {
+                DialogResult FClose = MessageBox.Show("Все не сохранённые данные будут потеряны!\nТакже не будет сохранено постановление!", "Сохранить изменения перед выходом?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (FClose == DialogResult.Yes)
+                {
+                    SaveData();
+                    e.Cancel = false;
+                }
+                else
+                    if (FClose == DialogResult.No)
+                    {
+                        //удаляем постановление без протокола
+                        string sql;
+                        sql = "delete from " + STable9;
+                        sql += " where pk_postanov = " + pk_postanov;
+                        //получение комманды и коннекта
+                        cmd = new MySqlCommand(sql, mycon);
+                        //вополнение запроса
+                        cmd.ExecuteNonQuery();
+
+                        e.Cancel = false;
+                    }
+                    else
+                        e.Cancel = true;
+            }
+
+            if (change)
+            {
+                DialogResult FClose = MessageBox.Show("Все не сохранённые данные будут потнряны!", "Сохранить изменения перед выходом?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                if (FClose == DialogResult.Yes)
+                {
+                    SaveData();
+                    e.Cancel = false;
+                }
+                else
+                    if (FClose == DialogResult.No)
+                        e.Cancel = false;
+                    else
+                        e.Cancel = true;
+            }
+        }
+
+        private void FileChange()   //файл изменили, но не сохранили
+        {
+            switch (id_prot)
+            {
+                case "1":
+                    {
+                        this.Text = "Протокол осмотра мета происшествия";
+                    } break;
+                case "2":
+                    {
+                        this.Text = "Протокол осмотра трупа";
+                    } break;
+                case "3":
+                    {
+                        this.Text = "Протокол личного обыска";
+                    } break;
+                case "4":
+                    {
+                        this.Text = "Протокол осмотра местности, жилища, иного помещения";
+                    } break;
+                case "5":
+                    {
+                        this.Text = "Протокол обыска (выемки)";
+                    } break;
+            }
+            if (pk_protokol == "")
+                this.Text += ": Новый документ *";
+            else
+                this.Text += ": *";
+            change = true;
+        }
+
+        private void FileSave()     //файл изменили и сохранили
+        {
+            switch (id_prot)
+            {
+                case "1":
+                    {
+                        this.Text = "Протокол осмотра мета происшествия";
+                    } break;
+                case "2":
+                    {
+                        this.Text = "Протокол осмотра трупа";
+                    } break;
+                case "3":
+                    {
+                        this.Text = "Протокол личного обыска";
+                    } break;
+                case "4":
+                    {
+                        this.Text = "Протокол осмотра местности, жилища, иного помещения";
+                    } break;
+                case "5":
+                    {
+                        this.Text = "Протокол обыска (выемки)";
+                    } break;
+            }
+            if (pk_protokol == "")
+                this.Text += ": Новый документ";
+            else
+                this.Text += "";
+            change = false;
+        }
+
+        private void textBox37_TextChanged(object sender, EventArgs e)
+        {
+            FileChange();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            FileChange();
+        }
+
+        private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            FileChange();
         }
 
     }

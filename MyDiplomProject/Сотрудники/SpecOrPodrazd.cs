@@ -346,6 +346,7 @@ namespace MyDiplomProject
                         switch (table)
                         {
                             case "spravochnik_pod": DTable1 = "Delo"; DPK1 = "PK_Raiona"; break;
+                            case "specialist": DTable1 = "protokol"; DPK1 = "pk_spec"; break;
                         }
 
                         if (!DontUse(DTable1, DPK1, e))

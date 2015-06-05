@@ -433,11 +433,64 @@ namespace MyDiplomProject
                 e.Handled = true;
         }
 
+        private bool DontUse(string DTable, string DPK, DataGridViewCellEventArgs e)
+        {
+            MySqlDataAdapter da;
+            MySqlDataReader dr;
+            bool DellRezylt;
+            string sql = "select * from " + DTable + " where " + DPK + " = " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            cmd = new MySqlCommand(sql, mycon);
+            //вополнение запроса
+            cmd.ExecuteNonQuery();
+            //выборка по запросу
+            da = new MySqlDataAdapter(cmd);
+            dr = cmd.ExecuteReader();
+            DellRezylt = dr.Read();
+            dr.Close();
+            // true - используется в др табл
+            // false - не используется в др табл
+            return DellRezylt;
+        }
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 11 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
-                MessageBox.Show("Delete " + e.RowIndex.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                // удалеие
+                DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?\nДанное действие необратимо!", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (del == System.Windows.Forms.DialogResult.Yes)
+                {
+                    string DTable1 = ""; //таблица1 для проверки
+                    string DPK1 = "";    //поле для проверки в табл 1
+                    string DTable2 = ""; //таблица2 для проверки
+                    string DPK2 = "";    //поле для проверки в табл 2
+                    string DTable3 = ""; //таблица3 для проверки
+                    string DPK3 = "";    //поле для проверки в табл 3
+                    string sql;
+
+                    DTable1 = "postanovlenie";  //постановление
+                    DPK1 = "pk_polise";
+
+                    DTable2 = "protokol";       //протокол
+                    DPK2 = "pk_polise";
+
+                    DTable3 = "delo";           //дело
+                    DPK3 = "pk_polise";
+
+                    if (!DontUse(DTable1, DPK1, e) && !DontUse(DTable2, DPK2, e) && !DontUse(DTable3, DPK3, e))
+                    {
+                        sql = "delete from " + table + " where " + DBHeader[0] + " = " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        cmd = new MySqlCommand(sql, mycon);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Данные успешно удалены!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Удаление невозможно!\nНарушение целостности данных!", "Отказ удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
 
             if (e.ColumnIndex == 12 && e.RowIndex < dataGridView1.Rows.Count - 1)

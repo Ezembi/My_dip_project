@@ -68,7 +68,6 @@ C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplo
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.csprojResolveAssemblyReference.cache
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.AddDojnost.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.AddOper.resources
-C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.AddProtokol.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.AddSpecMen.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.Form1.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.Properties.Resources.resources

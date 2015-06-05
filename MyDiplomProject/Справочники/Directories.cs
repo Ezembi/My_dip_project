@@ -354,16 +354,22 @@ namespace MyDiplomProject
 
                         switch (table)
                         {
+                            //case "какую_табл_провер": "в_какой_табл_провер"; "pk_в_какой_табл_провер"
                             case "spravochnik_zvanii": DTable1 = "Polise"; DPK1 = "pk_zvanie"; koll = 1; break;
                             case "chin": DTable1 = "Polise"; DPK1 = "pk_chin"; koll = 1; break;
                             case "spravochnik_oblastei_spec": DTable1 = "specialist"; DPK1 = "pk_special"; koll = 1; break;
                             case "sp_pro_pol": DTable1 = "Peoples"; DPK1 = "pk_pol"; koll = 1; break;
                             case "spravochnik_materialov": DTable1 = "vesh_dok"; DPK1 = "pk_material"; koll = 1; break;
                             case "ypakovka": DTable1 = "vesh_dok"; DPK1 = "pk_ypakovka"; koll = 1; break;
+                            case "spravochnik_tex_sredstv": DTable1 = "r_tex_sredstv"; DPK1 = "pk_tex_sredstvo"; koll = 1; break;
+                            case "spravochnik_pogodi": DTable1 = "protokol"; DPK1 = "pk_pogoda"; koll = 1; break;
+                            case "spravochnik_osveshennosti": DTable1 = "protokol"; DPK1 = "pk_osveshennost"; koll = 1; break;
 
                             case "prosecutor": DTable1 = "Postanovlenie"; DTable2 = "Postanovlenie"; DPK1 = "pk_prosecutor1"; DPK2 = "pk_prosecutor2"; koll = 2; break;
                             case "court": DTable1 = "Postanovlenie"; DTable2 = "Postanovlenie"; DPK1 = "pk_court1"; DPK2 = "pk_court2"; koll = 2; break;
                             case "spravochnik_dolgnostei": DTable1 = "Polise"; DTable2 = "Postanovlenie"; DPK1 = "pk_dolgnost"; DPK2 = "pk_dolgnost"; koll = 2; break;
+
+                            case "spravochnik_gorodov": DTable1 = "postanovlenie"; DTable2 = "protokol"; DTable3 = "spravochnik_pod"; DPK1 = "pk_gorod"; DPK2 = "pk_gorod"; DPK3 = "pk_gorod"; koll = 3; break;
                         }
 
                         if(koll == 1)

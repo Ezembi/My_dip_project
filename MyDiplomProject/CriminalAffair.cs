@@ -16,6 +16,8 @@ namespace MyDiplomProject
     {
         public MySqlConnection mycon;   // коннектор б/д
         public MySqlCommand cmd;        // sql комманды для работы с б/д
+        List<string> delPriticol;       // список протоколов для удаления
+        List<string> delPost;           // список постановлений для удаления
 
         int items;          // количество записей в таблице на форме
         bool Lock = true;   // блокировка действий пользователя до полной загрузки формы
@@ -31,14 +33,16 @@ namespace MyDiplomProject
         string[] DBHeader;  // название полей в таблице для sql запросов
         string PK_Dela;     // первичный ключ уголовного дела / материала проверки для выборки
 
-        string STable1;      // ТАБЛИЦА1 БАЗЫ ДАННЫХ для сопудствующей информации
+        string STable1;      // ТАБЛИЦА1 БАЗЫ ДАННЫХ для сопудствующей информации (уполномоченный)
         string[] DBSHeader1; // название полей в таблице1 для sql запросов, для сопудствующей информации
 
-        string STable2;      // ТАБЛИЦА2 БАЗЫ ДАННЫХ для сопудствующей информации
+        string STable2;      // ТАБЛИЦА2 БАЗЫ ДАННЫХ для сопудствующей информации (справочник подразделений)
         string[] DBSHeader2; // название полей в таблице2 для sql запросов, для сопудствующей информации
 
-        string STable3;      // ТАБЛИЦА2 БАЗЫ ДАННЫХ для сопудствующей информации
+        string STable3;      // ТАБЛИЦА2 БАЗЫ ДАННЫХ для сопудствующей информации (протокол)
         string[] DBSHeader3; // название полей в таблице2 для sql запросов, для сопудствующей информации
+
+
 
         bool change = false;
 
@@ -54,14 +58,16 @@ namespace MyDiplomProject
             Database = _database;
             Ip = _ip;
             table = "delo";
-            DBHeader = new string[] {"Nomer_materiala", "DateofM", "Nomer_dela", "DateofV","DateofPeredachi", "DateofClose", "Comment", "pk_polise", "PK_Raiona" };
+            DBHeader = new string[] { "Nomer_materiala", "DateofM", "Nomer_dela", "DateofV", "DateofPeredachi", "DateofClose", "Comment", "pk_polise", "PK_Raiona" };
             STable1 = "polise";
             DBSHeader1 = new string[] { "pk_polise", "surname", "Pname", "second_name" };
             STable2 = "spravochnik_pod";
             DBSHeader2 = new string[] { "PK_Raiona", "Nazv" };
             STable3 = "protokol";
-            DBSHeader3 = new string[] { "pk_protokol", "Number", "data_sostav", "pk_polise"};
-            
+            DBSHeader3 = new string[] { "pk_protokol", "Number", "data_sostav", "pk_polise" };
+            delPriticol = new List<string>();
+            delPost = new List<string>();
+
             PK_Dela = _PK_Dela;
             InitializeComponent();
         }
@@ -79,8 +85,8 @@ namespace MyDiplomProject
                 if (PK_Dela == "")
                     this.Text = "Уголовное дело / материал проверки: Новый документ";
                 else
-                    this.Text = "Уголовное дело / материал проверки: " + PK_Dela;
-                
+                    this.Text = "Уголовное дело / материал проверки";
+
                 if (mycon.State != ConnectionState.Open)
                 {
                     MessageBox.Show("Нет подключениея к базе данных!");
@@ -152,7 +158,7 @@ namespace MyDiplomProject
                             }
                             else
                                 checkBox3.Checked = false;
-                            
+
 
 
                             //coment
@@ -166,55 +172,10 @@ namespace MyDiplomProject
                             dr.Close();
 
                             // уполном
-                            sql = "select ";
-                            for (int j = 1; j < DBSHeader1.Length; j++)
-                            {
-                                if (j == 1)
-                                    sql += DBSHeader1[j];
-                                else
-                                    sql += ", " + DBSHeader1[j];
-                            }
-                            // генерация sql комманды
-                            sql += " from " + STable1 + " where " + DBSHeader1[0] + " = " + textBox4.Text;
-
-                            //получение комманды и коннекта
-                            cmd = new MySqlCommand(sql, mycon);
-
-                            //вополнение запроса
-                            cmd.ExecuteNonQuery();
-                            da = new MySqlDataAdapter(cmd);
-
-                            //получение выборки
-                            dr = cmd.ExecuteReader();
-
-                            // заполнения поля 
-                            if (dr.Read())
-                                textBox3.Text = dr[0].ToString() + " " + dr[1].ToString() + " " + dr[2].ToString();
-                            dr.Close();
-
-
+                            loadFromOtherFormMultiItems(STable1, DBSHeader1, textBox4, textBox3);
                             // подразделение следственного комитета
-                            sql = "select ";
-                            for (int j = 1; j < DBSHeader2.Length; j++)
-                            {
-                                if (j == 1)
-                                    sql += DBSHeader2[j];
-                                else
-                                    sql += ", " + DBSHeader2[j];
-                            }
-                            // генерация sql комманды
-                            sql += " from " + STable2 + " where " + DBSHeader2[0] + " = " + textBox6.Text;
-                            //получение комманды и коннекта
-                            cmd = new MySqlCommand(sql, mycon);
-                            //вополнение запроса
-                            cmd.ExecuteNonQuery();
-                            da = new MySqlDataAdapter(cmd);
-                            //получение выборки
-                            dr = cmd.ExecuteReader();
-                            // заполнения поля
-                            if (dr.Read())
-                                textBox5.Text = dr[0].ToString();
-                            dr.Close();
+                            loadFromOtherFormOneItem(STable2, DBSHeader2, textBox6, textBox5);
+
 
                             LoadTable();
 
@@ -227,7 +188,7 @@ namespace MyDiplomProject
                         // иправление бага WS
                         rSize = (rSize > 0) ? -1 : 1;
                         this.ClientSize = new System.Drawing.Size(this.ClientSize.Width + rSize, this.ClientSize.Height);
-                        
+
                     }
 
                     Lock = false;
@@ -238,10 +199,84 @@ namespace MyDiplomProject
                 else
                     MessageBox.Show("Нет подключениея к базе данных!");
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("Error:2\nОшибка при загрузке данных!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.ToString() + "\n\n\n\nError:2\nОшибка при загрузке данных!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void loadFromOtherFormMultiItems(string STable_, string[] DBSHeader_, TextBox from, TextBox to)
+        {
+            try
+            {
+                if (from.Text != "")
+                {
+                    MySqlDataAdapter da;
+                    MySqlDataReader dr;
+                    string sql;
+                    sql = "select ";
+                    for (int j = 1; j < DBSHeader_.Length; j++)
+                    {
+                        if (j == 1)
+                            sql += DBSHeader_[j];
+                        else
+                            sql += ", " + DBSHeader_[j];
+                    }
+                    // генерация sql комманды
+                    sql += " from " + STable_ + " where " + DBSHeader_[0] + " = " + from.Text;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля
+                    if (dr.Read())
+                        to.Text = dr[0].ToString() + " " + dr[1].ToString() + " " + dr[2].ToString();
+                    dr.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString()); 
+            }
+        }
+
+        private void loadFromOtherFormOneItem(string STable_, string[] DBSHeader_, TextBox from, TextBox to)
+        {
+            try
+            {
+                if (from.Text != "")
+                {
+                    MySqlDataAdapter da;
+                    MySqlDataReader dr;
+                    string sql;
+                    sql = "select ";
+                    for (int j = 1; j < DBSHeader_.Length; j++)
+                    {
+                        if (j == 1)
+                            sql += DBSHeader_[j];
+                        else
+                            sql += ", " + DBSHeader_[j];
+                    }
+                    // генерация sql комманды
+                    sql += " from " + STable_ + " where " + DBSHeader_[0] + " = " + from.Text;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля
+                    if (dr.Read())
+                        to.Text = dr[0].ToString();
+                    dr.Close();
+                }
+            }
+            catch
+            { }
         }
 
         private void LoadTable()//загрузка информации в таблицу
@@ -280,7 +315,7 @@ namespace MyDiplomProject
                     sql = "";
                     sql += "select * from " + STable3 + " where PK_Dela = " + PK_Dela;
 
-                   // sql += "limit " + lastIndex.ToString() + ", " + comboBox1.SelectedItem.ToString();
+                    // sql += "limit " + lastIndex.ToString() + ", " + comboBox1.SelectedItem.ToString();
 
                     cmd = new MySqlCommand(sql, mycon);
 
@@ -303,13 +338,39 @@ namespace MyDiplomProject
                     {
                         dataGridView1.Rows.Add();
                         dataGridView1.Rows[i].Cells[0].Value = dr[0].ToString();    // PC
-                        dataGridView1.Rows[i].Cells[1].Value = dr[1].ToString();    // номер материала
-                        dataGridView1.Rows[i].Cells[2].Value = Convert.ToDateTime(dr[2].ToString()).ToShortDateString();    // дата составления
-                        dataGridView1.Rows[i].Cells[3].Value = dr[3].ToString();    // pk_polise (уполном)
-                        dataGridView1.Rows[i].Cells[4].Value = dr[4].ToString();    // Уполномоченный
+                        dataGridView1.Rows[i].Cells[1].Value = Convert.ToDateTime(dr[1].ToString()).ToShortDateString();    // дата составления
+
+                        switch (dr[7].ToString())
+                        {
+                            case "1":
+                                {
+                                    dataGridView1.Rows[i].Cells[2].Value = "Протокол осмотра мета происшествия";
+                                } break;
+                            case "2":
+                                {
+                                    dataGridView1.Rows[i].Cells[2].Value = "Протокол осмотра трупа";
+                                } break;
+                            case "3":
+                                {
+                                    dataGridView1.Rows[i].Cells[2].Value = "Протокол личного обыска";
+                                } break;
+                            case "4":
+                                {
+                                    dataGridView1.Rows[i].Cells[2].Value = "Протокол осмотра местности, жилища, иного помещения";
+                                } break;
+                            case "5":
+                                {
+                                    dataGridView1.Rows[i].Cells[2].Value = "Протокол обыска (выемки)";
+                                } break;
+                        }
+
+                        dataGridView1.Rows[i].Cells[3].Value = dr[20].ToString();    // pk_polise (уполном)
 
                         dataGridView1.Rows[i].Cells[5].Value = "Удалить";           // Удаление
                         dataGridView1.Rows[i].Cells[6].Value = "Открыть";           // Выбор
+
+                        dataGridView1.Rows[i].Cells[7].Value = dr[21].ToString();    // pk_postanov (постановление)
+                        dataGridView1.Rows[i].Cells[8].Value = dr[7].ToString();    // тип ротокола
 
                         i++;
                         toolStripProgressBar1.Value = (i * 100) / count;
@@ -319,31 +380,34 @@ namespace MyDiplomProject
                     // уполном
                     for (int ii = 0; ii < dataGridView1.Rows.Count - 1; ii++)
                     {
-                        sql = "select ";
-                        for (int j = 1; j < DBSHeader1.Length; j++)
+                        if (dataGridView1.Rows[ii].Cells[3].Value.ToString() != "" && dataGridView1.Rows[ii].Cells[3].Value != null)
                         {
-                            if (j == 1)
-                                sql += DBSHeader1[j];
-                            else
-                                sql += ", " + DBSHeader1[j];
+                            sql = "select ";
+                            for (int j = 1; j < DBSHeader1.Length; j++)
+                            {
+                                if (j == 1)
+                                    sql += DBSHeader1[j];
+                                else
+                                    sql += ", " + DBSHeader1[j];
+                            }
+                            // генерация sql комманды
+                            sql += " from " + STable1 + " where " + DBSHeader1[0] + " = " + dataGridView1.Rows[ii].Cells[3].Value.ToString();
+
+                            //получение комманды и коннекта
+                            cmd = new MySqlCommand(sql, mycon);
+
+                            //вополнение запроса
+                            cmd.ExecuteNonQuery();
+                            da = new MySqlDataAdapter(cmd);
+
+                            //получение выборки
+                            dr = cmd.ExecuteReader();
+
+                            // заполнения поля 
+                            if (dr.Read())
+                                dataGridView1.Rows[ii].Cells[4].Value = dr[0].ToString() + " " + dr[1].ToString() + " " + dr[2].ToString();
+                            dr.Close();
                         }
-                        // генерация sql комманды
-                        sql += " from " + STable1 + " where " + DBSHeader1[0] + " = " + dataGridView1.Rows[ii].Cells[3].Value.ToString();
-
-                        //получение комманды и коннекта
-                        cmd = new MySqlCommand(sql, mycon);
-
-                        //вополнение запроса
-                        cmd.ExecuteNonQuery();
-                        da = new MySqlDataAdapter(cmd);
-
-                        //получение выборки
-                        dr = cmd.ExecuteReader();
-
-                        // заполнения поля 
-                        if (dr.Read())
-                            dataGridView1.Rows[ii].Cells[4].Value = dr[0].ToString() + " " + dr[1].ToString() + " " + dr[2].ToString();
-                        dr.Close();
                     }
 
                     dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[1];     //делаем последнюю ячейку активной
@@ -359,8 +423,9 @@ namespace MyDiplomProject
                 Lock = false;
                 dataGridView1.Enabled = true;
             }
-            catch
+            catch(Exception e)
             {
+                MessageBox.Show(e.ToString());
                 MessageBox.Show("Error:3\nОшибка при загрузке данных в таблицу!\nВозможно у Вас нет доступа к базе данных!", "Ошибка данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -399,7 +464,8 @@ namespace MyDiplomProject
 
         private void CheakChecked()
         {
-            textBox2.Enabled = dateTimePicker2.Enabled = checkBox1.Checked;
+            textBox2.Enabled = dateTimePicker2.Enabled = checkBox1.Checked; // уголовное дело заведено
+            checkBox2.Enabled = checkBox1.Checked;                          // передано в суд
             if (checkBox1.Checked)
                 dateTimePicker3.Enabled = checkBox2.Checked;
             else
@@ -432,7 +498,7 @@ namespace MyDiplomProject
                 textBox4.Text = "";
             }
 
-            
+
         }
 
         private void textBox5_MouseClick(object sender, MouseEventArgs e)
@@ -485,10 +551,54 @@ namespace MyDiplomProject
 
             try
             {
+                string sql = "";    // строка sql запросов
+                for (int i = 0; i < delPriticol.Count; i++)
+                {
+
+                    // поэлементное удаление вещественных доказательств
+                    sql = " delete from vesh_dok where " + DBSHeader3[0] + " = " + delPriticol[i];
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+
+                    // поэлементное удаление понятых
+                    sql = " delete from ponatoi where " + DBSHeader3[0] + " = " + delPriticol[i];
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+
+                    // поэлементное удаление тех средств
+                    sql = " delete from r_tex_sredstv where " + DBSHeader3[0] + " = " + delPriticol[i];
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+
+                    if (delPost[i] != "")
+                    {
+                        // поэлементное удаление постановленй
+                        sql = " delete from postanovlenie where pk_postanov = " + delPost[i];
+                        cmd = new MySqlCommand(sql, mycon);
+                        cmd.ExecuteNonQuery();
+
+                        // поэлементное удаление людей из постановление
+                        sql = " delete from peoples where pk_postanov = " + delPost[i];
+                        cmd = new MySqlCommand(sql, mycon);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // поэлементное удаление людей из протокола
+                    sql = " delete from peoples where " + DBSHeader3[0] + " = " + delPriticol[i];
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+
+                    // поэлементное удаление протоколов
+                    sql = " delete from " + STable3 + " where " + DBSHeader3[0] + " = " + delPriticol[i];
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+                }
+                delPriticol.Clear(); // очистка списка протоклов для удаления
+                delPost.Clear();     // очистка списка постановлений для удаления
+
                 if (PK_Dela == "")
                 {
                     // добавление
-                    string sql = "";
 
                     sql = "insert into " + table + "(";
 
@@ -527,8 +637,16 @@ namespace MyDiplomProject
                         sql += "STR_TO_DATE('', '%d.%m.%Y')" + ", "; //Дата закрытия уголовного дела
 
                     sql += "'" + textBox7.Text + "'" + ", ";    //коментарий
-                    sql += "'" + textBox4.Text + "'" + ", ";    //Уполномоченный по делу
-                    sql += "'" + textBox6.Text + "'" + ")";    //Подразделение следственного комитета
+
+                    if (textBox4.Text != "")
+                        sql += "'" + textBox4.Text + "'" + ", ";    //Уполномоченный по делу
+                    else
+                        sql += "NULL" + ", ";    //Уполномоченный по делу
+
+                    if (textBox6.Text != "")
+                        sql += "'" + textBox6.Text + "'" + ")";    //Подразделение следственного комитета
+                    else
+                        sql += "NULL" + ")";    //Подразделение следственного комитета
 
                     // внесение информации в БД
                     cmd = new MySqlCommand(sql, mycon);
@@ -544,14 +662,15 @@ namespace MyDiplomProject
                     {
                         PK_Dela = dr[0].ToString();
                     }
+                        
                     else
                         MessageBox.Show("Сохранение не удалось!\nНе удалось получить первичный ключ!", "Ошибка сохранения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Text = "Уголовное дело / материал проверки: " + PK_Dela;
+                    dr.Close();
+                    this.Text = "Уголовное дело / материал проверки";
                 }
                 else
                 {
                     //редактирование
-                    string sql = "";
 
                     sql = "update " + table + " set ";
 
@@ -580,8 +699,18 @@ namespace MyDiplomProject
                         sql += DBHeader[5] + " = STR_TO_DATE('', '%d.%m.%Y')" + ", "; //Дата закрытия уголовного дела
 
                     sql += DBHeader[6] + " = '" + textBox7.Text + "'" + ", ";    //коментарий
-                    sql += DBHeader[7] + " = '" + textBox4.Text + "'" + ", ";    //Уполномоченный по делу
-                    sql += DBHeader[8] + " = '" + textBox6.Text + "'" + " where PK_Dela = " + PK_Dela;    //Подразделение следственного комитета
+
+                    if (textBox4.Text != "")
+                        sql += DBHeader[7] + " = '" + textBox4.Text + "'" + ", ";    //Уполномоченный по делу
+                    else
+                        sql += DBHeader[7] + " = NULL" + ", ";    //Уполномоченный по делу
+
+                    if (textBox6.Text != "")
+                        sql += DBHeader[8] + " = '" + textBox6.Text + "'";    //Подразделение следственного комитета
+                    else
+                        sql += DBHeader[8] + " = NULL";
+
+                    sql += " where PK_Dela = " + PK_Dela;
 
                     // внесение информации в БД
                     cmd = new MySqlCommand(sql, mycon);
@@ -606,7 +735,7 @@ namespace MyDiplomProject
             if (PK_Dela == "")
                 this.Text = "Уголовное дело / материал проверки: Новый документ *";
             else
-                this.Text = "Уголовное дело / материал проверки: " + PK_Dela + "*";
+                this.Text = "Уголовное дело / материал проверки*";
             change = true;
         }
 
@@ -615,7 +744,7 @@ namespace MyDiplomProject
             if (PK_Dela == "")
                 this.Text = "Уголовное дело / материал проверки: Новый документ";
             else
-                this.Text = "Уголовное дело / материал проверки: " + PK_Dela;
+                this.Text = "Уголовное дело / материал проверки";
             change = false;
         }
 
@@ -661,26 +790,102 @@ namespace MyDiplomProject
 
         private void пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           Resolution f = new Resolution(User, Password, Database, Ip, PK_Dela, "5", "1","666666");
-           f.ShowDialog();
+            SaveData();
+            Resolution r;
+            if (textBox2.Text != "")
+                r = new Resolution(User, Password, Database, Ip, textBox2.Text, "5", "", "");
+            else
+                r = new Resolution(User, Password, Database, Ip, textBox1.Text, "5", "", "");
+            r.ShowDialog();
+
+            if (r.pk_postanov != "")
+            {
+                Protocol p = new Protocol(User, Password, Database, Ip, PK_Dela, "5", r.pk_postanov, "");
+                p.ShowDialog();
+            }
+            LoadData();
         }
 
         private void протоколЛичногоОбыскаПостановлениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Resolution f = new Resolution(User, Password, Database, Ip, PK_Dela, "2", "6","666666666");
-            f.ShowDialog();
+            SaveData();
+            Resolution r;
+            if (textBox2.Text != "")
+                r = new Resolution(User, Password, Database, Ip, textBox2.Text, "2", "", "");
+            else
+                r = new Resolution(User, Password, Database, Ip, textBox1.Text, "2", "", "");
+
+            r.ShowDialog();
+
+            if (r.pk_postanov != "")
+            {
+                Protocol p = new Protocol(User, Password, Database, Ip, PK_Dela, "3", r.pk_postanov, "");
+                p.ShowDialog();
+            }
+            LoadData();
         }
 
         private void пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Resolution f = new Resolution(User, Password, Database, Ip, PK_Dela, "1", "10","6666666");
-            f.ShowDialog();
+            SaveData();
+            Resolution r;
+            if (textBox2.Text != "")
+                r = new Resolution(User, Password, Database, Ip, textBox2.Text, "1", "", "");
+            else
+                r = new Resolution(User, Password, Database, Ip, textBox1.Text, "1", "", "");
+            r.ShowDialog();
+
+            if (r.pk_postanov != "")
+            {
+                Protocol p = new Protocol(User, Password, Database, Ip, PK_Dela, "4", r.pk_postanov, "");
+                p.ShowDialog();
+            }
+            LoadData();
         }
 
         private void протоколОсмотраМетаПроисшествияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, "5", "6", "666");
+            SaveData();
+            Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, "1", "", "");
             f.ShowDialog();
+            LoadData();
+        }
+
+        private void протоколОсмотраТрупаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveData();
+            Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, "2", "", "");
+            f.ShowDialog();
+            LoadData();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 5 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            {
+                DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (del == System.Windows.Forms.DialogResult.Yes)
+                {
+                    if (dataGridView1.Rows[e.RowIndex].Cells[0].Value == null)
+                    {
+                        dataGridView1.Rows.RemoveAt(e.RowIndex);
+                    }
+                    else
+                    {
+                        delPriticol.Add(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        delPost.Add(dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString());
+                        dataGridView1.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
+                FileChange();
+            }
+
+            if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            {
+                Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                f.ShowDialog();
+            }
         }
     }
 }

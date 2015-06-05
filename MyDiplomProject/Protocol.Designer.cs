@@ -34,13 +34,19 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.label44 = new System.Windows.Forms.Label();
+            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.textBox36 = new System.Windows.Forms.TextBox();
             this.textBox38 = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
@@ -49,10 +55,6 @@
             this.textBox34 = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.label44 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label38 = new System.Windows.Forms.Label();
@@ -71,6 +73,10 @@
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
@@ -155,19 +161,15 @@
             this.label34 = new System.Windows.Forms.Label();
             this.textBox27 = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
-            this.textBox35 = new System.Windows.Forms.TextBox();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label49 = new System.Windows.Forms.Label();
+            this.textBox37 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -271,21 +273,68 @@
             this.panel8.Size = new System.Drawing.Size(930, 82);
             this.panel8.TabIndex = 66;
             // 
-            // panel5
+            // panel6
             // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.Controls.Add(this.label41);
-            this.panel5.Controls.Add(this.label42);
-            this.panel5.Controls.Add(this.label43);
-            this.panel5.Controls.Add(this.textBox32);
-            this.panel5.Controls.Add(this.textBox33);
-            this.panel5.Controls.Add(this.textBox34);
-            this.panel5.Controls.Add(this.label40);
-            this.panel5.Location = new System.Drawing.Point(3, 99);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(927, 79);
-            this.panel5.TabIndex = 65;
+            this.panel6.Controls.Add(this.radioButton3);
+            this.panel6.Controls.Add(this.radioButton4);
+            this.panel6.Controls.Add(this.label44);
+            this.panel6.Location = new System.Drawing.Point(6, 263);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(930, 161);
+            this.panel6.TabIndex = 66;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(4, 57);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(142, 17);
+            this.radioButton3.TabIndex = 8;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "изъяты принудительно";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Checked = true;
+            this.radioButton4.Location = new System.Drawing.Point(4, 33);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(134, 17);
+            this.radioButton4.TabIndex = 7;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "выданы добровольно";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(-3, 16);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(240, 13);
+            this.label44.TabIndex = 6;
+            this.label44.Text = "Указанные предметы, документы и ценности";
+            // 
+            // textBox35
+            // 
+            this.textBox35.Location = new System.Drawing.Point(444, 88);
+            this.textBox35.Name = "textBox35";
+            this.textBox35.Size = new System.Drawing.Size(120, 20);
+            this.textBox35.TabIndex = 68;
+            this.textBox35.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(357, 89);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(74, 13);
+            this.label48.TabIndex = 67;
+            this.label48.Text = "Температура";
             // 
             // panel7
             // 
@@ -345,6 +394,22 @@
             this.label47.Size = new System.Drawing.Size(182, 13);
             this.label47.TabIndex = 59;
             this.label47.Text = "Осмотр производился в условиях:";
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this.label41);
+            this.panel5.Controls.Add(this.label42);
+            this.panel5.Controls.Add(this.label43);
+            this.panel5.Controls.Add(this.textBox32);
+            this.panel5.Controls.Add(this.textBox33);
+            this.panel5.Controls.Add(this.textBox34);
+            this.panel5.Controls.Add(this.label40);
+            this.panel5.Location = new System.Drawing.Point(3, 99);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(927, 79);
+            this.panel5.TabIndex = 65;
             // 
             // label41
             // 
@@ -420,50 +485,6 @@
             this.panel4.Size = new System.Drawing.Size(924, 161);
             this.panel4.TabIndex = 2;
             // 
-            // panel6
-            // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.Controls.Add(this.radioButton3);
-            this.panel6.Controls.Add(this.radioButton4);
-            this.panel6.Controls.Add(this.label44);
-            this.panel6.Location = new System.Drawing.Point(6, 263);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(930, 161);
-            this.panel6.TabIndex = 66;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(4, 57);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(142, 17);
-            this.radioButton3.TabIndex = 8;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "изъяты принудительно";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Checked = true;
-            this.radioButton4.Location = new System.Drawing.Point(4, 33);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(134, 17);
-            this.radioButton4.TabIndex = 7;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "выданы добровольно";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(-3, 16);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(240, 13);
-            this.label44.TabIndex = 6;
-            this.label44.Text = "Указанные предметы, документы и ценности";
-            // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
@@ -474,6 +495,7 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "изъяты принудительно";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // radioButton1
             // 
@@ -486,6 +508,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "выданы добровольно";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // label38
             // 
@@ -506,6 +529,7 @@
             this.textBox31.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox31.Size = new System.Drawing.Size(921, 63);
             this.textBox31.TabIndex = 2;
+            this.textBox31.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label37
             // 
@@ -537,6 +561,7 @@
             this.textBox30.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox30.Size = new System.Drawing.Size(922, 63);
             this.textBox30.TabIndex = 1;
+            this.textBox30.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label36
             // 
@@ -565,6 +590,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Перейти к постановлению";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dateTimePicker4
             // 
@@ -604,6 +630,7 @@
             this.textBox29.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox29.Size = new System.Drawing.Size(924, 63);
             this.textBox29.TabIndex = 1;
+            this.textBox29.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label35
             // 
@@ -624,6 +651,7 @@
             this.textBox10.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox10.Size = new System.Drawing.Size(920, 63);
             this.textBox10.TabIndex = 62;
+            this.textBox10.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label4
             // 
@@ -651,6 +679,32 @@
             this.dataGridView1.TabIndex = 60;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
+            // Column16
+            // 
+            this.Column16.HeaderText = "id_in_r";
+            this.Column16.Name = "Column16";
+            this.Column16.ReadOnly = true;
+            this.Column16.Visible = false;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "id_t_s";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "Техническое средство";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Удалить";
+            this.Column3.Name = "Column3";
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -667,6 +721,7 @@
             this.textBox8.Size = new System.Drawing.Size(20, 20);
             this.textBox8.TabIndex = 58;
             this.textBox8.Visible = false;
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox9
             // 
@@ -684,6 +739,7 @@
             this.textBox7.Size = new System.Drawing.Size(20, 20);
             this.textBox7.TabIndex = 56;
             this.textBox7.Visible = false;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox6
             // 
@@ -731,6 +787,7 @@
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox5.Size = new System.Drawing.Size(920, 63);
             this.textBox5.TabIndex = 51;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox4
             // 
@@ -742,6 +799,7 @@
             this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox4.Size = new System.Drawing.Size(921, 63);
             this.textBox4.TabIndex = 50;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox3
             // 
@@ -754,6 +812,7 @@
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox3.Size = new System.Drawing.Size(921, 63);
             this.textBox3.TabIndex = 49;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label12
             // 
@@ -798,6 +857,7 @@
             this.textBox1.Size = new System.Drawing.Size(213, 20);
             this.textBox1.TabIndex = 14;
             this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // dateTimePicker3
             // 
@@ -808,6 +868,7 @@
             this.dateTimePicker3.Size = new System.Drawing.Size(213, 20);
             this.dateTimePicker3.TabIndex = 13;
             this.dateTimePicker3.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // label3
             // 
@@ -827,6 +888,7 @@
             this.dateTimePicker2.Size = new System.Drawing.Size(213, 20);
             this.dateTimePicker2.TabIndex = 11;
             this.dateTimePicker2.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // label2
             // 
@@ -845,6 +907,7 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(205, 20);
             this.dateTimePicker1.TabIndex = 8;
             this.dateTimePicker1.Value = new System.DateTime(2015, 5, 29, 0, 0, 0, 0);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // label1
             // 
@@ -889,6 +952,7 @@
             this.dataGridView2.TabIndex = 30;
             this.dataGridView2.TabStop = false;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            this.dataGridView2.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);
             this.dataGridView2.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView2_RowsAdded);
             // 
             // Column5
@@ -1103,6 +1167,7 @@
             this.textBox25.Size = new System.Drawing.Size(451, 20);
             this.textBox25.TabIndex = 54;
             this.textBox25.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox25_MouseClick);
+            this.textBox25.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label31
             // 
@@ -1146,6 +1211,7 @@
             this.textBox19.Name = "textBox19";
             this.textBox19.Size = new System.Drawing.Size(107, 20);
             this.textBox19.TabIndex = 49;
+            this.textBox19.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox20
             // 
@@ -1153,6 +1219,7 @@
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(108, 20);
             this.textBox20.TabIndex = 48;
+            this.textBox20.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox21
             // 
@@ -1160,6 +1227,7 @@
             this.textBox21.Name = "textBox21";
             this.textBox21.Size = new System.Drawing.Size(121, 20);
             this.textBox21.TabIndex = 47;
+            this.textBox21.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label26
             // 
@@ -1194,6 +1262,7 @@
             this.textBox22.Name = "textBox22";
             this.textBox22.Size = new System.Drawing.Size(145, 20);
             this.textBox22.TabIndex = 43;
+            this.textBox22.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox23
             // 
@@ -1201,6 +1270,7 @@
             this.textBox23.Name = "textBox23";
             this.textBox23.Size = new System.Drawing.Size(145, 20);
             this.textBox23.TabIndex = 42;
+            this.textBox23.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox24
             // 
@@ -1208,6 +1278,7 @@
             this.textBox24.Name = "textBox24";
             this.textBox24.Size = new System.Drawing.Size(145, 20);
             this.textBox24.TabIndex = 41;
+            this.textBox24.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label29
             // 
@@ -1260,6 +1331,7 @@
             this.textBox18.Name = "textBox18";
             this.textBox18.Size = new System.Drawing.Size(107, 20);
             this.textBox18.TabIndex = 35;
+            this.textBox18.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox17
             // 
@@ -1267,6 +1339,7 @@
             this.textBox17.Name = "textBox17";
             this.textBox17.Size = new System.Drawing.Size(108, 20);
             this.textBox17.TabIndex = 34;
+            this.textBox17.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox16
             // 
@@ -1274,6 +1347,7 @@
             this.textBox16.Name = "textBox16";
             this.textBox16.Size = new System.Drawing.Size(121, 20);
             this.textBox16.TabIndex = 33;
+            this.textBox16.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label21
             // 
@@ -1308,6 +1382,7 @@
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(145, 20);
             this.textBox15.TabIndex = 29;
+            this.textBox15.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox14
             // 
@@ -1315,6 +1390,7 @@
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(145, 20);
             this.textBox14.TabIndex = 28;
+            this.textBox14.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // textBox13
             // 
@@ -1322,6 +1398,7 @@
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(145, 20);
             this.textBox13.TabIndex = 27;
+            this.textBox13.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label10
             // 
@@ -1368,6 +1445,7 @@
             this.textBox12.Size = new System.Drawing.Size(472, 20);
             this.textBox12.TabIndex = 16;
             this.textBox12.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox12_MouseClick);
+            this.textBox12.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label7
             // 
@@ -1381,6 +1459,8 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.textBox37);
+            this.tabPage4.Controls.Add(this.label49);
             this.tabPage4.Controls.Add(this.textBox28);
             this.tabPage4.Controls.Add(this.label34);
             this.tabPage4.Controls.Add(this.textBox27);
@@ -1396,16 +1476,17 @@
             this.textBox28.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox28.Location = new System.Drawing.Point(8, 335);
+            this.textBox28.Location = new System.Drawing.Point(9, 345);
             this.textBox28.Multiline = true;
             this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(925, 277);
+            this.textBox28.Size = new System.Drawing.Size(921, 262);
             this.textBox28.TabIndex = 3;
+            this.textBox28.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(5, 319);
+            this.label34.Location = new System.Drawing.Point(6, 329);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(56, 13);
             this.label34.TabIndex = 2;
@@ -1415,62 +1496,38 @@
             // 
             this.textBox27.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox27.Location = new System.Drawing.Point(8, 31);
+            this.textBox27.Location = new System.Drawing.Point(9, 64);
             this.textBox27.Multiline = true;
             this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(925, 277);
+            this.textBox27.Size = new System.Drawing.Size(921, 262);
             this.textBox27.TabIndex = 1;
+            this.textBox27.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(5, 14);
+            this.label32.Location = new System.Drawing.Point(6, 48);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(189, 13);
             this.label32.TabIndex = 0;
             this.label32.Text = "Замечания (дополнения, уточнения)";
             // 
-            // label48
+            // label49
             // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(357, 89);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(74, 13);
-            this.label48.TabIndex = 67;
-            this.label48.Text = "Температура";
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(6, 14);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(189, 13);
+            this.label49.TabIndex = 4;
+            this.label49.Text = "Ознокомление с протоколом путём";
             // 
-            // textBox35
+            // textBox37
             // 
-            this.textBox35.Location = new System.Drawing.Point(444, 88);
-            this.textBox35.Name = "textBox35";
-            this.textBox35.Size = new System.Drawing.Size(120, 20);
-            this.textBox35.TabIndex = 68;
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "id_in_r";
-            this.Column16.Name = "Column16";
-            this.Column16.ReadOnly = true;
-            this.Column16.Visible = false;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "id_t_s";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Техническое средство";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Удалить";
-            this.Column3.Name = "Column3";
+            this.textBox37.Location = new System.Drawing.Point(200, 11);
+            this.textBox37.Name = "textBox37";
+            this.textBox37.Size = new System.Drawing.Size(730, 20);
+            this.textBox37.TabIndex = 5;
+            this.textBox37.TextChanged += new System.EventHandler(this.textBox37_TextChanged);
             // 
             // Protocol
             // 
@@ -1483,6 +1540,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Protocol";
             this.Text = "Protocol";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Protocol_FormClosing);
             this.Load += new System.EventHandler(this.Protocol_Load);
             this.Shown += new System.EventHandler(this.Protocol_Shown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Protocol_KeyPress);
@@ -1491,14 +1549,14 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -1654,5 +1712,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewButtonColumn Column3;
+        private System.Windows.Forms.TextBox textBox37;
+        private System.Windows.Forms.Label label49;
     }
 }

@@ -79,22 +79,16 @@
     <Compile Include="Сотрудники\Policeman.Designer.cs">
       <DependentUpon>Policeman.cs</DependentUpon>
     </Compile>
-    <Compile Include="old\AddProtokol.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\AddProtokol.Designer.cs">
-      <DependentUpon>AddProtokol.cs</DependentUpon>
-    </Compile>
     <Compile Include="Сотрудники\SpecOrPodrazd.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Сотрудники\SpecOrPodrazd.Designer.cs">
       <DependentUpon>SpecOrPodrazd.cs</DependentUpon>
     </Compile>
-    <Compile Include="old\Form1.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="old\Form1.Designer.cs">
+    <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -114,13 +108,10 @@
     <EmbeddedResource Include="Сотрудники\Policeman.resx">
       <DependentUpon>Policeman.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="old\AddProtokol.resx">
-      <DependentUpon>AddProtokol.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Сотрудники\SpecOrPodrazd.resx">
       <DependentUpon>SpecOrPodrazd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="old\Form1.resx">
+    <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

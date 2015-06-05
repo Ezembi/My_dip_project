@@ -148,7 +148,9 @@ namespace MyDiplomProject
                         dataGridView1.Rows[i].Cells[1].Value = dr[1].ToString();    // номер материала
                         dataGridView1.Rows[i].Cells[2].Value = Convert.ToDateTime(dr[2].ToString()).ToShortDateString();    // дата поступления материала
                         dataGridView1.Rows[i].Cells[3].Value = dr[3].ToString();    // номер дела
-                        dataGridView1.Rows[i].Cells[4].Value = Convert.ToDateTime(dr[4].ToString()).ToShortDateString();    // дата поступления дела
+
+                        if(dr[4].ToString() != "01.01.0001 0:00:00")
+                            dataGridView1.Rows[i].Cells[4].Value = Convert.ToDateTime(dr[4].ToString()).ToShortDateString();    // дата поступления дела
                         dataGridView1.Rows[i].Cells[5].Value = dr[8].ToString();    // pk_polise (уполном)
                         dataGridView1.Rows[i].Cells[6].Value = dr[9].ToString();    // PK_Raiona (подразделение следственного комитета)
 
@@ -163,57 +165,63 @@ namespace MyDiplomProject
                     // уполном
                     for (int ii = 0; ii < dataGridView1.Rows.Count - 1; ii++)
                     {
-                        sql = "select ";
-                        for (int j = 1; j < DBSHeader1.Length; j++)
+                        if (dataGridView1.Rows[ii].Cells[5].Value != null && dataGridView1.Rows[ii].Cells[5].Value.ToString() != "")
                         {
-                            if (j == 1)
-                                sql += DBSHeader1[j];
-                            else
-                                sql += ", " + DBSHeader1[j];
+                            sql = "select ";
+                            for (int j = 1; j < DBSHeader1.Length; j++)
+                            {
+                                if (j == 1)
+                                    sql += DBSHeader1[j];
+                                else
+                                    sql += ", " + DBSHeader1[j];
+                            }
+                            // генерация sql комманды
+                            sql += " from " + STable1 + " where " + DBSHeader1[0] + " = " + dataGridView1.Rows[ii].Cells[5].Value.ToString();
+
+                            //получение комманды и коннекта
+                            cmd = new MySqlCommand(sql, mycon);
+
+                            //вополнение запроса
+                            cmd.ExecuteNonQuery();
+                            da = new MySqlDataAdapter(cmd);
+
+                            //получение выборки
+                            dr = cmd.ExecuteReader();
+
+                            // заполнения поля 
+                            if (dr.Read())
+                                dataGridView1.Rows[ii].Cells[7].Value = dr[0].ToString() + " " + dr[1].ToString() + " " + dr[2].ToString();
+                            dr.Close();
                         }
-                        // генерация sql комманды
-                        sql += " from " + STable1 + " where " + DBSHeader1[0] + " = " + dataGridView1.Rows[ii].Cells[5].Value.ToString();
-
-                        //получение комманды и коннекта
-                        cmd = new MySqlCommand(sql, mycon);
-
-                        //вополнение запроса
-                        cmd.ExecuteNonQuery();
-                        da = new MySqlDataAdapter(cmd);
-
-                        //получение выборки
-                        dr = cmd.ExecuteReader();
-
-                        // заполнения поля 
-                        if (dr.Read())
-                            dataGridView1.Rows[ii].Cells[7].Value = dr[0].ToString() + " " + dr[1].ToString() + " " + dr[2].ToString();
-                        dr.Close();
                     }
 
                     // подразделение следственного комитета
                     for (int ii = 0; ii < dataGridView1.Rows.Count - 1; ii++)
                     {
-                        sql = "select ";
-                        for (int j = 1; j < DBSHeader2.Length; j++)
+                        if (dataGridView1.Rows[ii].Cells[6].Value != null && dataGridView1.Rows[ii].Cells[6].Value.ToString() != "")
                         {
-                            if (j == 1)
-                                sql += DBSHeader2[j];
-                            else
-                                sql += ", " + DBSHeader2[j];
+                            sql = "select ";
+                            for (int j = 1; j < DBSHeader2.Length; j++)
+                            {
+                                if (j == 1)
+                                    sql += DBSHeader2[j];
+                                else
+                                    sql += ", " + DBSHeader2[j];
+                            }
+                            // генерация sql комманды
+                            sql += " from " + STable2 + " where " + DBSHeader2[0] + " = " + dataGridView1.Rows[ii].Cells[6].Value.ToString();
+                            //получение комманды и коннекта
+                            cmd = new MySqlCommand(sql, mycon);
+                            //вополнение запроса
+                            cmd.ExecuteNonQuery();
+                            da = new MySqlDataAdapter(cmd);
+                            //получение выборки
+                            dr = cmd.ExecuteReader();
+                            // заполнения поля
+                            if (dr.Read())
+                                dataGridView1.Rows[ii].Cells[8].Value = dr[0].ToString();
+                            dr.Close();
                         }
-                        // генерация sql комманды
-                        sql += " from " + STable2 + " where " + DBSHeader2[0] + " = " + dataGridView1.Rows[ii].Cells[6].Value.ToString();
-                        //получение комманды и коннекта
-                        cmd = new MySqlCommand(sql, mycon);
-                        //вополнение запроса
-                        cmd.ExecuteNonQuery();
-                        da = new MySqlDataAdapter(cmd);
-                        //получение выборки
-                        dr = cmd.ExecuteReader();
-                        // заполнения поля
-                        if (dr.Read())
-                            dataGridView1.Rows[ii].Cells[8].Value = dr[0].ToString();
-                        dr.Close();
                     }
 
                    
@@ -376,7 +384,90 @@ namespace MyDiplomProject
         {
             if (e.ColumnIndex == 9 && e.RowIndex < dataGridView1.Rows.Count - 1)
             {
-                MessageBox.Show("Спрашиваю и удаляю " + e.RowIndex.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                //удаление
+                string sql = "";    // строка sql запросов
+                DialogResult del = MessageBox.Show("Вы действительно хотите удалить дело?\nДанное действие необратимо!\nТакже будет удалена вся информация, связанная с делом (протоколы, постановления, вещественные доказательства, понятые и т.д.)", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (del == System.Windows.Forms.DialogResult.Yes)
+                {
+                    try
+                    {
+
+                        MySqlDataAdapter da;
+                        MySqlDataReader dr;
+                        List<string> delPriticol = new List<string>();
+                        List<string> delPost = new List<string>();
+
+                        sql = "select pk_protokol,pk_postanov from protokol where PK_Dela = " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        //получение комманды и коннекта
+                        cmd = new MySqlCommand(sql, mycon);
+                        //вополнение запроса
+                        cmd.ExecuteNonQuery();
+                        da = new MySqlDataAdapter(cmd);
+                        //получение выборки
+                        dr = cmd.ExecuteReader();
+                        // заполнения поля
+                        while (dr.Read())
+                        {
+                            delPriticol.Add(dr[0].ToString());
+                            delPost.Add(dr[1].ToString());
+                        }
+                        dr.Close();
+
+                        for (int i = 0; i < delPriticol.Count; i++)
+                        {
+
+                            // поэлементное удаление вещественных доказательств
+                            sql = " delete from vesh_dok where pk_protokol = " + delPriticol[i];
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+
+                            // поэлементное удаление понятых
+                            sql = " delete from ponatoi where pk_protokol = " + delPriticol[i];
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+
+                            // поэлементное удаление тех средств
+                            sql = " delete from r_tex_sredstv where pk_protokol = " + delPriticol[i];
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+
+                            if (delPost[i] != "")
+                            {
+                                // поэлементное удаление постановленй
+                                sql = " delete from postanovlenie where pk_postanov = " + delPost[i];
+                                cmd = new MySqlCommand(sql, mycon);
+                                cmd.ExecuteNonQuery();
+
+                                // поэлементное удаление людей из постановление
+                                sql = " delete from peoples where pk_postanov = " + delPost[i];
+                                cmd = new MySqlCommand(sql, mycon);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            // поэлементное удаление людей из протокола
+                            sql = " delete from peoples where pk_protokol = " + delPriticol[i];
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+
+                            // поэлементное удаление протоколов
+                            sql = " delete from protokol where pk_protokol = " + delPriticol[i];
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+                        }
+                        delPriticol.Clear(); // очистка списка протоклов для удаления
+                        delPost.Clear();     // очистка списка постановлений для удаления
+
+                        // удаление дела
+                        sql = " delete from delo where PK_Dela = " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        cmd = new MySqlCommand(sql, mycon);
+                        cmd.ExecuteNonQuery();
+                        LoadData();
+                    }
+                    catch {
+                        MessageBox.Show("Ошибка при удалении данных!\nВозможно у Вас нет доступа к базе данных!", "Ошибка удаления!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
 
             if (e.ColumnIndex == 10 && e.RowIndex < dataGridView1.Rows.Count - 1)

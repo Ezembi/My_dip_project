@@ -20,22 +20,18 @@ namespace MyDiplomProject
 
         List<string> delList;
 
-        int items;          // количество записей в таблице на форме
         bool Lock = true;   // блокировка действий пользователя до полной загрузки формы
         string User;        // имя пользователя, для доступа к б/д
         string Password;    // пароль пользователя
         string Database;    // название б/д
         string Ip;          // ip сервера
-        int lastIndex = 0;  // для корректного постраничного отображения
-        int count = 0;      // количество записей в таблице БД
         int rSize = 1;      // иправление бага WS
         string table;       // ТАБЛИЦА БАЗЫ ДАННЫХ
-        string[] HeaderText;// название полей в таблице для отображения
         string[] DBHeader;  // название полей в таблице для sql запросов
 
         string PK_Dela;     // внешний ключ уголовного дела / материала проверки для выборки
         string id_post;     // номер варианта постановления
-        string pk_postanov; // первичный ключ постановления
+        public string pk_postanov; // первичный ключ постановления
         string pk_protokol; // пномер протокола
 
         string STable1;      // ТАБЛИЦА1 БАЗЫ ДАННЫХ для сопудствующей информации (уполномоченный)
@@ -93,6 +89,8 @@ namespace MyDiplomProject
             DBSHeader6 = new string[] { "PK_people", "surname", "Pname", "second_name", "primichanie", "mystate", "pk_postanov", "pk_protokol", "pk_pol" };
 
             STable7 = "sp_pro_pol";
+
+            
 
             delList = new List<string>();
 
@@ -171,7 +169,7 @@ namespace MyDiplomProject
                             textBox24.Text = dr[5].ToString();      // дом
                             textBox23.Text = dr[6].ToString();      // квартира
                             textBox7.Text = dr[3].ToString();       // произвести обыск (выемку) в жилище
-                            textBox5.Text = pk_protokol;
+                            textBox5.Text = PK_Dela;
 
 
                             dr.Close();
@@ -298,6 +296,7 @@ namespace MyDiplomProject
                     }
                     else
                     {
+                        textBox5.Text = PK_Dela;
                         switch (id_post)
                         {
                             // Протокол осмотра местности, жилища, иного помещения
@@ -406,6 +405,8 @@ namespace MyDiplomProject
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveData();
+            if (pk_protokol == "")
+                this.Close();
         }
 
         private void SaveData() // сохранение внесённой информации
@@ -784,6 +785,8 @@ namespace MyDiplomProject
 
         private void Resolution_Shown(object sender, EventArgs e)
         {
+            if (pk_protokol == "")
+                сохранитьToolStripMenuItem.Text = "Сохранить и перейти к протоколу";
             LoadData();
             FileSave();
         }
