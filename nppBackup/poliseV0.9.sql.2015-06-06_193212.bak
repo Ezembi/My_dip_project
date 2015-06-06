@@ -222,17 +222,3 @@ Create table r_tex_sredstv (
 	pk_tex_sredstvo Int NOT NULL,
 	pk_protokol Int NOT NULL,
  Primary Key (pc_r,pk_tex_sredstvo,pk_protokol)) ENGINE = MyISAM;
- 
- Create table Apps (
-	pk_apps Int NOT NULL AUTO_INCREMENT,
-	nazvanie Varchar(200),
-	pk_protokol Int NOT NULL,
- Primary Key (pk_apps)) ENGINE = MyISAM
-COMMENT = 'Приложения к протоколу';
-
-Create table Spend (
-	pk_spend Int NOT NULL AUTO_INCREMENT,
-	nazvanie Varchar(200),
-	pk_protokol Int NOT NULL,
- Primary Key (pk_spend)) ENGINE = MyISAM
-COMMENT = 'Во_время_проводилась';

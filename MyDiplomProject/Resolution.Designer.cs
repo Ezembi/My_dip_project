@@ -82,12 +82,12 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label21 = new System.Windows.Forms.Label();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.label21 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -256,6 +256,7 @@
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(239, 358);
+            this.textBox7.MaxLength = 5000;
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(602, 20);
             this.textBox7.TabIndex = 23;
@@ -435,6 +436,7 @@
             // 
             this.textBox22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox22.Location = new System.Drawing.Point(652, 22);
+            this.textBox22.MaxLength = 200;
             this.textBox22.Name = "textBox22";
             this.textBox22.Size = new System.Drawing.Size(161, 20);
             this.textBox22.TabIndex = 41;
@@ -454,6 +456,7 @@
             // 
             this.textBox21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox21.Location = new System.Drawing.Point(485, 22);
+            this.textBox21.MaxLength = 200;
             this.textBox21.Name = "textBox21";
             this.textBox21.Size = new System.Drawing.Size(161, 20);
             this.textBox21.TabIndex = 6;
@@ -463,6 +466,7 @@
             // 
             this.textBox20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox20.Location = new System.Drawing.Point(318, 22);
+            this.textBox20.MaxLength = 200;
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(161, 20);
             this.textBox20.TabIndex = 5;
@@ -546,6 +550,7 @@
             // 
             this.textBox23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox23.Location = new System.Drawing.Point(643, 22);
+            this.textBox23.MaxLength = 200;
             this.textBox23.Name = "textBox23";
             this.textBox23.Size = new System.Drawing.Size(161, 20);
             this.textBox23.TabIndex = 41;
@@ -565,6 +570,7 @@
             // 
             this.textBox24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox24.Location = new System.Drawing.Point(476, 22);
+            this.textBox24.MaxLength = 20;
             this.textBox24.Name = "textBox24";
             this.textBox24.Size = new System.Drawing.Size(161, 20);
             this.textBox24.TabIndex = 6;
@@ -574,6 +580,7 @@
             // 
             this.textBox25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox25.Location = new System.Drawing.Point(309, 22);
+            this.textBox25.MaxLength = 1000;
             this.textBox25.Name = "textBox25";
             this.textBox25.Size = new System.Drawing.Size(161, 20);
             this.textBox25.TabIndex = 5;
@@ -620,6 +627,15 @@
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(16, 514);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(261, 13);
+            this.label21.TabIndex = 45;
+            this.label21.Text = "Проживающие в данном жилом помещении лица:";
+            // 
             // Column5
             // 
             this.Column5.HeaderText = "id";
@@ -631,18 +647,21 @@
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column1.HeaderText = "Фамилия";
+            this.Column1.MaxInputLength = 200;
             this.Column1.Name = "Column1";
             // 
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column2.HeaderText = "Имя";
+            this.Column2.MaxInputLength = 200;
             this.Column2.Name = "Column2";
             // 
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column3.HeaderText = "Отчество";
+            this.Column3.MaxInputLength = 200;
             this.Column3.Name = "Column3";
             // 
             // Column4
@@ -650,15 +669,6 @@
             this.Column4.HeaderText = "Удалить";
             this.Column4.Name = "Column4";
             this.Column4.Text = "Удалить";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(16, 514);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(261, 13);
-            this.label21.TabIndex = 45;
-            this.label21.Text = "Проживающие в данном жилом помещении лица:";
             // 
             // Resolution
             // 

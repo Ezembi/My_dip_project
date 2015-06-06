@@ -375,7 +375,7 @@
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(15, 229);
-            this.textBox7.MaxLength = 500;
+            this.textBox7.MaxLength = 1000;
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
             this.textBox7.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -414,7 +414,7 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(314, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
@@ -574,6 +574,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "CriminalAffair";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Уголовное дело / материал проверки";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CriminalAffair_FormClosing);
             this.Load += new System.EventHandler(this.CriminalAffair_Load);

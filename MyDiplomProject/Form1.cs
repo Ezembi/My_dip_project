@@ -81,16 +81,12 @@ namespace MyDiplomProject
                     sql = "";
                     sql += "select * from " + table + " where ";
                     sql += DBHeader[1] + " like '%" + textBox1.Text + "%' ";
-                   /* sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
-                    sql += "and " + DBHeader[3] + " like '%" + textBox3.Text + "%' ";
-                    sql += "and " + DBHeader[4] + " like '%" + textBox4.Text + "%' ";
+                    sql += "and " + DBHeader[3] + " like '%" + textBox2.Text + "%' ";
 
-                    if (textBox8.Text != "")
-                        sql += "and " + DBHeader[5] + " = '" + textBox8.Text + "' ";
-                    if (textBox9.Text != "")
-                        sql += "and " + DBHeader[6] + " = '" + textBox9.Text + "' ";
-                    if (textBox10.Text != "")
-                        sql += "and " + DBHeader[7] + " = '" + textBox10.Text + "' ";*/
+                    if (textBox4.Text != "")
+                        sql += "and " + DBHeader[5] + " = '" + textBox4.Text + "' ";
+                    if (textBox6.Text != "")
+                        sql += "and " + DBHeader[6] + " = '" + textBox6.Text + "' ";
 
                     cmd = new MySqlCommand(sql, mycon);
 
@@ -111,16 +107,12 @@ namespace MyDiplomProject
                     sql = "";
                     sql += "select * from " + table + " where ";
                     sql += DBHeader[1] + " like '%" + textBox1.Text + "%' ";
-                    /*sql += "and " + DBHeader[2] + " like '%" + textBox2.Text + "%' ";
-                    sql += "and " + DBHeader[3] + " like '%" + textBox3.Text + "%' ";
-                    sql += "and " + DBHeader[4] + " like '%" + textBox4.Text + "%' ";
+                    sql += "and " + DBHeader[3] + " like '%" + textBox2.Text + "%' ";
 
-                    if (textBox8.Text != "")
-                        sql += "and " + DBHeader[5] + " = '" + textBox8.Text + "' ";
-                    if (textBox9.Text != "")
-                        sql += "and " + DBHeader[6] + " = '" + textBox9.Text + "' ";
-                    if (textBox10.Text != "")
-                        sql += "and " + DBHeader[7] + " = '" + textBox10.Text + "' ";*/
+                    if (textBox4.Text != "")
+                        sql += "and " + DBHeader[5] + " = '" + textBox4.Text + "' ";
+                    if (textBox6.Text != "")
+                        sql += "and " + DBHeader[6] + " = '" + textBox6.Text + "' ";
 
                     sql += "limit " + lastIndex.ToString() + ", " + comboBox1.SelectedItem.ToString();
 
@@ -355,7 +347,7 @@ namespace MyDiplomProject
 
         private void справочникПодразделенийСледственногоКомитетаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddSpecMen f = new AddSpecMen(User, Password, Database, Ip, false, "Справочник подразделений следственного комитета", "spravochnik_pod", new string[] { "Название", "Идентификационный номер", "Район", "Город" }, new string[] { "PK_Raiona", "Nazv", "id_number", "Raion", "pk_gorod" }, "spravochnik_gorodov", new string[] { "pk_gorod", "nazvanie" });
+            AddSpecMen f = new AddSpecMen(User, Password, Database, Ip, false, "Справочник подразделений следственного комитета", "spravochnik_pod", new string[] { "Название", "Район", "Идентификационный номер", "Город" }, new string[] { "PK_Raiona", "Nazv", "Raion", "id_number", "pk_gorod" }, "spravochnik_gorodov", new string[] { "pk_gorod", "nazvanie" });
             f.ShowDialog();
         }
 
@@ -382,7 +374,7 @@ namespace MyDiplomProject
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 9 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 9 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 //удаление
                 string sql = "";    // строка sql запросов
@@ -450,6 +442,16 @@ namespace MyDiplomProject
                             cmd = new MySqlCommand(sql, mycon);
                             cmd.ExecuteNonQuery();
 
+                            // поэлементное удаление "В ходе осмотра проводилась"
+                            sql = " delete from spend where pk_protokol = " + delPriticol[i];
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+
+                            // поэлементное удаление "К протоколу прилагаются"
+                            sql = " delete from apps where pk_protokol = " + delPriticol[i];
+                            cmd = new MySqlCommand(sql, mycon);
+                            cmd.ExecuteNonQuery();
+
                             // поэлементное удаление протоколов
                             sql = " delete from protokol where pk_protokol = " + delPriticol[i];
                             cmd = new MySqlCommand(sql, mycon);
@@ -470,7 +472,7 @@ namespace MyDiplomProject
                 }
             }
 
-            if (e.ColumnIndex == 10 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 10 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 // выбор дела
                 this.Visible = false;
@@ -537,6 +539,7 @@ namespace MyDiplomProject
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheackButton();
+            LoadData();
         }
 
         private void создатьМатериалПроверкиУголовноеДелоToolStripMenuItem_Click(object sender, EventArgs e)
@@ -557,9 +560,75 @@ namespace MyDiplomProject
             LoadData();
         }
 
-        private void файлToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button5_MouseEnter(object sender, EventArgs e)
         {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button5, "Следующая страница");
+        }
 
+        private void button6_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button6, "Последняя страница");
+        }
+
+        private void button4_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button4, "Предидущая страница");
+        }
+
+        private void button3_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button3, "Первая страница");
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void textBox3_MouseClick(object sender, MouseEventArgs e)
+        {
+            //уполномоченный
+            AddOper f = new AddOper(User, Password, Database, Ip, true, "Справочник уполномоченных", "polise", new string[] { "Табельный номер", "Фамилия", "Имя", "Отчество", "Звание", "Должность", "Чин" }, new string[] { "pk_polise", "id_number", "surname", "Pname", "second_name", "pk_zvanie", "pk_dolgnost", "pk_chin" }, "spravochnik_zvanii", new string[] { "pk_zvanie", "nazvanie" }, "spravochnik_dolgnostei", new string[] { "pk_dolgnost", "nazvanie" }, "chin", new string[] { "pk_chin", "nazvanie" });
+            f.ShowDialog();
+
+            textBox4.Text = f.PC_rezult;
+            textBox3.Text = f.Rezult;
+
+            LoadData();
+        }
+
+        private void textBox5_MouseClick(object sender, MouseEventArgs e)
+        {
+            //Подразделение следственного комитета
+            AddSpecMen f = new AddSpecMen(User, Password, Database, Ip, true, "Справочник подразделений следственного комитета", "spravochnik_pod", new string[] { "Название", "Район", "Идентификационный номер", "Город" }, new string[] { "PK_Raiona", "Nazv", "Raion", "id_number", "pk_gorod" }, "spravochnik_gorodov", new string[] { "pk_gorod", "nazvanie" });
+            f.ShowDialog();
+
+            textBox6.Text = f.PC_rezult;
+            textBox5.Text = f.Rezult;
+
+            LoadData();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // перебераем элементы на форме и удаляем текст из всех TextBox
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl is TextBox)
+                {
+                    ctrl.Text = "";
+                }
+            }
+            LoadData();
         }
 
         

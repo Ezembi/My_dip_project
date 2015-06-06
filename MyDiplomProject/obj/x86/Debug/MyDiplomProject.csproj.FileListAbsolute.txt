@@ -77,3 +77,4 @@ C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplo
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.CriminalAffair.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.Resolution.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.Protocol.resources
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.CheckConnection.resources

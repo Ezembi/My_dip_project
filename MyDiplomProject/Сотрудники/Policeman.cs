@@ -322,27 +322,6 @@ namespace MyDiplomProject
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //button1.Enabled = false;
-            //if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
-            //{
-            //    cmd.CommandText = "SELECT * FROM POLISE, PROTOKOL WHERE POLISE.PK_POLISE = PROTOKOL.PK_POLISE AND POLISE.PK_DOLGNOSTOE_LICO = (SELECT SPRAVOCHNIK_DOLGNOSTNIX_LIC.PK_DOLGNOSTOE_LICO FROM SPRAVOCHNIK_DOLGNOSTNIX_LIC WHERE SPRAVOCHNIK_DOLGNOSTNIX_LIC.NAZVANIE = '" + oldCell0 + "') AND POLISE.FIO = '" + oldCell1 + "' AND POLISE.PK_DOLGNOST = (SELECT SPRAVOCHNIK_DOLGNOSTEI.PK_DOLGNOST FROM SPRAVOCHNIK_DOLGNOSTEI WHERE SPRAVOCHNIK_DOLGNOSTEI.NAZVANIE = '" + oldCell2 + "') AND POLISE.PK_ZVANIE = (SELECT SPRAVOCHNIK_ZVANII.PK_ZVANIE FROM SPRAVOCHNIK_ZVANII WHERE SPRAVOCHNIK_ZVANII.NAZVANIE = '" + oldCell3 + "') AND POLISE.PK_NOMER = (SELECT SPRAVOCHNIK_NOMEROV.PK_NOMER FROM SPRAVOCHNIK_NOMEROV WHERE SPRAVOCHNIK_NOMEROV.NOMER = '" + oldCell4 + "')";
-            //    dr = cmd.ExecuteReader();
-            //    if (!dr.Read())
-            //    {
-            //        cmd.CommandText = "DELETE FROM POLISE WHERE POLISE.PK_DOLGNOSTOE_LICO = (SELECT SPRAVOCHNIK_DOLGNOSTNIX_LIC.PK_DOLGNOSTOE_LICO FROM SPRAVOCHNIK_DOLGNOSTNIX_LIC WHERE SPRAVOCHNIK_DOLGNOSTNIX_LIC.NAZVANIE = '" + oldCell0 + "') AND POLISE.FIO = '" + oldCell1 + "' AND POLISE.PK_DOLGNOST = (SELECT SPRAVOCHNIK_DOLGNOSTEI.PK_DOLGNOST FROM SPRAVOCHNIK_DOLGNOSTEI WHERE SPRAVOCHNIK_DOLGNOSTEI.NAZVANIE = '" + oldCell2 + "') AND POLISE.PK_ZVANIE = (SELECT SPRAVOCHNIK_ZVANII.PK_ZVANIE FROM SPRAVOCHNIK_ZVANII WHERE SPRAVOCHNIK_ZVANII.NAZVANIE = '" + oldCell3 + "') AND POLISE.PK_NOMER = (SELECT SPRAVOCHNIK_NOMEROV.PK_NOMER FROM SPRAVOCHNIK_NOMEROV WHERE SPRAVOCHNIK_NOMEROV.NOMER = '" + oldCell4 + "')";
-            //        cmd.ExecuteNonQuery();
-
-            //        Lock = true;
-            //        UpDate();
-            //        Lock = false;
-            //    }
-            //     else
-            //        MessageBox.Show("Необходимо удалить или изменить все протоколы с данным уполномоченным!", "Удаление уполномоченного невозможно!");
-            //}
-        }
-
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             string str = "";    // ячейки табл. на форме
@@ -384,7 +363,7 @@ namespace MyDiplomProject
                             cmd = new MySqlCommand(sql, mycon);
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Данные " + str + " успешно добавлены!", "Добавление", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            lastIndex = count - Convert.ToInt32(comboBox1.SelectedItem) + 1;
+                            lastIndex = 0;
                             if (lastIndex < 0)
                                 lastIndex = 0;
                             LoadData();
@@ -454,7 +433,7 @@ namespace MyDiplomProject
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 11 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 11 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 // удалеие
                 DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?\nДанное действие необратимо!", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -493,14 +472,14 @@ namespace MyDiplomProject
                 }
             }
 
-            if (e.ColumnIndex == 12 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 12 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 PC_rezult = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
                 Rezult = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
                 this.Close();
             }
 
-            if (e.ColumnIndex == 8 && e.RowIndex < dataGridView1.Rows.Count - 1)    //звание
+            if (e.ColumnIndex == 8 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)    //звание
             {
                 AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник званий", "spravochnik_zvanii", new string[] { "Звание", "Идентификационный номер" }, new string[] { "pk_zvanie", "nazvanie", "id_number" });
                 f.ShowDialog();
@@ -511,10 +490,11 @@ namespace MyDiplomProject
                 PC_rezult = f.PC_rezult;
                 Rezult = f.Rezult;
 
-                if (PC_rezult != null)
+                if (PC_rezult != null && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
                 {
                     dataGridView1.Rows[e.RowIndex].Cells[5].Value = PC_rezult;
-                    dataGridView1.Rows[e.RowIndex].Cells[8].Value = Rezult;
+                    if (e.RowIndex < dataGridView1.Rows.Count - 1)
+                        dataGridView1.Rows[e.RowIndex].Cells[8].Value = Rezult;
                 }
                 else
                     if (dataGridView1.Rows[e.RowIndex].Cells[5].Value != null)
@@ -524,7 +504,7 @@ namespace MyDiplomProject
                 
             }
 
-            if (e.ColumnIndex == 9 && e.RowIndex < dataGridView1.Rows.Count - 1)    //должность
+            if (e.ColumnIndex == 9 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)    //должность
             {
                 AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник должностей", "spravochnik_dolgnostei", new string[] { "Должность", "Идентификационный номер" }, new string[] { "pk_dolgnost", "nazvanie", "id_number" });
                 f.ShowDialog();
@@ -535,10 +515,11 @@ namespace MyDiplomProject
                 PC_rezult = f.PC_rezult;
                 Rezult = f.Rezult;
 
-                if (PC_rezult != null)
+                if (PC_rezult != null && e.RowIndex < dataGridView1.Rows.Count - 1)
                 {
                     dataGridView1.Rows[e.RowIndex].Cells[6].Value = PC_rezult;
-                    dataGridView1.Rows[e.RowIndex].Cells[9].Value = Rezult;
+                    if (e.RowIndex < dataGridView1.Rows.Count - 1)
+                        dataGridView1.Rows[e.RowIndex].Cells[9].Value = Rezult;
                 }
                 else
                     if (dataGridView1.Rows[e.RowIndex].Cells[6].Value != null)
@@ -548,7 +529,7 @@ namespace MyDiplomProject
                 
             }
 
-            if (e.ColumnIndex == 10 && e.RowIndex < dataGridView1.Rows.Count - 1)    //чин
+            if (e.ColumnIndex == 10 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)    //чин
             {
                 AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник классных чинов", "chin", new string[] { "Название", "Идентификационный номер" }, new string[] { "pk_chin", "nazvanie", "id_number" });
                 f.ShowDialog();
@@ -559,10 +540,11 @@ namespace MyDiplomProject
                 PC_rezult = f.PC_rezult;
                 Rezult = f.Rezult;
 
-                if (PC_rezult != null)
+                if (PC_rezult != null && e.RowIndex < dataGridView1.Rows.Count - 1)
                 {
-                    dataGridView1.Rows[e.RowIndex].Cells[7].Value = PC_rezult;
-                    dataGridView1.Rows[e.RowIndex].Cells[10].Value = Rezult;
+                        dataGridView1.Rows[e.RowIndex].Cells[7].Value = PC_rezult;
+                        if (e.RowIndex < dataGridView1.Rows.Count - 1)
+                            dataGridView1.Rows[e.RowIndex].Cells[10].Value = Rezult;
                 }
                 else
                     if (dataGridView1.Rows[e.RowIndex].Cells[7].Value != null)
@@ -643,10 +625,20 @@ namespace MyDiplomProject
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheackButton();
+            LoadData();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            // перебераем элементы на форме и удаляем текст из всех TextBox
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl is TextBox)
+                {
+                    ctrl.Text = "";
+                }
+            }
+
             LoadData();
         }
 
@@ -725,6 +717,30 @@ namespace MyDiplomProject
                 textBox7.Text = "";
             }
             LoadData();
+        }
+
+        private void button5_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button5, "Следующая страница");
+        }
+
+        private void button6_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button6, "Последняя страница");
+        }
+
+        private void button4_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button4, "Предидущая страница");
+        }
+
+        private void button3_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button3, "Первая страница");
         }
     }
 }

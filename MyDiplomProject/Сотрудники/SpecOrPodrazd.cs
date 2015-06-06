@@ -196,15 +196,20 @@ namespace MyDiplomProject
                 //открытие подключения
                 mycon.Open();
 
+                
                 //авто выбор кол-ва элементов, для отображения
                 comboBox1.SelectedIndex = 0;
-
+                Lock = true;
                 //зполнение шапки таблици
                 for (int i = 0; i < HeaderText.Length; i++)
                 {
                     dataGridView1.Columns[i + 1].HeaderText = HeaderText[i];
                 }
                 dataGridView1.Columns[HeaderText.Length+1].HeaderText = HeaderText[HeaderText.Length - 1];
+                label3.Text = HeaderText[0];
+                label4.Text = HeaderText[1];
+                label5.Text = HeaderText[2];
+                label6.Text = HeaderText[3];
 
                 //скрытие лишних полей таблици
                 if (HeaderText.Length == 1)
@@ -214,7 +219,6 @@ namespace MyDiplomProject
                     textBox2.Visible = false;
                 }
 
-                button7.Text = HeaderText[HeaderText.Length - 1];
 
                 this.Text = FormName;
 
@@ -225,6 +229,7 @@ namespace MyDiplomProject
                     MessageBox.Show("Нет подключениея к базе данных!");
                     throw new Exception();
                 }
+                Lock = false; ;
 
             }
             catch
@@ -332,7 +337,7 @@ namespace MyDiplomProject
         {
             try
             {
-                if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1)
+                if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
                 {
                     // удалеие
                     DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?\nДанное действие необратимо!", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -367,7 +372,7 @@ namespace MyDiplomProject
             catch { MessageBox.Show("При удаление произошла ошибка!", "Удаление невозможно", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
 
-            if (e.ColumnIndex == 7 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 7 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 // выбор
                 PC_rezult = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -380,7 +385,7 @@ namespace MyDiplomProject
                 this.Close();
             }
 
-            if (e.ColumnIndex == 5 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 5 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 // загрузка доп. информации
                 AddDojnost f;
@@ -485,10 +490,19 @@ namespace MyDiplomProject
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheackButton();
+            LoadData();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            // перебераем элементы на форме и удаляем текст из всех TextBox
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl is TextBox)
+                {
+                    ctrl.Text = "";
+                }
+            }
             LoadData();
         }
 
@@ -518,5 +532,55 @@ namespace MyDiplomProject
                 textBox4.Text = "";
             LoadData();
         }
+
+        private void textBox5_MouseClick(object sender, MouseEventArgs e)
+        {
+            AddDojnost f;
+            switch (STable)
+            {
+                case "spravochnik_oblastei_spec": f = new AddDojnost(User, Password, Database, Ip, true, "Справочник областей специализации", "spravochnik_oblastei_spec", new string[] { "Название", "Идентификационный номер" }, new string[] { "pk_special", "nazvanie", "id_number" }); break;
+                case "spravochnik_gorodov": f = new AddDojnost(User, Password, Database, Ip, true, "Справочник городов", "spravochnik_gorodov", new string[] { "Город", "Идентификационный номер" }, new string[] { "pk_gorod", "nazvanie", "id_number" }); break;
+                default: f = new AddDojnost(User, Password, Database, Ip, true, "Справочник городов", "spravochnik_gorodov", new string[] { "Город", "Идентификационный номер" }, new string[] { "pk_gorod", "nazvanie", "id_number" }); break;
+            }
+
+            f.ShowDialog();
+            string rezult = "";
+            rezult = f.PC_rezult;
+            if (rezult != null)
+            {
+                textBox4.Text = rezult;
+                textBox5.Text = f.Rezult;
+            }
+            else
+                textBox4.Text = "";
+            LoadData();
+        }
+        private void button5_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button5, "Следующая страница");
+        }
+
+        private void button6_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button6, "Последняя страница");
+        }
+
+        private void button4_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button4, "Предидущая страница");
+        }
+
+        private void button3_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button3, "Первая страница");
+        }
+    
+    
     }
+
+
 }

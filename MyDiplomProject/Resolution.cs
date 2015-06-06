@@ -812,7 +812,7 @@ namespace MyDiplomProject
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 4 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 DialogResult del = MessageBox.Show("Подтверждение удаления", "Вы действительно хотите удалить данный элемент?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 

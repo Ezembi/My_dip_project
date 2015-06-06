@@ -20,6 +20,9 @@ namespace MyDiplomProject
         List<string> delPeoples;        // список лиц для удаления
         List<string> delDevise;         // список тех средств для удаления
 
+        List<string> delSpend;          // список "В ходе осмотра проводилась" для удаления
+        List<string> delApps;           // список "К протоколу прилагаются" для удаления
+
         bool Lock = true;   // блокировка действий пользователя до полной загрузки формы
         string User;        // имя пользователя, для доступа к б/д
         string Password;    // пароль пользователя
@@ -126,6 +129,8 @@ namespace MyDiplomProject
             delVeshDokList = new List<string>();
             delPeoples = new List<string>();
             delDevise = new List<string>();
+            delSpend = new List<string>();
+            delApps = new List<string>();
 
             InitializeComponent();
         }
@@ -318,6 +323,103 @@ namespace MyDiplomProject
             catch  { MessageBox.Show("\nНе удалось загрузить других лиц!\nВозможно у Вас нет доступа к базе данных!", "Ошибка сохранения!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
+        private void LoadAppsSpend(string appTable, System.Windows.Forms.DataGridView MyDataGridView)  // загрузка В ходе осмотра проводилась / приложения к протоколу
+        {
+            MySqlDataAdapter da;
+            MySqlDataReader dr;
+            string sql = "";
+            int i = 0;
+            bool LocLock = Lock;
+            try
+            {
+                if (pk_protokol != "")
+                {
+                    Lock = true;
+                    MyDataGridView.Rows.Clear();
+                    Lock = LocLock;
+
+                    //грузим проживающих в данном жилом помещении лиц
+                    sql = "select * from " + appTable +" where pk_protokol = " + pk_protokol;
+                    //получение комманды и коннекта
+                    cmd = new MySqlCommand(sql, mycon);
+                    //вополнение запроса
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    //получение выборки
+                    dr = cmd.ExecuteReader();
+                    // заполнения поля 
+                    while (dr.Read())
+                    {
+                        MyDataGridView.Rows.Add();
+                        MyDataGridView.Rows[i].Cells[0].Value = dr[0].ToString();    // PC
+                        MyDataGridView.Rows[i].Cells[1].Value = dr[1].ToString();    // наименование
+                        MyDataGridView.Rows[i].Cells[2].Value = "Удалить";           // Удаление
+
+                        i++;
+                    }
+                    dr.Close();
+                }
+            }
+            catch { MessageBox.Show("\nНе удалось загрузить приложения к протоколу!\nВозможно у Вас нет доступа к базе данных!", "Ошибка сохранения!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void SaveAppsSpend(string STable, string[] DBSHeader, List<string> delList, System.Windows.Forms.DataGridView MyDataGridView)  // сохранение вещественных доказательств(изъятого имущества)
+        {
+            try
+            {
+                string sql = "";    // строка sql запросов
+                for (int i = 0; i < delList.Count; i++)
+                {
+                    // поэлементное удаление вещественных доказательств(изъятого имущества)
+                    sql = " delete from " + STable + " where " + DBSHeader[0] + " = " + delList[i];
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+                }
+                delList.Clear(); // очистка списка вещественных доказательств(изъятого имущества) для удаления
+
+                for (int i = 0; i < MyDataGridView.Rows.Count - 1; i++)
+                {
+                    if (MyDataGridView.Rows[i].Cells[0].Value != null)
+                    {
+                        //изменение
+                        sql = "update " + STable + " set ";
+
+                        if (MyDataGridView.Rows[i].Cells[1].Value != null && MyDataGridView.Rows[i].Cells[1].Value.ToString() != "")
+                            sql += DBSHeader[1] + " = '" + MyDataGridView.Rows[i].Cells[1].Value.ToString() + "'";  //если ячейка заполнена
+
+                        sql += " where " + DBSHeader[0] + " = " + MyDataGridView.Rows[i].Cells[0].Value.ToString();
+                        cmd = new MySqlCommand(sql, mycon);
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        //добавление
+                        sql = "";
+                        sql = "insert into " + STable + "(";
+
+                        sql += DBSHeader[1];
+                        sql += ", pk_protokol";
+
+                        sql += ") values (";
+
+                            if (MyDataGridView.Rows[i].Cells[1].Value != null && MyDataGridView.Rows[i].Cells[1].Value.ToString() != "")
+                                sql += "'" + MyDataGridView.Rows[i].Cells[1].Value.ToString() + "',";
+                        sql += "'" + pk_protokol + "'";
+
+                        sql += ")";
+
+                        cmd = new MySqlCommand(sql, mycon);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Error:" + STable + "\nНе удалось сохранить приложения к протоколу!\nВозможно у Вас нет доступа к базе данных!", "Ошибка сохранения!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
         private void SavePonyatoi(TextBox surname, TextBox pname, TextBox second_name, TextBox street, TextBox house, TextBox room, TextBox pk_ponatoi) // сохранение понятого
         {
             try
@@ -564,6 +666,8 @@ namespace MyDiplomProject
             LoadPeopels();
             LoadPonyatoi();
             LoadDevise();
+            LoadAppsSpend("spend", dataGridView4);                                      //В ходе осмотра проводилась
+            LoadAppsSpend("apps", dataGridView5);                                       //К протоколу прилагаются
             loadFromOtherFormOneItem(STable0, DBSHeader0, textBox2, textBox1);          // загрузка города
             loadFromOtherFormOneItem(STable1, DBSHeader1, textBox7, textBox6);          // загрузка погоды
             loadFromOtherFormOneItem(STable1, DBSHeader1, textBox7, textBox38);         // загрузка погоды
@@ -1039,8 +1143,14 @@ namespace MyDiplomProject
             SaveTables(STable3, DBSHeader3, "pk_protokol", pk_protokol, delVeshDokList, dataGridView2, 5);   //сохранение вещественных дказательств (изьятого имущетсва)
             LoadVeshDok(STable3, dataGridView2);
 
-            SaveTables(STable6, DBSHeader6, "pk_protokol", pk_protokol, delPeoples, dataGridView3, 5);   //сохранение иных (других) лиц
+            SaveTables(STable6, DBSHeader6, "pk_protokol", pk_protokol, delPeoples, dataGridView3, 5);    //сохранение иных (других) лиц
             LoadPeopels();
+
+            SaveAppsSpend("spend", new string[] { "pk_spend", "nazvanie" }, delSpend, dataGridView4);     //сохранение "В ходе осмотра проводилась"
+            LoadAppsSpend("spend", dataGridView4);                                                        //В ходе осмотра проводилась
+
+            SaveAppsSpend("apps", new string[] { "pk_apps", "nazvanie" }, delApps, dataGridView5);        //сохранение "К протоколу прилагаются"
+            LoadAppsSpend("apps", dataGridView5);                                                         //К протоколу прилагаются
 
             SavePonyatoi(textBox13, textBox14, textBox15, textBox16, textBox17, textBox18, textBox39);
             SavePonyatoi(textBox24, textBox23, textBox22, textBox21, textBox20, textBox19, textBox40);
@@ -1058,8 +1168,9 @@ namespace MyDiplomProject
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 7 && e.RowIndex < dataGridView2.Rows.Count - 1)
+            if (e.ColumnIndex == 7 && e.RowIndex < dataGridView2.Rows.Count - 1 && e.RowIndex != -1)
             {
+                //удаление
                 DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (del == System.Windows.Forms.DialogResult.Yes)
@@ -1073,10 +1184,11 @@ namespace MyDiplomProject
                         delVeshDokList.Add(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
                         dataGridView2.Rows.RemoveAt(e.RowIndex);
                     }
+                    FileChange();
                 }
             }
 
-            if (e.ColumnIndex == 5)
+            if (e.ColumnIndex == 5 && e.RowIndex != -1)
             {
                 //материал упаковки
                 AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник материалов упаковки", "spravochnik_materialov", new string[] { "Маериал", "Идентификационный номер" }, new string[] { "pk_material", "material", "id_number" });
@@ -1084,9 +1196,10 @@ namespace MyDiplomProject
 
                 dataGridView2.Rows[e.RowIndex].Cells[3].Value = f.PC_rezult;
                 loadFromOtherTable(STable5, DBSHeader5, dataGridView2, 3, 5);  //Справочник материалов, в которые упаковываю вещественные доказательства
+                FileChange();
             }
 
-            if (e.ColumnIndex == 6)
+            if (e.ColumnIndex == 6 && e.RowIndex != -1)
             {
                 //способ упаковки
                 AddDojnost f = new AddDojnost(User, Password, Database, Ip, true, "Справочник способов упаковки вещественных доказательств", "ypakovka", new string[] { "Способ" }, new string[] { "pk_ypakovka", "nazvanie" });
@@ -1094,6 +1207,7 @@ namespace MyDiplomProject
 
                 dataGridView2.Rows[e.RowIndex].Cells[4].Value = f.PC_rezult;
                 loadFromOtherTable(STable4, DBSHeader4, dataGridView2, 4, 6);  //Справочник материалов, в которые упаковываю вещественные доказательства
+                FileChange();
             }
         }
 
@@ -1118,7 +1232,7 @@ namespace MyDiplomProject
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 5 && e.RowIndex < dataGridView3.Rows.Count - 1)
+            if (e.ColumnIndex == 5 && e.RowIndex < dataGridView3.Rows.Count - 1 && e.RowIndex != -1)
             {
                 DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -1192,7 +1306,7 @@ namespace MyDiplomProject
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             bool isNull = false;
-            if (e.ColumnIndex == 3 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 3 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -1208,11 +1322,11 @@ namespace MyDiplomProject
                         dataGridView1.Rows.RemoveAt(e.RowIndex);
                     }
 
-                    FileSave();
+                    FileChange();
                 }
             }
 
-            if (e.ColumnIndex == 2)
+            if (e.ColumnIndex == 2 && e.RowIndex != -1)
             {
                 if (dataGridView1.Rows[e.RowIndex].Cells[1].Value == null)
                     isNull = true;
@@ -1238,7 +1352,7 @@ namespace MyDiplomProject
                     dataGridView1.Rows[e.RowIndex].Cells[3].Value = "Удалить";
                     dataGridView1.Rows[e.RowIndex].Cells[1].Value = f.PC_rezult;
                     dataGridView1.Rows[e.RowIndex].Cells[2].Value = f.Rezult;
-                    FileSave();
+                    FileChange();
                 }
             }
         }
@@ -1269,8 +1383,40 @@ namespace MyDiplomProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Resolution r = new Resolution(User, Password, Database, Ip, PK_Dela, id_psot, pk_postanov, pk_protokol);
-            r.ShowDialog();
+
+            try
+            {
+                MySqlDataAdapter da;
+                MySqlDataReader dr;
+                string sql = "";
+
+                //грузим проживающих в данном жилом помещении лиц
+                sql = "select Nomer_materiala, Nomer_dela from delo where PK_Dela = " + PK_Dela;
+                //получение комманды и коннекта
+                cmd = new MySqlCommand(sql, mycon);
+                //вополнение запроса
+                cmd.ExecuteNonQuery();
+                da = new MySqlDataAdapter(cmd);
+                //получение выборки
+                dr = cmd.ExecuteReader();
+                // заполнения поля 
+                if (dr.Read())
+                {
+                    Resolution r;
+                    if(dr[1].ToString() != "")
+                        r = new Resolution(User, Password, Database, Ip, dr[1].ToString(), id_psot, pk_postanov, pk_protokol);  // Nomer_dela
+                    else
+                        r = new Resolution(User, Password, Database, Ip, dr[0].ToString(), id_psot, pk_postanov, pk_protokol);  // Nomer_materiala
+                    r.ShowDialog();
+                }
+                dr.Close();
+            }
+            catch {
+                Resolution r = new Resolution(User, Password, Database, Ip, PK_Dela, id_psot, pk_postanov, pk_protokol);
+                r.ShowDialog();
+            }
+
+            
 
             switch (id_prot)
             {
@@ -1307,14 +1453,18 @@ namespace MyDiplomProject
                 else
                     if (FClose == DialogResult.No)
                     {
-                        //удаляем постановление без протокола
-                        string sql;
-                        sql = "delete from " + STable9;
-                        sql += " where pk_postanov = " + pk_postanov;
-                        //получение комманды и коннекта
-                        cmd = new MySqlCommand(sql, mycon);
-                        //вополнение запроса
-                        cmd.ExecuteNonQuery();
+                        try
+                        {
+                            //удаляем постановление без протокола
+                            string sql;
+                            sql = "delete from " + STable9;
+                            sql += " where pk_postanov = " + pk_postanov;
+                            //получение комманды и коннекта
+                            cmd = new MySqlCommand(sql, mycon);
+                            //вополнение запроса
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch { }
 
                         e.Cancel = false;
                     }
@@ -1414,6 +1564,76 @@ namespace MyDiplomProject
         }
 
         private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            FileChange();
+        }
+
+        private void dataGridView4_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (e.RowIndex > 0)
+                dataGridView4.Rows[e.RowIndex - 1].Cells[2].Value = "Удалить";           // Удаление
+            FileChange();
+
+        }
+
+        private void dataGridView5_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (e.RowIndex > 0)
+                dataGridView5.Rows[e.RowIndex - 1].Cells[2].Value = "Удалить";           // Удаление
+        }
+
+        private void dataGridView4_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 2 && e.RowIndex < dataGridView4.Rows.Count - 1 && e.RowIndex != -1)
+            {
+                DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (del == System.Windows.Forms.DialogResult.Yes)
+                {
+                    if (dataGridView4.Rows[e.RowIndex].Cells[0].Value == null)
+                    {
+                        // если в базе ещё нет данного элемента
+                        // то удаляем только строку
+                        dataGridView4.Rows.RemoveAt(e.RowIndex);
+                    }
+                    else
+                    {
+                        // если элемент в базе есть, 
+                        // то удаляем строку и запись в бд
+                        delSpend.Add(dataGridView4.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        dataGridView4.Rows.RemoveAt(e.RowIndex);
+                    }
+                    FileChange();
+                }
+            }
+        }
+
+        private void dataGridView5_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 2 && e.RowIndex < dataGridView5.Rows.Count - 1 && e.RowIndex != -1)
+            {
+                DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (del == System.Windows.Forms.DialogResult.Yes)
+                {
+                    if (dataGridView5.Rows[e.RowIndex].Cells[0].Value == null)
+                    {
+                        // если в базе ещё нет данного элемента
+                        // то удаляем только строку
+                        dataGridView5.Rows.RemoveAt(e.RowIndex);
+                    }
+                    else
+                    {
+                        // если элемент в базе есть, 
+                        // то удаляем строку и запись в бд
+                        delApps.Add(dataGridView5.Rows[e.RowIndex].Cells[0].Value.ToString());
+                        dataGridView5.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
+            }
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             FileChange();
         }

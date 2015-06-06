@@ -504,7 +504,7 @@ namespace MyDiplomProject
         private void textBox5_MouseClick(object sender, MouseEventArgs e)
         {
             //Подразделение следственного комитета
-            AddSpecMen f = new AddSpecMen(User, Password, Database, Ip, true, "Справочник подразделений следственного комитета", "spravochnik_pod", new string[] { "Название", "Идентификационный номер", "Район", "Город" }, new string[] { "PK_Raiona", "Nazv", "id_number", "Raion", "pk_gorod" }, "spravochnik_gorodov", new string[] { "pk_gorod", "nazvanie" });
+            AddSpecMen f = new AddSpecMen(User, Password, Database, Ip, true, "Справочник подразделений следственного комитета", "spravochnik_pod", new string[] { "Название", "Район", "Идентификационный номер", "Город" }, new string[] { "PK_Raiona", "Nazv", "Raion", "id_number", "pk_gorod" }, "spravochnik_gorodov", new string[] { "pk_gorod", "nazvanie" });
             f.ShowDialog();
 
             string PC_rezult = "";  //значение первичного ключа
@@ -585,6 +585,16 @@ namespace MyDiplomProject
 
                     // поэлементное удаление людей из протокола
                     sql = " delete from peoples where " + DBSHeader3[0] + " = " + delPriticol[i];
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+
+                    // поэлементное удаление "В ходе осмотра проводилась"
+                    sql = " delete from spend where " + DBSHeader3[0] + " = " + delPriticol[i];
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+
+                    // поэлементное удаление "К протоколу прилагаются"
+                    sql = " delete from apps where " + DBSHeader3[0] + " = " + delPriticol[i];
                     cmd = new MySqlCommand(sql, mycon);
                     cmd.ExecuteNonQuery();
 
@@ -861,7 +871,7 @@ namespace MyDiplomProject
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 5 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 5 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 DialogResult del = MessageBox.Show("Вы действительно хотите удалить данный элемент?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -881,7 +891,7 @@ namespace MyDiplomProject
                 FileChange();
             }
 
-            if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
                 Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 f.ShowDialog();

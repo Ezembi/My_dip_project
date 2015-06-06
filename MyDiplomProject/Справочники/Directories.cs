@@ -172,11 +172,16 @@ namespace MyDiplomProject
                 //авто выбор кол-ва элементов, для отображения
                 comboBox1.SelectedIndex = 0;
 
+                Lock = true;
                 //зполнение шапки таблици
                 for (int i = 0; i < HeaderText.Length; i++)
                 {
                     dataGridView1.Columns[i + 1].HeaderText = HeaderText[i];
                 }
+                Lock = false;
+
+                label3.Text = HeaderText[0];
+                label4.Text = HeaderText[1];
 
                 //скрытие лишних полей таблици
                 if (HeaderText.Length == 1)
@@ -504,11 +509,44 @@ namespace MyDiplomProject
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheackButton();
+            LoadData();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            // перебераем элементы на форме и удаляем текст из всех TextBox
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl is TextBox)
+                {
+                    ctrl.Text = "";
+                }
+            }
             LoadData();
+        }
+
+        private void button5_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button5, "Следующая страница");
+        }
+
+        private void button6_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button6, "Последняя страница");
+        }
+
+        private void button4_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button4, "Предидущая страница");
+        }
+
+        private void button3_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button3, "Первая страница");
         }
     }
 }
