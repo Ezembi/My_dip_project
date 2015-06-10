@@ -631,6 +631,12 @@ namespace MyDiplomProject
             LoadData();
         }
 
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MainForm f = new MainForm();
+            f.ShowDialog();
+        }
+
         
     }
 }

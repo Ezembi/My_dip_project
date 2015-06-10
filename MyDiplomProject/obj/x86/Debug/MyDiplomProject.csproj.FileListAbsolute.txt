@@ -78,3 +78,12 @@ C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplo
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.Resolution.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.Protocol.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.CheckConnection.resources
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\bin\Debug\NPOI.dll
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\bin\Debug\NPOI.OOXML.dll
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\bin\Debug\NPOI.xml
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\bin\Debug\NPOI.OOXML.xml
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\bin\Debug\NPOI.OpenXml4Net.xml
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.MainForm.resources

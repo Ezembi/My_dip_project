@@ -181,14 +181,16 @@ namespace MyDiplomProject
                 Lock = false;
 
                 label3.Text = HeaderText[0];
-                label4.Text = HeaderText[1];
+                if(HeaderText.Length > 1)
+                    label4.Text = HeaderText[1];
 
                 //скрытие лишних полей таблици
                 if (HeaderText.Length == 1)
                 {
                     for (int i = 2; i < dataGridView1.ColumnCount - 2; i++)
                         dataGridView1.Columns[i].Visible = false;
-                    textBox2.Visible = false;
+                    label4.Visible = textBox2.Visible = false;
+
                 }
 
                 this.Text = FormName;

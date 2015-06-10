@@ -164,16 +164,16 @@
             this.textBox27 = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.label50 = new System.Windows.Forms.Label();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label51 = new System.Windows.Forms.Label();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label50 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -191,8 +191,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1587,50 +1587,6 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Приложения";
             // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(6, 14);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(155, 13);
-            this.label50.TabIndex = 0;
-            this.label50.Text = "В ходе осмотра проводилась";
-            // 
-            // dataGridView4
-            // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column17,
-            this.Column18,
-            this.Column19});
-            this.dataGridView4.Location = new System.Drawing.Point(9, 30);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(921, 267);
-            this.dataGridView4.TabIndex = 1;
-            this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
-            this.dataGridView4.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);
-            this.dataGridView4.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView4_RowsAdded);
-            // 
-            // Column17
-            // 
-            this.Column17.HeaderText = "id";
-            this.Column17.Name = "Column17";
-            this.Column17.ReadOnly = true;
-            this.Column17.Visible = false;
-            // 
-            // Column18
-            // 
-            this.Column18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column18.HeaderText = "Наименование";
-            this.Column18.MaxInputLength = 200;
-            this.Column18.Name = "Column18";
-            // 
-            // Column19
-            // 
-            this.Column19.HeaderText = "Удалить";
-            this.Column19.Name = "Column19";
-            this.Column19.ReadOnly = true;
-            // 
             // dataGridView5
             // 
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1674,6 +1630,50 @@
             this.label51.Size = new System.Drawing.Size(138, 13);
             this.label51.TabIndex = 2;
             this.label51.Text = "К протоколу прилагаются";
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column17,
+            this.Column18,
+            this.Column19});
+            this.dataGridView4.Location = new System.Drawing.Point(9, 30);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(921, 267);
+            this.dataGridView4.TabIndex = 1;
+            this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
+            this.dataGridView4.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);
+            this.dataGridView4.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView4_RowsAdded);
+            // 
+            // Column17
+            // 
+            this.Column17.HeaderText = "id";
+            this.Column17.Name = "Column17";
+            this.Column17.ReadOnly = true;
+            this.Column17.Visible = false;
+            // 
+            // Column18
+            // 
+            this.Column18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column18.HeaderText = "Наименование";
+            this.Column18.MaxInputLength = 200;
+            this.Column18.Name = "Column18";
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "Удалить";
+            this.Column19.Name = "Column19";
+            this.Column19.ReadOnly = true;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(6, 14);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(155, 13);
+            this.label50.TabIndex = 0;
+            this.label50.Text = "В ходе осмотра проводилась";
             // 
             // Protocol
             // 
@@ -1721,8 +1721,8 @@
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

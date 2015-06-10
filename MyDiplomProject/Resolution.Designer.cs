@@ -31,6 +31,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.экспортироватьВWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -82,12 +83,13 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label21 = new System.Windows.Forms.Label();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label21 = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -107,7 +109,8 @@
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.сохранитьToolStripMenuItem});
+            this.сохранитьToolStripMenuItem,
+            this.экспортироватьВWordToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
@@ -115,9 +118,16 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
+            // экспортироватьВWordToolStripMenuItem
+            // 
+            this.экспортироватьВWordToolStripMenuItem.Name = "экспортироватьВWordToolStripMenuItem";
+            this.экспортироватьВWordToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.экспортироватьВWordToolStripMenuItem.Text = "Экспортировать в Word";
+            this.экспортироватьВWordToolStripMenuItem.Click += new System.EventHandler(this.экспортироватьВWordToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -627,15 +637,6 @@
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(16, 514);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(261, 13);
-            this.label21.TabIndex = 45;
-            this.label21.Text = "Проживающие в данном жилом помещении лица:";
-            // 
             // Column5
             // 
             this.Column5.HeaderText = "id";
@@ -669,6 +670,19 @@
             this.Column4.HeaderText = "Удалить";
             this.Column4.Name = "Column4";
             this.Column4.Text = "Удалить";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(16, 514);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(261, 13);
+            this.label21.TabIndex = 45;
+            this.label21.Text = "Проживающие в данном жилом помещении лица:";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Microsoft Word | *.docx";
             // 
             // Resolution
             // 
@@ -714,6 +728,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Resolution";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Постановление";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Resolution_FormClosing);
             this.Load += new System.EventHandler(this.Resolution_Load);
@@ -793,5 +808,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewButtonColumn Column4;
+        private System.Windows.Forms.ToolStripMenuItem экспортироватьВWordToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

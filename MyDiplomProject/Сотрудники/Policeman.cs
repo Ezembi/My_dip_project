@@ -314,7 +314,6 @@ namespace MyDiplomProject
                     MessageBox.Show("Нет подключениея к базе данных!");
                     throw new Exception();
                 }
-
             }
             catch
             {
@@ -474,7 +473,9 @@ namespace MyDiplomProject
 
             if (e.ColumnIndex == 12 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
+                //выбрать
                 PC_rezult = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                //ФИО
                 Rezult = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
                 this.Close();
             }

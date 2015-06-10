@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using MySql;
 using System.Windows;
+using NPOI.XWPF.UserModel;
+using System.IO;
 
 namespace MyDiplomProject
 {
@@ -90,7 +92,7 @@ namespace MyDiplomProject
 
             STable7 = "sp_pro_pol";
 
-            
+
 
             delList = new List<string>();
 
@@ -838,13 +840,13 @@ namespace MyDiplomProject
             switch (id_post)
             {
                 // Протокол осмотра местности, жилища, иного помещения
-                case "1": this.Text = "Протокол осмотра местности, жилища, иного помещения*"; break;
+                case "1": this.Text = "Постановление о производстве осмотра местности, жилища, иного помещения*"; break;
 
                 // Протокол личного обыска
-                case "2": this.Text = "Протокол личного обыска*"; break;
+                case "2": this.Text = "Постановление о производстве личного обыска*"; break;
 
                 // Протокол обыска (выемки)
-                case "5": this.Text = "Протокол обыска (выемки)*"; break;
+                case "5": this.Text = "Постановление о производстве обыска (выемки)*"; break;
             }
             change = true;
         }
@@ -854,13 +856,13 @@ namespace MyDiplomProject
             switch (id_post)
             {
                 // Протокол осмотра местности, жилища, иного помещения
-                case "1": this.Text = "Протокол осмотра местности, жилища, иного помещения"; break;
+                case "1": this.Text = "Постановление о производстве осмотра местности, жилища, иного помещения"; break;
 
                 // Протокол личного обыска
-                case "2": this.Text = "Протокол личного обыска"; break;
+                case "2": this.Text = "Постановление о производстве личного обыска"; break;
 
                 // Протокол обыска (выемки)
-                case "5": this.Text = "Протокол обыска (выемки)"; break;
+                case "5": this.Text = "Постановление о производстве обыска (выемки)"; break;
             }
             change = false;
         }
@@ -982,6 +984,220 @@ namespace MyDiplomProject
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             FileChange();
+        }
+
+        private string loadTextFromOtherTableOnId(string STable_, string[] DBSHeader_, string id)
+        {
+            string rezult = "";
+            try
+            {
+                MySqlDataAdapter da;
+                MySqlDataReader dr;
+                string sql;
+                sql = "select ";
+                for (int j = 1; j < DBSHeader_.Length; j++)
+                {
+                    if (j == 1)
+                        sql += DBSHeader_[j];
+                    else
+                        sql += ", " + DBSHeader_[j];
+                }
+                // генерация sql комманды
+                sql += " from " + STable_ + " where " + DBSHeader_[0] + " = " + id;
+                //получение комманды и коннекта
+                cmd = new MySqlCommand(sql, mycon);
+                //вополнение запроса
+                cmd.ExecuteNonQuery();
+                da = new MySqlDataAdapter(cmd);
+                //получение выборки
+                dr = cmd.ExecuteReader();
+                // заполнения поля
+                if (dr.Read())
+                    rezult = dr[0].ToString();
+                else
+                    rezult = "";
+                dr.Close();
+                
+            }
+            catch
+            { }
+            return rezult;
+        }
+
+        private void экспортироватьВWordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                XWPFDocument doc = new XWPFDocument();
+                doc.Document.body = new NPOI.OpenXmlFormats.Wordprocessing.CT_Body();
+                doc.Document.body.sectPr = new NPOI.OpenXmlFormats.Wordprocessing.CT_SectPr();
+                doc.Document.body.sectPr.pgBorders = new NPOI.OpenXmlFormats.Wordprocessing.CT_PageBorders();
+
+                doc.Document.body.sectPr.pgBorders.left = new NPOI.OpenXmlFormats.Wordprocessing.CT_Border();
+                doc.Document.body.sectPr.pgBorders.left.space = 71;
+
+                doc.Document.body.sectPr.pgBorders.right = new NPOI.OpenXmlFormats.Wordprocessing.CT_Border();
+                doc.Document.body.sectPr.pgBorders.right.space = 28;
+
+                doc.Document.body.sectPr.pgBorders.top = new NPOI.OpenXmlFormats.Wordprocessing.CT_Border();
+                doc.Document.body.sectPr.pgBorders.top.space = 71;
+
+                doc.Document.body.sectPr.pgBorders.bottom = new NPOI.OpenXmlFormats.Wordprocessing.CT_Border();
+                doc.Document.body.sectPr.pgBorders.bottom.space = 71;
+
+
+                #region заголовок
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.CENTER;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.SetBold(true);
+                    r0.FontSize = 16;
+                    r0.SetText("ПОСТАНОВЛЕНИЕ\n");
+                    r0.FontSize = 14;
+                    switch (id_post)
+                    {
+                        // Протокол осмотра местности, жилища, иного помещения
+                        case "1": r0.SetText("о производстве осмотра жилища\nв случаях, не терпящих отлагательства\n"); break;
+
+                        // Протокол личного обыска
+                        case "2": r0.SetText("о производстве личного обыска подозреваемого (обвиняемого)\nв случаях, не терпящих отлагательства\n"); break;
+
+                        // Протокол обыска (выемки)
+                        case "5": r0.SetText("о производстве обыска (выемки) в жилище\nв случаях, не терпящих отлагательства\n"); break;
+                    }
+
+                }
+                #endregion
+
+                #region город, дата
+                {
+                    XWPFTable table1 = doc.CreateTable(2, 3);
+                    #region размер столбцов
+                    {
+                        table1.SetColumnWidth(0, 4000);
+                        table1.SetColumnWidth(1, 3000);
+                        table1.SetColumnWidth(2, 3000);
+                    }
+                    #endregion
+
+                    #region заполнение таблицы
+                    {
+                        #region [0,0] город
+                        {
+                            table1.GetRow(0).GetCell(0).SetBorderBottom(XWPFTable.XWPFBorderType.THICK, 3, 0, "000000");
+                            XWPFTableCell c0 = table1.GetRow(0).GetCell(0);
+                            XWPFParagraph p = c0.AddParagraph();   
+                            p.Alignment = ParagraphAlignment.CENTER;
+                            XWPFRun r0 = p.CreateRun();
+                            r0.SetText("г." + textBox1.Text);
+                        }
+                        #endregion
+
+                        #region [0,2]   дата
+                        {
+                            table1.GetRow(0).GetCell(2).SetBorderBottom(XWPFTable.XWPFBorderType.THICK, 0, 0, "000000");
+                            XWPFTableCell c0 = table1.GetRow(0).GetCell(2);
+                            XWPFParagraph p = c0.AddParagraph();   //don't use doc.CreateParagraph
+                            p.Alignment = ParagraphAlignment.CENTER;
+                            XWPFRun r0 = p.CreateRun();
+                            r0.SetText(dateTimePicker1.Value.Date.ToLongDateString());
+                        }
+                        #endregion
+
+                        #region [1,0]
+                        {
+                            XWPFTableCell c3 = table1.GetRow(1).GetCell(0);
+                            XWPFParagraph p = c3.AddParagraph();   //don't use doc.CreateParagraph
+                            p.Alignment = ParagraphAlignment.CENTER;
+                            XWPFRun r3 = p.CreateRun();
+                            r3.FontSize = 9;
+                            r3.SetText("(место составления)");
+                            r3.IsItalic = true;
+                        }
+                        #endregion
+                    }
+                    #endregion
+                }
+                #endregion
+
+                #region следователь
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.LEFT;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.SetUnderline(UnderlinePatterns.Single);
+                    r0.FontSize = 12;
+
+                    //должность
+                    r0.SetText("\n" + loadTextFromOtherTableOnId(STable3, DBSHeader3, loadTextFromOtherTableOnId(STable1, new string[] { "pk_polise", "pk_dolgnost" }, textBox4.Text)));
+                    r0.SetText(", ");
+
+                    //звание
+                    r0.SetText(loadTextFromOtherTableOnId("spravochnik_zvanii", new string[] { "pk_zvanie", "nazvanie" }, loadTextFromOtherTableOnId(STable1, new string[] { "pk_polise", "pk_dolgnost" }, textBox4.Text)));
+                    r0.SetText(", ");
+
+                    //фио
+                    r0.SetText(textBox3.Text);
+
+                    r0.SetText(",      \nрассмотрев материалы уголовного дела №" + textBox5.Text + ",");
+
+                }
+                #endregion
+
+                #region Установил
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.CENTER;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.SetBold(true);
+                    r0.FontSize = 12;
+                    r0.SetText("\nУ С Т А Н О В И Л :\n");
+                }
+                #endregion
+
+                #region что установил
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.LEFT;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.SetUnderline(UnderlinePatterns.Single);
+                    r0.FontSize = 12;
+
+                    //должность
+                    r0.SetText("\n" +textBox6.Text);
+                    r0.SetText(", ");
+
+
+                }
+                #endregion
+
+                saveFileDialog1.ShowDialog();
+
+                if (saveFileDialog1.FileName != "")
+                {
+                    FileStream out1 = new FileStream(saveFileDialog1.FileName, FileMode.Create);
+                    doc.Write(out1);
+                    out1.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
     }
 }
