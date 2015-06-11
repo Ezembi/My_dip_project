@@ -921,7 +921,12 @@ namespace MyDiplomProject
                         sql += "NULL, ";                                                                                //pk_postanov
                     else
                         sql += "'" + pk_postanov + "', ";
-                    sql += "'" + PK_Dela + "', ";                                                                         //PK_Dela
+
+                    if (PK_Dela == "")
+                        sql += "NULL, ";                                                                                //PK_Dela
+                    else
+                        sql += "'" + PK_Dela + "', ";
+
                     sql += "'" + textBox10.Text + "'";
 
 
@@ -1003,7 +1008,12 @@ namespace MyDiplomProject
                         sql += DBHeader[21] + " = NULL, ";                                                                                //pk_postanov
                     else
                         sql += DBHeader[21] + " = '" + pk_postanov + "', ";
-                    sql += DBHeader[22] + " = '" + PK_Dela + "', ";                                                                         //PK_Dela
+
+                    if (PK_Dela == "")
+                        sql += DBHeader[22] + " = NULL, ";                                                                                //PK_Dela
+                    else
+                        sql += DBHeader[22] + " = '" + PK_Dela + "', ";
+
                     sql += DBHeader[23] + " = '" + textBox10.Text + "'"; 
 
                     sql += " where pk_protokol = " + pk_protokol;

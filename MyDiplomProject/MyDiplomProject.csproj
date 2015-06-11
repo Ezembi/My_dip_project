@@ -76,6 +76,12 @@
     <Compile Include="CriminalAffair.Designer.cs">
       <DependentUpon>CriminalAffair.cs</DependentUpon>
     </Compile>
+    <Compile Include="DirectoriesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectoriesForm.Designer.cs">
+      <DependentUpon>DirectoriesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,12 @@
     </Compile>
     <Compile Include="Resolution.Designer.cs">
       <DependentUpon>Resolution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectProtocol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectProtocol.Designer.cs">
+      <DependentUpon>SelectProtocol.cs</DependentUpon>
     </Compile>
     <Compile Include="Справочники\Directories.cs">
       <SubType>Form</SubType>
@@ -131,6 +143,9 @@
     <EmbeddedResource Include="CriminalAffair.resx">
       <DependentUpon>CriminalAffair.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DirectoriesForm.resx">
+      <DependentUpon>DirectoriesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resolution.resx">
       <DependentUpon>Resolution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectProtocol.resx">
+      <DependentUpon>SelectProtocol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Справочники\Directories.resx">
       <DependentUpon>Directories.cs</DependentUpon>

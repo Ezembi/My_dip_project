@@ -84,21 +84,25 @@ namespace MyDiplomProject
             }
 
             this.Visible = false;
-            Form1 f = new Form1(User, Password, Database, Ip, "Материалы проверки / уголовные дела", "delo", new string[] { "Номер материала", "Дата поступления материала", "Номер дела", "Дата возбуждения дела", "Уполномоченный", "Подразделение" }, new string[] { "PK_Dela", "Nomer_materiala", "DateofM", "Nomer_dela", "DateofV", "pk_polise", "PK_Raiona" }, "polise", new string[] { "pk_polise", "surname", "Pname", "second_name" }, "spravochnik_pod", new string[] { "PK_Raiona", "Nazv" });
+            MainForm f = new MainForm(User, Password, Database, Ip);
             f.ShowDialog();
             this.Close();
         }
 
         private void CheckConnection_Load(object sender, EventArgs e)
         {
-            using (StreamReader r = File.OpenText("connection.cfg"))
+            try
             {
-                User = r.ReadLine();
-                Password = r.ReadLine();
-                Database = r.ReadLine();
-                Ip = r.ReadLine();
-                r.Close();
+                using (StreamReader r = File.OpenText("connection.cfg"))
+                {
+                    User = r.ReadLine();
+                    Password = r.ReadLine();
+                    Database = r.ReadLine();
+                    Ip = r.ReadLine();
+                    r.Close();
+                }
             }
+            catch { }
 
             try
             {
@@ -121,7 +125,7 @@ namespace MyDiplomProject
                 }
 
                 this.Visible = false;
-                Form1 f = new Form1(User, Password, Database, Ip, "Материалы проверки / уголовные дела", "delo", new string[] { "Номер материала", "Дата поступления материала", "Номер дела", "Дата возбуждения дела", "Уполномоченный", "Подразделение" }, new string[] { "PK_Dela", "Nomer_materiala", "DateofM", "Nomer_dela", "DateofV", "pk_polise", "PK_Raiona" }, "polise", new string[] { "pk_polise", "surname", "Pname", "second_name" }, "spravochnik_pod", new string[] { "PK_Raiona", "Nazv" });
+                MainForm f = new MainForm(User, Password, Database, Ip);
                 f.ShowDialog();
                 this.Close();
 

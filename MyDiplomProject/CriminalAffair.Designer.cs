@@ -68,6 +68,7 @@
             this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.прикрепитьСуществующийПротоколToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -406,7 +407,8 @@
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сохранитьToolStripMenuItem,
-            this.добавитьПротоколToolStripMenuItem});
+            this.добавитьПротоколToolStripMenuItem,
+            this.прикрепитьСуществующийПротоколToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
@@ -414,7 +416,7 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(314, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(498, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
@@ -427,7 +429,7 @@
             this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem,
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem});
             this.добавитьПротоколToolStripMenuItem.Name = "добавитьПротоколToolStripMenuItem";
-            this.добавитьПротоколToolStripMenuItem.Size = new System.Drawing.Size(314, 22);
+            this.добавитьПротоколToolStripMenuItem.Size = new System.Drawing.Size(498, 22);
             this.добавитьПротоколToolStripMenuItem.Text = "Сохранить изменения и добавить протокол";
             // 
             // протоколОсмотраМетаПроисшествияToolStripMenuItem
@@ -464,6 +466,13 @@
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Text = "Протокол осмотра местности, жилища, иного помещения + постановление";
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Click += new System.EventHandler(this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem_Click);
+            // 
+            // прикрепитьСуществующийПротоколToolStripMenuItem
+            // 
+            this.прикрепитьСуществующийПротоколToolStripMenuItem.Name = "прикрепитьСуществующийПротоколToolStripMenuItem";
+            this.прикрепитьСуществующийПротоколToolStripMenuItem.Size = new System.Drawing.Size(498, 22);
+            this.прикрепитьСуществующийПротоколToolStripMenuItem.Text = "Сохранить изменения и прикрепить существующий протокол к данноу делу";
+            this.прикрепитьСуществующийПротоколToolStripMenuItem.Click += new System.EventHandler(this.прикрепитьСуществующийПротоколToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
@@ -646,5 +655,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.ToolStripMenuItem прикрепитьСуществующийПротоколToolStripMenuItem;
     }
 }

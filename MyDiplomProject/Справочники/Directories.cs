@@ -298,39 +298,6 @@ namespace MyDiplomProject
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*button1.Enabled = false;
-
-            if (MessageBox.Show("Удалть?", "Удаление", MessageBoxButtons.YesNo).ToString() == "Yes")
-            {
-                cmd.CommandText = "SELECT * FROM SPRAVOCHNIK_DOLGNOSTNIX_LIC, POLISE WHERE POLISE.PK_DOLGNOSTOE_LICO = SPRAVOCHNIK_DOLGNOSTNIX_LIC.PK_DOLGNOSTOE_LICO AND SPRAVOCHNIK_DOLGNOSTNIX_LIC.NAZVANIE = '" + oldValue + "'";
-                dr = cmd.ExecuteReader();
-                if (!dr.Read())
-                {
-                    cmd.CommandText = " DELETE FROM SPRAVOCHNIK_DOLGNOSTNIX_LIC WHERE NAZVANIE = '" + oldValue + "'";
-                    cmd.ExecuteNonQuery();
-
-                    dataGridView1.Rows.Clear();
-
-                    cmd.CommandText = "SELECT NAZVANIE from SPRAVOCHNIK_DOLGNOSTNIX_LIC";
-                    dr = cmd.ExecuteReader();
-                    int i = 0;
-                    Lock = true;
-                    while (dr.Read())
-                    {
-                        dataGridView1.Rows.Add();
-                        dataGridView1.Rows[i].Cells[0].Value = dr[0].ToString();
-                        i++;
-                    }
-                    items = dataGridView1.Rows.Count;
-                    Lock = false;
-                }
-                else
-                    MessageBox.Show("Необходимо удалить или изменить всех уполномоченных с данным должностным лицом!", "Удаление данного должностного лица невозможно!");
-            }*/
-        }
-
         private void AddDojnost_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 32 && e.KeyChar != 8 && (e.KeyChar < 48 || e.KeyChar > 57) && (e.KeyChar < 65 || e.KeyChar > 90) && (e.KeyChar < 97 || e.KeyChar > 122) && (e.KeyChar < 'А' || e.KeyChar > 'Я') && (e.KeyChar < 'а' || e.KeyChar > 'я') && e.KeyChar != 'ё' && e.KeyChar != 'Ё' && e.KeyChar != 17 && e.KeyChar != '.' && e.KeyChar != ',' && e.KeyChar != 3 && e.KeyChar != 22 && e.KeyChar != 26)

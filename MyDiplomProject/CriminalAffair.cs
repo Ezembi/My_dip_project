@@ -856,16 +856,20 @@ namespace MyDiplomProject
         private void протоколОсмотраМетаПроисшествияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveData();
+            this.Visible = false;
             Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, "1", "", "");
             f.ShowDialog();
+            this.Visible = true;
             LoadData();
         }
 
         private void протоколОсмотраТрупаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveData();
+            this.Visible = false;
             Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, "2", "", "");
             f.ShowDialog();
+            this.Visible = true;
             LoadData();
         }
 
@@ -893,9 +897,22 @@ namespace MyDiplomProject
 
             if (e.ColumnIndex == 6 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
             {
+                this.Visible = false;
                 Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 f.ShowDialog();
+                this.Visible = true;
             }
+            LoadTable();
+        }
+
+        private void прикрепитьСуществующийПротоколToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveData();
+            this.Visible = false;
+            SelectProtocol sp = new SelectProtocol(User, Password, Database, Ip, PK_Dela);
+            sp.ShowDialog();
+            this.Visible = true;
+            LoadTable();
         }
     }
 }

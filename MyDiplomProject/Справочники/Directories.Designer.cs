@@ -283,6 +283,7 @@
             this.Controls.Add(this.dataGridView1);
             this.KeyPreview = true;
             this.Name = "AddDojnost";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справочник";
             this.Load += new System.EventHandler(this.AddDojnost_Load);
             this.Shown += new System.EventHandler(this.AddDojnost_Shown);
