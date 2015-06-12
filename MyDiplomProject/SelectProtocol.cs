@@ -29,18 +29,21 @@ namespace MyDiplomProject
         string STable3;      // ТАБЛИЦА2 БАЗЫ ДАННЫХ для сопудствующей информации (протокол)
         string[] DBSHeader3; // название полей в таблице2 для sql запросов, для сопудствующей информации
         int count = 0;      // количество записей в таблице БД
+        bool isNull;        // для отображения столбца Выбрать, для прикрепление протокола к делу
+        int lastIndex = 0;  // для корректного постраничного отображения
 
         public SelectProtocol()
         {
             InitializeComponent();
         }
 
-        public SelectProtocol(string _user, string _pass, string _database, string _ip, string _PK_Dela)
+        public SelectProtocol(string _user, string _pass, string _database, string _ip, string _PK_Dela, bool _isNull)
         {
             User = _user;
             Password = _pass;
             Database = _database;
             Ip = _ip;
+            isNull = _isNull;
             STable1 = "polise";
             DBSHeader1 = new string[] { "pk_polise", "surname", "Pname", "second_name" };
             STable3 = "protokol";
@@ -60,10 +63,7 @@ namespace MyDiplomProject
 
                 //открытие подключения
                 mycon.Open();
-                if (PK_Dela == "")
-                    this.Text = "Уголовное дело / материал проверки: Новый документ";
-                else
-                    this.Text = "Уголовное дело / материал проверки";
+                comboBox2.SelectedIndex = 0;
 
                 if (mycon.State != ConnectionState.Open)
                 {
@@ -93,11 +93,21 @@ namespace MyDiplomProject
                     //генерация sql запроса, для подсчёта кол-ва элементов в БД
                     string sql;
                     sql = "";
-                    sql += "select * from " + STable3 + " where PK_Dela is null";
-                    if(textBox2.Text != "")
-                        sql += " and pk_polise = " + textBox2.Text;
+                    sql += "select * from " + STable3 + " where ";
 
-                    sql += " and mesto_peibitiya like '%" + textBox3.Text + "%' ";
+                    if(isNull)
+                        sql += "PK_Dela is null";
+
+                    if(textBox2.Text != "")
+                        if (isNull)
+                            sql += " and pk_polise = " + textBox2.Text;
+                        else
+                            sql += " pk_polise = " + textBox2.Text + " and ";
+
+                    if (isNull)
+                        sql += " and ";
+
+                    sql += " mesto_peibitiya like '%" + textBox3.Text + "%' ";
 
                     if(comboBox1.SelectedIndex != -1)
                         sql += " and id_prot = " + (comboBox1.SelectedIndex + 1).ToString();
@@ -120,16 +130,26 @@ namespace MyDiplomProject
 
                     //генерация sql запроса, для отображения данных из БД на форму
                     sql = "";
-                    sql += "select * from " + STable3 + " where PK_Dela is null";
-                    if (textBox2.Text != "")
-                        sql += " and pk_polise = " + textBox2.Text;
+                    sql += "select * from " + STable3 + " where ";
 
-                    sql += " and mesto_peibitiya like '%" + textBox3.Text + "%' ";
+                    if (isNull)
+                        sql += "PK_Dela is null";
+
+                    if (textBox2.Text != "")
+                        if (isNull)
+                            sql += " and pk_polise = " + textBox2.Text;
+                        else
+                            sql += " pk_polise = " + textBox2.Text + " and ";
+
+                    if (isNull)
+                        sql += " and ";
+
+                    sql += " mesto_peibitiya like '%" + textBox3.Text + "%' ";
 
                     if (comboBox1.SelectedIndex != -1)
-                        sql += " and id_prot = " + (comboBox1.SelectedIndex + 1).ToString();
+                        sql += " and id_prot = " + (comboBox1.SelectedIndex + 1).ToString() + " ";
 
-                    // sql += "limit " + lastIndex.ToString() + ", " + comboBox1.SelectedItem.ToString();
+                     sql += "limit " + lastIndex.ToString() + ", " + comboBox2.SelectedItem.ToString();
 
                     cmd = new MySqlCommand(sql, mycon);
 
@@ -182,9 +202,10 @@ namespace MyDiplomProject
 
                         dataGridView1.Rows[i].Cells[5].Value = dr[4].ToString();           // место прибытия
                         dataGridView1.Rows[i].Cells[6].Value = "Выбрать";           // Выбор
+                        dataGridView1.Rows[i].Cells[7].Value = "Открыть";           // Выбор
 
-                        dataGridView1.Rows[i].Cells[7].Value = dr[21].ToString();    // pk_postanov (постановление)
-                        dataGridView1.Rows[i].Cells[8].Value = dr[7].ToString();    // тип ротокола
+                        dataGridView1.Rows[i].Cells[8].Value = dr[21].ToString();    // pk_postanov (постановление)
+                        dataGridView1.Rows[i].Cells[9].Value = dr[7].ToString();    // тип ротокола
 
                         i++;
                         toolStripProgressBar1.Value = (i * 100) / count;
@@ -235,6 +256,7 @@ namespace MyDiplomProject
                     MessageBox.Show("Нет подключениея к базе данных!");
                 Lock = false;
                 dataGridView1.Enabled = true;
+                CheackButton();
             }
             catch (Exception e)
             {
@@ -264,10 +286,21 @@ namespace MyDiplomProject
                 cmd.ExecuteNonQuery();
                 LoadTable();
             }
+
+            if (e.ColumnIndex == 7 && e.RowIndex < dataGridView1.Rows.Count - 1 && e.RowIndex != -1)
+            {
+                this.Visible = false;
+                Protocol f = new Protocol(User, Password, Database, Ip, PK_Dela, dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                f.ShowDialog();
+                this.Visible = true;
+            }
+            LoadTable();
         }
 
         private void SelectProtocol_Shown(object sender, EventArgs e)
         {
+            if (isNull)
+                this.Column5.Visible = true;
             LoadTable();
         }
 
@@ -315,6 +348,55 @@ namespace MyDiplomProject
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             LoadTable();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            lastIndex += Convert.ToInt32(comboBox2.SelectedItem);
+            if (count - lastIndex < 0)
+                lastIndex = count - Convert.ToInt32(comboBox2.SelectedItem);
+            LoadTable();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            lastIndex = count - Convert.ToInt32(comboBox2.SelectedItem);
+            LoadTable();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            lastIndex -= Convert.ToInt32(comboBox2.SelectedItem);
+            if (lastIndex <= 0)
+                lastIndex = 0;
+
+            LoadTable();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            lastIndex = 0;
+            LoadTable();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CheackButton();
+            LoadTable();
+        }
+
+        public void CheackButton()
+        {
+            if (lastIndex <= 0)
+                button3.Enabled = button4.Enabled = false;
+            else
+                button3.Enabled = button4.Enabled = true;
+
+            if (count - (lastIndex + Convert.ToInt32(comboBox2.SelectedItem)) <= 0)
+                button5.Enabled = button6.Enabled = false;
+            else
+                button5.Enabled = button6.Enabled = true;
+
         }
     }
 }

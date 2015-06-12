@@ -909,7 +909,7 @@ namespace MyDiplomProject
         {
             SaveData();
             this.Visible = false;
-            SelectProtocol sp = new SelectProtocol(User, Password, Database, Ip, PK_Dela);
+            SelectProtocol sp = new SelectProtocol(User, Password, Database, Ip, PK_Dela,true);
             sp.ShowDialog();
             this.Visible = true;
             LoadTable();

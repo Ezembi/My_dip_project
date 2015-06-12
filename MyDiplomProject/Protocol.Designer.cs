@@ -31,6 +31,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.экспортироватьВWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -174,6 +175,7 @@
             this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column19 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label50 = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -208,7 +210,8 @@
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.сохранитьToolStripMenuItem});
+            this.сохранитьToolStripMenuItem,
+            this.экспортироватьВWordToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
@@ -216,9 +219,16 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
+            // экспортироватьВWordToolStripMenuItem
+            // 
+            this.экспортироватьВWordToolStripMenuItem.Name = "экспортироватьВWordToolStripMenuItem";
+            this.экспортироватьВWordToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.экспортироватьВWordToolStripMenuItem.Text = "Экспортировать в Word";
+            this.экспортироватьВWordToolStripMenuItem.Click += new System.EventHandler(this.экспортироватьВWordToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
@@ -1675,6 +1685,10 @@
             this.label50.TabIndex = 0;
             this.label50.Text = "В ходе осмотра проводилась";
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Microsoft Word | *.docx";
+            // 
             // Protocol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1876,5 +1890,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
         private System.Windows.Forms.DataGridViewButtonColumn Column19;
         private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.ToolStripMenuItem экспортироватьВWordToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

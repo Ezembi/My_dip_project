@@ -151,5 +151,18 @@ namespace MyDiplomProject
             df.ShowDialog();
             this.Visible = true;
         }
+
+        private void button9_MouseEnter(object sender, EventArgs e)
+        {
+            textBox1.Text = "Добавление / просмотр / редактирование / удаление информации в протоколах.";
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            SelectProtocol sp = new SelectProtocol(User, Password, Database, Ip, "", false);
+            sp.ShowDialog();
+            this.Visible = true;
+        }
     }
 }

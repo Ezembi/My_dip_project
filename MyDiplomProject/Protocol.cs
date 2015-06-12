@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using MySql;
+using NPOI.XWPF.UserModel;
+using System.IO;
 
 namespace MyDiplomProject
 {
@@ -1393,7 +1395,7 @@ namespace MyDiplomProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            this.Visible = false;
             try
             {
                 MySqlDataAdapter da;
@@ -1425,6 +1427,7 @@ namespace MyDiplomProject
                 Resolution r = new Resolution(User, Password, Database, Ip, PK_Dela, id_psot, pk_postanov, pk_protokol);
                 r.ShowDialog();
             }
+            this.Visible = true;
 
             
 
@@ -1646,6 +1649,994 @@ namespace MyDiplomProject
         private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             FileChange();
+        }
+
+        private void экспортироватьВWordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                XWPFDocument doc = new XWPFDocument();
+                doc.Document.body = new NPOI.OpenXmlFormats.Wordprocessing.CT_Body();
+                doc.Document.body.sectPr = new NPOI.OpenXmlFormats.Wordprocessing.CT_SectPr();
+                doc.Document.body.sectPr.pgBorders = new NPOI.OpenXmlFormats.Wordprocessing.CT_PageBorders();
+
+                doc.Document.body.sectPr.pgBorders.left = new NPOI.OpenXmlFormats.Wordprocessing.CT_Border();
+                doc.Document.body.sectPr.pgBorders.left.space = 71;
+
+                doc.Document.body.sectPr.pgBorders.right = new NPOI.OpenXmlFormats.Wordprocessing.CT_Border();
+                doc.Document.body.sectPr.pgBorders.right.space = 28;
+
+                doc.Document.body.sectPr.pgBorders.top = new NPOI.OpenXmlFormats.Wordprocessing.CT_Border();
+                doc.Document.body.sectPr.pgBorders.top.space = 71;
+
+                doc.Document.body.sectPr.pgBorders.bottom = new NPOI.OpenXmlFormats.Wordprocessing.CT_Border();
+                doc.Document.body.sectPr.pgBorders.bottom.space = 71;
+
+                #region заголовок
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.CENTER;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.SetBold(true);
+                    r0.FontSize = 16;
+                    r0.SetText("ПРОТОКОЛ\n");
+                    r0.FontSize = 14;
+                    switch (id_prot)
+                    {
+                        // Протокол осмотра местности, жилища, иного помещения
+                        case "1": r0.SetText("осмотра мета происшествия\n"); break;
+
+                        // Протокол осмотра трупа
+                        case "2": r0.SetText("осмотра трупа\n"); break;
+
+                        // Протокол личного обыска
+                        case "3": r0.SetText("личного обыска\n"); break;
+
+                        // Протокол осмотра местности, жилища, иного помещения
+                        case "4": r0.SetText("осмотра местности, жилища, иного помещения\n"); break;
+
+                        // Протокол обыска (выемки)
+                        case "5": r0.SetText("обыска (выемки)\n"); break;
+                    }
+                }
+                #endregion
+
+                #region город, дата
+                {
+                    XWPFTable table1 = doc.CreateTable(2, 3);
+                    #region размер столбцов
+                    {
+                        table1.SetColumnWidth(0, 4000);
+                        table1.SetColumnWidth(1, 3000);
+                        table1.SetColumnWidth(2, 3000);
+                    }
+                    #endregion
+
+                    #region заполнение таблицы
+                    {
+                        #region [0,0] город
+                        {
+                            table1.GetRow(0).GetCell(0).SetBorderBottom(XWPFTable.XWPFBorderType.THICK, 3, 0, "000000");
+                            XWPFTableCell c0 = table1.GetRow(0).GetCell(0);
+                            XWPFParagraph p = c0.AddParagraph();
+                            p.Alignment = ParagraphAlignment.CENTER;
+                            XWPFRun r0 = p.CreateRun();
+                            r0.SetText("г." + textBox1.Text);
+                        }
+                        #endregion
+
+                        #region [0,2]   дата
+                        {
+                            table1.GetRow(0).GetCell(2).SetBorderBottom(XWPFTable.XWPFBorderType.THICK, 0, 0, "000000");
+                            XWPFTableCell c0 = table1.GetRow(0).GetCell(2);
+                            XWPFParagraph p = c0.AddParagraph();   //don't use doc.CreateParagraph
+                            p.Alignment = ParagraphAlignment.CENTER;
+                            XWPFRun r0 = p.CreateRun();
+                            r0.SetText(dateTimePicker1.Value.Date.ToLongDateString());
+                        }
+                        #endregion
+
+                        #region [1,0]
+                        {
+                            XWPFTableCell c3 = table1.GetRow(1).GetCell(0);
+                            XWPFParagraph p = c3.AddParagraph();   //don't use doc.CreateParagraph
+                            p.Alignment = ParagraphAlignment.CENTER;
+                            XWPFRun r3 = p.CreateRun();
+                            r3.FontSize = 9;
+                            r3.SetText("(место составления)");
+                            r3.IsItalic = true;
+                        }
+                        #endregion
+                    }
+                    #endregion
+                }
+                #endregion
+
+                #region осмотр начат...
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.LEFT;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.FontSize = 12;
+                    r0.SetText("\n");
+                    r0.SetText("	Осмотр начат      в _");
+
+                    XWPFRun r1 = p0.CreateRun();
+                    r1.FontSize = 12;
+                    r1.SetUnderline(UnderlinePatterns.Single);
+                    r1.SetText(dateTimePicker2.Value.Hour.ToString());
+
+                    XWPFRun r2 = p0.CreateRun();
+                    r2.FontSize = 12;
+                    r2.SetText("_ ч _");
+
+                    XWPFRun r3 = p0.CreateRun();
+                    r3.FontSize = 12;
+                    r3.SetUnderline(UnderlinePatterns.Single);
+                    r3.SetText(dateTimePicker2.Value.Minute.ToString());
+
+                    XWPFRun r4 = p0.CreateRun();
+                    r4.FontSize = 12;
+                    r4.SetText("_ мин");
+                }
+                #endregion
+
+                #region осмотр окончен...
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.LEFT;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.FontSize = 12;
+                    r0.SetText("	Осмотр окончен в _");
+
+                    XWPFRun r1 = p0.CreateRun();
+                    r1.FontSize = 12;
+                    r1.SetUnderline(UnderlinePatterns.Single);
+                    r1.SetText(dateTimePicker3.Value.Hour.ToString());
+
+                    XWPFRun r2 = p0.CreateRun();
+                    r2.FontSize = 12;
+                    r2.SetText("_ ч _");
+
+                    XWPFRun r3 = p0.CreateRun();
+                    r3.FontSize = 12;
+                    r3.SetUnderline(UnderlinePatterns.Single);
+                    r3.SetText(dateTimePicker3.Value.Minute.ToString());
+
+                    XWPFRun r4 = p0.CreateRun();
+                    r4.FontSize = 12;
+                    r4.SetText("_ мин");
+                }
+                #endregion
+
+                #region следователь
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.BOTH;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.SetUnderline(UnderlinePatterns.Single);
+                    r0.FontSize = 12;
+
+                    //должность
+                    r0.SetText("\n" + loadTextFromOtherTableOnId("spravochnik_dolgnostei", new string[] { "pk_dolgnost", "nazvanie", "id_number" }, loadTextFromOtherTableOnId(STable7, new string[] { "pk_polise", "pk_dolgnost" }, textBox11.Text)));
+                    r0.SetText(", ");
+
+                    //звание
+                    r0.SetText(loadTextFromOtherTableOnId("spravochnik_zvanii", new string[] { "pk_zvanie", "nazvanie" }, loadTextFromOtherTableOnId(STable7, new string[] { "pk_polise", "pk_zvanie" }, textBox11.Text)));
+                    r0.SetText(", ");
+
+                    //фио
+                    r0.SetText(textBox12.Text);
+                    r0.SetText(", ");
+                    r0.SetText("  ");
+
+                    for (int i = 0; i < 2; i++)
+                        r0.SetText(" \n");
+                }
+                #endregion
+
+                if (id_prot == "1" || id_prot == "2" || id_prot == "3")
+                {
+                    if (id_prot == "1" || id_prot == "2")
+                    {
+                        #region получив сообщение...
+                        {
+                            XWPFParagraph p0 = doc.CreateParagraph();
+                            p0.BorderLeft = Borders.NONE;
+                            p0.Alignment = ParagraphAlignment.BOTH;
+                            p0.VerticalAlignment = TextAlignment.TOP;
+                            p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                            XWPFRun r0 = p0.CreateRun();
+                            r0.FontSize = 12;
+                            r0.SetText("получив сообщение ");
+
+                            XWPFRun r1 = p0.CreateRun();
+                            r1.FontSize = 12;
+                            r1.SetUnderline(UnderlinePatterns.Single);
+                            r1.SetText(textBox3.Text);
+                            for (int i = 0; i < 40; i++)
+                                r1.SetText("  ");
+                            for (int i = 0; i < 2; i++)
+                                r1.SetText(" \n");
+
+                        }
+                        #endregion
+                    }
+
+                    #region прибыл...
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.BOTH;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("прибыл ");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.FontSize = 12;
+                        r1.SetUnderline(UnderlinePatterns.Single);
+                        r1.SetText(textBox4.Text);
+                        for (int i = 0; i < 40; i++)
+                            r1.SetText("  ");
+                        for (int i = 0; i < 2; i++)
+                            r1.SetText(" \n");
+
+                    }
+                    #endregion
+                }
+
+                #region и в присутствии понятых:...
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.LEFT;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.FontSize = 12;
+                    r0.SetText("и в присутствии понятых:");
+                }
+                #endregion
+
+                #region понятой 1...
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.BOTH;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.FontSize = 12;
+                    r0.SetText("	1. ");
+
+                    XWPFRun r1 = p0.CreateRun();
+                    r1.FontSize = 12;
+                    r1.SetUnderline(UnderlinePatterns.Single);
+                    r1.SetText(textBox13.Text + " ");
+                    r1.SetText(textBox14.Text + " ");
+                    r1.SetText(textBox15.Text + " ");
+                    r1.SetText(textBox16.Text + " ");
+                    r1.SetText(textBox17.Text + " - ");
+                    r1.SetText(textBox18.Text + " ");
+                    for (int i = 0; i < 10; i++)
+                        r1.SetText("  ");
+                    for (int i = 0; i < 2; i++)
+                        r1.SetText(" \n");
+
+                }
+                #endregion
+
+                #region понятой 2...
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.BOTH;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.FontSize = 12;
+                    r0.SetText("	2. ");
+
+                    XWPFRun r1 = p0.CreateRun();
+                    r1.FontSize = 12;
+                    r1.SetUnderline(UnderlinePatterns.Single);
+                    r1.SetText(textBox24.Text + " ");
+                    r1.SetText(textBox23.Text + " ");
+                    r1.SetText(textBox22.Text + " ");
+                    r1.SetText(textBox21.Text + " ");
+                    r1.SetText(textBox20.Text + " - ");
+                    r1.SetText(textBox19.Text + " ");
+                    for (int i = 0; i < 10; i++)
+                        r1.SetText("  ");
+                    for (int i = 0; i < 2; i++)
+                        r1.SetText(" \n");
+
+                }
+                #endregion
+
+                if (id_prot == "3")
+                {
+                    #region с  участием  привлеченног...специалиста
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.BOTH;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("с  участием  привлеченного  к  участию  в  процессуальном  действии  в  качестве   специалиста ");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.FontSize = 12;
+                        r1.SetUnderline(UnderlinePatterns.Single);
+                        r1.SetText(textBox25.Text);
+                        r1.SetText(",");
+                        for (int i = 0; i < 40; i++)
+                            r1.SetText("  ");
+                        for (int i = 0; i < 2; i++)
+                            r1.SetText(" \n");
+                    }
+                    #endregion
+                }
+
+                #region с  участием...
+                {
+                    XWPFParagraph p0 = doc.CreateParagraph();
+                    p0.BorderLeft = Borders.NONE;
+                    p0.Alignment = ParagraphAlignment.BOTH;
+                    p0.VerticalAlignment = TextAlignment.TOP;
+                    p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                    XWPFRun r0 = p0.CreateRun();
+                    r0.FontSize = 12;
+                    if (id_prot == "3")
+                        r0.SetText("а также иных лиц ");
+                    else
+                        r0.SetText("с участием ");
+
+                    XWPFRun r1 = p0.CreateRun();
+                    r1.SetUnderline(UnderlinePatterns.Single);
+                    r1.FontSize = 12;
+
+                    for (int i = 0; i < dataGridView3.RowCount - 1; i++)
+                    {
+                        if (i != 0)
+                            r1.SetText(", ");
+                        r1.SetText(dataGridView3.Rows[i].Cells[1].Value.ToString() + " ");
+                        r1.SetText(dataGridView3.Rows[i].Cells[2].Value.ToString() + " ");
+                        r1.SetText(dataGridView3.Rows[i].Cells[3].Value.ToString() + " ");
+                        r1.SetText(dataGridView3.Rows[i].Cells[4].Value.ToString());
+
+                    }
+                    for (int i = 0; i < 10; i++)
+                        r1.SetText(" ");
+                    for (int i = 0; i < 2; i++)
+                        r1.SetText(" \n");
+
+                }
+                #endregion
+
+
+                if (id_prot == "1" || id_prot == "2")
+                {
+                    #region произвел осмотр...
+                    {
+                        if (id_prot == "1")
+                        {
+                            #region произвел осмотр чего
+                            {
+                                XWPFParagraph p0 = doc.CreateParagraph();
+                                p0.BorderLeft = Borders.NONE;
+                                p0.Alignment = ParagraphAlignment.BOTH;
+                                p0.VerticalAlignment = TextAlignment.TOP;
+                                p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                                XWPFRun r0 = p0.CreateRun();
+                                r0.FontSize = 12;
+                                r0.SetText("произвел осмотр ");
+
+                                XWPFRun r1 = p0.CreateRun();
+                                r1.FontSize = 12;
+                                r1.SetUnderline(UnderlinePatterns.Single);
+                                r1.SetText(textBox5.Text);
+                                r1.SetText(",");
+                                for (int i = 0; i < 40; i++)
+                                    r1.SetText("  ");
+                                for (int i = 0; i < 2; i++)
+                                    r1.SetText(" \n");
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            #region произвел осмотр трупа
+                            {
+                                XWPFParagraph p0 = doc.CreateParagraph();
+                                p0.BorderLeft = Borders.NONE;
+                                p0.Alignment = ParagraphAlignment.LEFT;
+                                p0.VerticalAlignment = TextAlignment.TOP;
+                                p0.SpacingLineRule = LineSpacingRule.AUTO;
+                                XWPFRun r0 = p0.CreateRun();
+                                r0.SetText("в соответствии со ст. 164, 177 и 178 УПК РФ произвел осмотр трупа.");
+                            }
+                            #endregion
+                        }
+                    }
+                    #endregion
+
+                    #region Перед началом осмотра участвующим...
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.LEFT;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("	Перед началом осмотра участвующим лицам разъяснены их права, ответственность, а также порядок производства осмотра");
+
+                        if (id_prot == "1")
+                            r0.SetText(" места происшествия.\n");
+                        else
+                            r0.SetText(" трупа.\n");
+                        r0.SetText("	Понятым, кроме того, до начала осмотра разъяснены их права, обязанности и ответственность, предусмотренные ст. 60 УПК РФ.");
+
+                    }
+                    #endregion
+
+                    #region подпись 1
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.RIGHT;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("\n______________________\n");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.FontSize = 9;
+                        r1.SetText("(подпись понятого)               ");
+                    }
+                    #endregion
+
+                    #region подпись 2
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.RIGHT;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("\n______________________\n");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.FontSize = 9;
+                        r1.SetText("(подпись понятого)               ");
+                    }
+                    #endregion
+
+                    #region эксперт
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.BOTH;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("\n");
+                        if (id_prot == "1")
+                            r0.SetText("Специалисту (эксперту) ");
+                        else
+                            r0.SetText("Судебно-медицинскому эксперту (врачу, специалисту) ");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.FontSize = 12;
+                        r1.SetUnderline(UnderlinePatterns.Single);
+                        r1.SetText(textBox25.Text);
+                        for (int i = 0; i < 5; i++)
+                            r1.SetText(" ");
+
+                        XWPFRun r3 = p0.CreateRun();
+                        r3.FontSize = 12;
+                        r3.SetText("\nразъяснены его права и обязанности, предусмотренные ст. 58 (57) УПК РФ.");
+                    }
+                    #endregion
+
+                    #region подпись эксперта
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.RIGHT;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("\n______________________\n");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.FontSize = 9;
+                        if (id_prot == "1")
+                            r1.SetText("(подпись специалиста (эксперта)  ");
+                        else
+                            r1.SetText("(подпись судебно-медицинского\nэксперта (врача, специалиста)");
+                    }
+                    #endregion
+
+                    #region подпись понятых
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.LEFT;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("\n______________________                                                                           ______________________\n");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.FontSize = 9;
+                        r1.SetText("   (подпись понятого)                                                                                                                                         (подпись понятого)");
+                    }
+                    #endregion
+
+                    #region Лица,    участвующие    в    следственном    действии,    были...
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.BOTH;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        if (id_prot == "1")
+                            r0.SetText("	Лица,    участвующие    в    следственном    действии,    были    заранее   предупреждены о применении при производстве следственного действия технических средств ");
+                        else
+                            r0.SetText("	Участвующим лицам также объявлено о применении технических средств ");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.SetUnderline(UnderlinePatterns.Single);
+                        r1.FontSize = 12;
+
+                        for (int i = 0; i < dataGridView1.RowCount - 1; i++)
+                        {
+                            if (i != 0)
+                                r1.SetText(", ");
+                            r1.SetText(dataGridView1.Rows[i].Cells[2].Value.ToString());
+
+                        }
+                        for (int i = 0; i < 10; i++)
+                            r1.SetText(" ");
+                        for (int i = 0; i < 2; i++)
+                            r1.SetText(" \n");
+
+                    }
+                    #endregion
+
+                    #region Осмотр производился в условиях...
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.BOTH;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("	Осмотр производился в условиях ");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.SetUnderline(UnderlinePatterns.Single);
+                        r1.FontSize = 12;
+                        if (id_prot != "1")
+                            r1.SetText(" температура воздуха: " + textBox35.Text + "C, погода: " + textBox6.Text + ", освещённость: " + textBox9.Text);
+                        else
+                            r1.SetText(" погода: " + textBox6.Text + ", освещённость: " + textBox9.Text);
+
+                        for (int i = 0; i < 10; i++)
+                            r1.SetText(" ");
+                        for (int i = 0; i < 2; i++)
+                            r1.SetText(" \n");
+
+                    }
+                    #endregion
+
+                    #region Осмотром установлено:...
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.BOTH;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("	Осмотром установлено: ");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.SetUnderline(UnderlinePatterns.Single);
+                        r1.FontSize = 12;
+                        r1.SetText(textBox10.Text);
+
+                        for (int i = 0; i < 10; i++)
+                            r1.SetText(" ");
+                        for (int i = 0; i < 2; i++)
+                            r1.SetText(" \n");
+
+                    }
+                    #endregion
+
+                    #region В ходе осмотра проводилась...
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.BOTH;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("	В ходе осмотра проводилась ");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.SetUnderline(UnderlinePatterns.Single);
+                        r1.FontSize = 12;
+
+                        for (int i = 0; i < dataGridView4.RowCount - 1; i++)
+                        {
+                            if (i != 0)
+                                r1.SetText(", ");
+                            r1.SetText(dataGridView4.Rows[i].Cells[1].Value.ToString());
+
+                        }
+                        for (int i = 0; i < 10; i++)
+                            r1.SetText(" ");
+                        for (int i = 0; i < 2; i++)
+                            r1.SetText(" \n");
+                    }
+                    #endregion
+
+                    #region При производстве следственного действия изъяты...
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.BOTH;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        r0.SetText("	При производстве следственного действия изъяты ");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.SetUnderline(UnderlinePatterns.Single);
+                        r1.FontSize = 12;
+
+                        for (int i = 0; i < dataGridView2.RowCount - 1; i++)
+                        {
+                            if (i != 0)
+                                r1.SetText("; ");
+                            r1.SetText("индивидуальные признаки: " + dataGridView2.Rows[i].Cells[1].Value.ToString() + ", ");
+                            r1.SetText("наименование: " + dataGridView2.Rows[i].Cells[2].Value.ToString() + ", ");
+                            r1.SetText("материал упаковки: " + dataGridView2.Rows[i].Cells[5].Value.ToString() + ", ");
+                            r1.SetText("способ упаковки: " + dataGridView2.Rows[i].Cells[6].Value.ToString());
+
+                        }
+                        for (int i = 0; i < 10; i++)
+                            r1.SetText(" ");
+                        for (int i = 0; i < 2; i++)
+                            r1.SetText(" \n");
+                    }
+                    #endregion
+
+                    #region Все  обнаруженное  и  изъятое...
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.LEFT;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        if (id_prot == "1")
+                            r0.SetText("	Все  обнаруженное  и  изъятое  при  производстве  следственного действия предъявлено понятым и другим участникам следственного действия.");
+                    }
+                    #endregion
+
+                    #region К протоколу прилагаются...
+                    {
+                        XWPFParagraph p0 = doc.CreateParagraph();
+                        p0.BorderLeft = Borders.NONE;
+                        p0.Alignment = ParagraphAlignment.BOTH;
+                        p0.VerticalAlignment = TextAlignment.TOP;
+                        p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                        XWPFRun r0 = p0.CreateRun();
+                        r0.FontSize = 12;
+                        if (id_prot == "1")
+                            r0.SetText("	К протоколу прилагаются ");
+                        else
+                            r0.SetText("	К протоколу осмотра трупа прилагаются ");
+
+                        XWPFRun r1 = p0.CreateRun();
+                        r1.SetUnderline(UnderlinePatterns.Single);
+                        r1.FontSize = 12;
+
+                        for (int i = 0; i < dataGridView5.RowCount - 1; i++)
+                        {
+                            if (i != 0)
+                                r1.SetText(", ");
+                            r1.SetText(dataGridView5.Rows[i].Cells[1].Value.ToString());
+                        }
+                        for (int i = 0; i < 10; i++)
+                            r1.SetText(" ");
+                        for (int i = 0; i < 2; i++)
+                            r1.SetText(" \n");
+                    }
+                    #endregion
+
+                    if (id_prot == "1")
+                    {
+                        #region Протокол  предъявлен для ознакомления...
+                        {
+                            XWPFParagraph p0 = doc.CreateParagraph();
+                            p0.BorderLeft = Borders.NONE;
+                            p0.Alignment = ParagraphAlignment.BOTH;
+                            p0.VerticalAlignment = TextAlignment.TOP;
+                            p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                            XWPFRun r0 = p0.CreateRun();
+                            r0.FontSize = 12;
+                            r0.SetText("	 Протокол        предъявлен      для      ознакомления      всем      лицам,        участвовавшим");
+                            r0.SetText("в следственном    действии.   При    этом    указанным    лицам    разъяснено    их   право  делать");
+                            r0.SetText("подлежащие   внесению  в   протокол   оговоренные  и   удостоверенные  подписями  этих    лиц");
+                            r0.SetText("замечания  о  его  дополнении и уточнении. Ознакомившись с протоколом путем ");
+
+                            XWPFRun r1 = p0.CreateRun();
+                            r1.SetUnderline(UnderlinePatterns.Single);
+                            r1.FontSize = 12;
+                            r1.SetText(textBox37.Text);
+                            for (int i = 0; i < 10; i++)
+                                r1.SetText(" ");
+                            for (int i = 0; i < 2; i++)
+                                r1.SetText(" \n");
+
+                            XWPFRun r2 = p0.CreateRun();
+                            r2.FontSize = 12;
+                            r2.SetText("\nучастники следственного действия замечания о его дополнении и уточнении ");
+
+                            XWPFRun r3 = p0.CreateRun();
+                            r3.SetUnderline(UnderlinePatterns.Single);
+                            r3.FontSize = 12;
+                            if(textBox27.Text != "")
+                                r3.SetText("сделали - " + textBox27.Text);
+                            else
+                                r3.SetText("не сделали");
+
+                            for (int i = 0; i < 10; i++)
+                                r3.SetText(" ");
+                            for (int i = 0; i < 2; i++)
+                                r3.SetText(" \n");
+                        }
+                        #endregion
+
+                        #region подпись понятые
+                        {
+                            XWPFParagraph p0 = doc.CreateParagraph();
+                            p0.BorderLeft = Borders.NONE;
+                            p0.Alignment = ParagraphAlignment.LEFT;
+                            p0.VerticalAlignment = TextAlignment.TOP;
+                            p0.SpacingLineRule = LineSpacingRule.AUTO;
+                            XWPFRun r0 = p0.CreateRun();
+                            r0.FontSize = 12;
+                            r0.SetText("Понятые                      ______________________                      ");
+
+                            XWPFRun r1 = p0.CreateRun();
+                            r1.SetUnderline(UnderlinePatterns.Single);
+                            r1.FontSize = 12;
+                            r1.SetText(textBox13.Text + " " + textBox14.Text + " " + textBox15.Text);
+
+                            XWPFRun r2 = p0.CreateRun();
+                            r2.FontSize = 9;
+                            r2.SetText("\n                                                                         (подпись)                                                         (Фамлия,Имя,Отчество)");
+
+                            XWPFRun r3 = p0.CreateRun();
+                            r3.FontSize = 12;
+                            r3.SetText("\n                                     ______________________                      ");
+
+                            XWPFRun r4 = p0.CreateRun();
+                            r4.SetUnderline(UnderlinePatterns.Single);
+                            r4.FontSize = 12;
+                            r4.SetText(textBox13.Text + " " + textBox14.Text + " " + textBox15.Text);
+
+                            XWPFRun r5 = p0.CreateRun();
+                            r5.FontSize = 9;
+                            r5.SetText("\n                                                                         (подпись)                                                         (Фамлия,Имя,Отчество)");
+                        }
+                        #endregion
+
+                        #region подпись эксперт
+                        {
+                            XWPFParagraph p0 = doc.CreateParagraph();
+                            p0.BorderLeft = Borders.NONE;
+                            p0.Alignment = ParagraphAlignment.LEFT;
+                            p0.VerticalAlignment = TextAlignment.TOP;
+                            p0.SpacingLineRule = LineSpacingRule.AUTO;
+                            XWPFRun r0 = p0.CreateRun();
+                            r0.FontSize = 12;
+                            r0.SetText("Специалист (эксперт)     ______________________                 ");
+
+                            XWPFRun r1 = p0.CreateRun();
+                            r1.SetUnderline(UnderlinePatterns.Single);
+                            r1.FontSize = 12;
+                            r1.SetText(textBox25.Text);
+
+                            XWPFRun r2 = p0.CreateRun();
+                            r2.FontSize = 9;
+                            r2.SetText("\n                                                                         (подпись)                                                         (Фамлия,Имя,Отчество)");
+                        }
+                        #endregion
+
+
+                        #region подпись понятые
+                        {
+                            XWPFParagraph p0 = doc.CreateParagraph();
+                            p0.BorderLeft = Borders.NONE;
+                            p0.Alignment = ParagraphAlignment.LEFT;
+                            p0.VerticalAlignment = TextAlignment.TOP;
+                            p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                            XWPFRun r0 = p0.CreateRun();
+                            r0.FontSize = 12;
+                            r0.SetText("Иные участвующие лица:    ________________                       ______________________");
+                            XWPFRun r2 = p0.CreateRun();
+                            r2.FontSize = 9;
+                            r2.SetText("\n                                                                         (подпись)                                                         (Фамлия,Имя,Отчество)");
+
+                            XWPFRun r3 = p0.CreateRun();
+                            r3.FontSize = 12;
+                            r3.SetText("\n                                                ________________                       ______________________");
+                            XWPFRun r4 = p0.CreateRun();
+                            r4.FontSize = 9;
+                            r4.SetText("\n                                                                         (подпись)                                                         (Фамлия,Имя,Отчество)");
+
+                            XWPFRun r5 = p0.CreateRun();
+                            r5.FontSize = 12;
+                            r5.SetText("\n                                                ________________                       ______________________");
+                            XWPFRun r6 = p0.CreateRun();
+                            r6.FontSize = 9;
+                            r6.SetText("\n                                                                         (подпись)                                                         (Фамлия,Имя,Отчество)");
+
+                            XWPFRun r7 = p0.CreateRun();
+                            r7.FontSize = 12;
+                            r7.SetText("\n                                                ________________                       ______________________");
+                            XWPFRun r8 = p0.CreateRun();
+                            r8.FontSize = 9;
+                            r8.SetText("\n                                                                         (подпись)                                                         (Фамлия,Имя,Отчество)");
+                        }
+                        #endregion
+
+                        #region Настоящий протокол...
+                        {
+                            XWPFParagraph p0 = doc.CreateParagraph();
+                            p0.BorderLeft = Borders.NONE;
+                            p0.Alignment = ParagraphAlignment.LEFT;
+                            p0.VerticalAlignment = TextAlignment.TOP;
+                            p0.SpacingLineRule = LineSpacingRule.AUTO;
+
+                            XWPFRun r0 = p0.CreateRun();
+                            r0.FontSize = 12;
+                            r0.SetText("	Настоящий протокол составлен в соответствии со ст. 166 (167) УПК РФ.");
+                        }
+                         #endregion
+
+                        #region Следователь (дознаватель)
+                        {
+                            XWPFParagraph p0 = doc.CreateParagraph();
+                            p0.BorderLeft = Borders.NONE;
+                            p0.Alignment = ParagraphAlignment.LEFT;
+                            p0.VerticalAlignment = TextAlignment.TOP;
+                            p0.SpacingLineRule = LineSpacingRule.AUTO;
+                            XWPFRun r0 = p0.CreateRun();
+                            r0.FontSize = 12;
+                            r0.SetText("Следователь (дознаватель)     ______________________                 ");
+
+                            XWPFRun r1 = p0.CreateRun();
+                            r1.SetUnderline(UnderlinePatterns.Single);
+                            r1.FontSize = 12;
+                            r1.SetText(textBox12.Text);
+
+                            XWPFRun r2 = p0.CreateRun();
+                            r2.FontSize = 9;
+                            r2.SetText("\n                                                                         (подпись)                                                         (Фамлия,Имя,Отчество)");
+                        }
+                        #endregion
+
+                    }
+
+                }
+
+
+                saveFileDialog1.ShowDialog();
+
+                if (saveFileDialog1.FileName != "")
+                {
+                    FileStream out1 = new FileStream(saveFileDialog1.FileName, FileMode.Create);
+                    doc.Write(out1);
+                    out1.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\nЗакройте все приложения, использующие этот файл и повторите попытку\nТакже можете сохранить файл под другил именем.", "Ошибка экспорта данных!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string loadTextFromOtherTableOnId(string STable_, string[] DBSHeader_, string id)
+        {
+            string rezult = "";
+            try
+            {
+                MySqlDataAdapter da;
+                MySqlDataReader dr;
+                string sql;
+                sql = "select ";
+                for (int j = 1; j < DBSHeader_.Length; j++)
+                {
+                    if (j == 1)
+                        sql += DBSHeader_[j];
+                    else
+                        sql += ", " + DBSHeader_[j];
+                }
+                // генерация sql комманды
+                sql += " from " + STable_ + " where " + DBSHeader_[0] + " = " + id;
+                //получение комманды и коннекта
+                cmd = new MySqlCommand(sql, mycon);
+                //вополнение запроса
+                cmd.ExecuteNonQuery();
+                da = new MySqlDataAdapter(cmd);
+                //получение выборки
+                dr = cmd.ExecuteReader();
+                // заполнения поля
+                if (dr.Read())
+                    rezult = dr[0].ToString();
+                else
+                    rezult = "";
+                dr.Close();
+
+            }
+            catch
+            { }
+            return rezult;
         }
 
     }
