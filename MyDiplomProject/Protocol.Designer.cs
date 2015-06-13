@@ -176,6 +176,7 @@
             this.Column19 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label50 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.label52 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -249,15 +250,16 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.label52);
             this.tabPage1.Controls.Add(this.panel8);
             this.tabPage1.Controls.Add(this.panel6);
+            this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.textBox35);
             this.tabPage1.Controls.Add(this.label48);
             this.tabPage1.Controls.Add(this.panel7);
             this.tabPage1.Controls.Add(this.panel5);
             this.tabPage1.Controls.Add(this.panel4);
             this.tabPage1.Controls.Add(this.panel3);
-            this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.textBox10);
             this.tabPage1.Controls.Add(this.label4);
@@ -346,7 +348,7 @@
             // 
             // textBox35
             // 
-            this.textBox35.Location = new System.Drawing.Point(444, 88);
+            this.textBox35.Location = new System.Drawing.Point(444, 87);
             this.textBox35.MaxLength = 200;
             this.textBox35.Name = "textBox35";
             this.textBox35.Size = new System.Drawing.Size(120, 20);
@@ -605,7 +607,7 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.dateTimePicker4);
             this.panel2.Controls.Add(this.label39);
-            this.panel2.Location = new System.Drawing.Point(360, 11);
+            this.panel2.Location = new System.Drawing.Point(360, 6);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(236, 86);
             this.panel2.TabIndex = 64;
@@ -1689,6 +1691,15 @@
             // 
             this.saveFileDialog1.Filter = "Microsoft Word | *.docx";
             // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(570, 89);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(18, 13);
+            this.label52.TabIndex = 69;
+            this.label52.Text = "°С";
+            // 
             // Protocol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1892,5 +1903,6 @@
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.ToolStripMenuItem экспортироватьВWordToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Label label52;
     }
 }
