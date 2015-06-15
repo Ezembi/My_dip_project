@@ -416,6 +416,7 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(498, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
@@ -435,42 +436,48 @@
             // протоколОсмотраМетаПроисшествияToolStripMenuItem
             // 
             this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Name = "протоколОсмотраМетаПроисшествияToolStripMenuItem";
-            this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.протоколОсмотраМетаПроисшествияToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
+            this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Size = new System.Drawing.Size(539, 22);
             this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Text = "Протокол осмотра мета происшествия";
             this.протоколОсмотраМетаПроисшествияToolStripMenuItem.Click += new System.EventHandler(this.протоколОсмотраМетаПроисшествияToolStripMenuItem_Click);
             // 
             // протоколОсмотраТрупаToolStripMenuItem
             // 
             this.протоколОсмотраТрупаToolStripMenuItem.Name = "протоколОсмотраТрупаToolStripMenuItem";
-            this.протоколОсмотраТрупаToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.протоколОсмотраТрупаToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
+            this.протоколОсмотраТрупаToolStripMenuItem.Size = new System.Drawing.Size(539, 22);
             this.протоколОсмотраТрупаToolStripMenuItem.Text = "Протокол осмотра трупа";
             this.протоколОсмотраТрупаToolStripMenuItem.Click += new System.EventHandler(this.протоколОсмотраТрупаToolStripMenuItem_Click);
             // 
             // протоколЛичногоОбыскаПостановлениеToolStripMenuItem
             // 
             this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Name = "протоколЛичногоОбыскаПостановлениеToolStripMenuItem";
-            this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
+            this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(539, 22);
             this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Text = "Протокол личного обыска + постановление";
             this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem.Click += new System.EventHandler(this.протоколЛичногоОбыскаПостановлениеToolStripMenuItem_Click);
             // 
             // пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem
             // 
             this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.Name = "пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem";
-            this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4)));
+            this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(539, 22);
             this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.Text = "Протокол обыска (выемки) + постановление";
             this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem.Click += new System.EventHandler(this.пРОТОКОЛОбыскавыемкиПостановлениеToolStripMenuItem_Click);
             // 
             // пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem
             // 
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Name = "пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem";
-            this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(499, 22);
+            this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D5)));
+            this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Size = new System.Drawing.Size(539, 22);
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Text = "Протокол осмотра местности, жилища, иного помещения + постановление";
             this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem.Click += new System.EventHandler(this.пРОТОКОЛОсмотраМестностиЖилищаИногоПомещенияПостановлениеToolStripMenuItem_Click);
             // 
             // прикрепитьСуществующийПротоколToolStripMenuItem
             // 
             this.прикрепитьСуществующийПротоколToolStripMenuItem.Name = "прикрепитьСуществующийПротоколToolStripMenuItem";
-            this.прикрепитьСуществующийПротоколToolStripMenuItem.Size = new System.Drawing.Size(498, 22);
+            this.прикрепитьСуществующийПротоколToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.прикрепитьСуществующийПротоколToolStripMenuItem.Size = new System.Drawing.Size(540, 22);
             this.прикрепитьСуществующийПротоколToolStripMenuItem.Text = "Сохранить изменения и прикрепить существующий протокол к данноу делу";
             this.прикрепитьСуществующийПротоколToolStripMenuItem.Click += new System.EventHandler(this.прикрепитьСуществующийПротоколToolStripMenuItem_Click);
             // 

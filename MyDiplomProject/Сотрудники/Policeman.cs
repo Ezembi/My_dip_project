@@ -605,7 +605,6 @@ namespace MyDiplomProject
                 button5.Enabled = button6.Enabled = false;
             else
                 button5.Enabled = button6.Enabled = true;
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

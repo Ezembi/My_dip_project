@@ -34,11 +34,16 @@
             this.экспортироватьВWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label52 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.label44 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
+            this.label39 = new System.Windows.Forms.Label();
             this.textBox35 = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -64,10 +69,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBox30 = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
-            this.label39 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox29 = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
@@ -176,16 +177,15 @@
             this.Column19 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label50 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.label52 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -220,14 +220,17 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.сохранитьToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // экспортироватьВWordToolStripMenuItem
             // 
             this.экспортироватьВWordToolStripMenuItem.Name = "экспортироватьВWordToolStripMenuItem";
-            this.экспортироватьВWordToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.экспортироватьВWordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.экспортироватьВWordToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.экспортироватьВWordToolStripMenuItem.Text = "Экспортировать в Word";
             this.экспортироватьВWordToolStripMenuItem.Click += new System.EventHandler(this.экспортироватьВWordToolStripMenuItem_Click);
             // 
@@ -293,6 +296,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Гланая";
             // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(570, 89);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(18, 13);
+            this.label52.TabIndex = 69;
+            this.label52.Text = "°С";
+            // 
             // panel8
             // 
             this.panel8.Location = new System.Drawing.Point(6, 260);
@@ -345,6 +357,43 @@
             this.label44.Size = new System.Drawing.Size(240, 13);
             this.label44.TabIndex = 6;
             this.label44.Text = "Указанные предметы, документы и ценности";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.dateTimePicker4);
+            this.panel2.Controls.Add(this.label39);
+            this.panel2.Location = new System.Drawing.Point(360, 6);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(236, 86);
+            this.panel2.TabIndex = 64;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(9, 56);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(179, 20);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Перейти к постановлению";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dateTimePicker4
+            // 
+            this.dateTimePicker4.Enabled = false;
+            this.dateTimePicker4.Location = new System.Drawing.Point(9, 30);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.Size = new System.Drawing.Size(179, 20);
+            this.dateTimePicker4.TabIndex = 1;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(6, 7);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(100, 13);
+            this.label39.TabIndex = 0;
+            this.label39.Text = "Постановление от";
             // 
             // textBox35
             // 
@@ -601,43 +650,6 @@
             this.label36.Size = new System.Drawing.Size(123, 13);
             this.label36.TabIndex = 0;
             this.label36.Text = "Цель обыска (выемки)";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.dateTimePicker4);
-            this.panel2.Controls.Add(this.label39);
-            this.panel2.Location = new System.Drawing.Point(360, 6);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(236, 86);
-            this.panel2.TabIndex = 64;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(9, 56);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(179, 20);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Перейти к постановлению";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // dateTimePicker4
-            // 
-            this.dateTimePicker4.Enabled = false;
-            this.dateTimePicker4.Location = new System.Drawing.Point(9, 30);
-            this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(179, 20);
-            this.dateTimePicker4.TabIndex = 1;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(6, 7);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(100, 13);
-            this.label39.TabIndex = 0;
-            this.label39.Text = "Постановление от";
             // 
             // panel1
             // 
@@ -1691,15 +1703,6 @@
             // 
             this.saveFileDialog1.Filter = "Microsoft Word | *.docx";
             // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(570, 89);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(18, 13);
-            this.label52.TabIndex = 69;
-            this.label52.Text = "°С";
-            // 
             // Protocol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1723,6 +1726,8 @@
             this.tabPage1.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -1731,8 +1736,6 @@
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -243,3 +243,5 @@ Create table Spend (
 	pk_protokol Int NOT NULL,
  Primary Key (pk_spend)) ENGINE = MyISAM
 COMMENT = 'Во_время_проводилась';
+
+

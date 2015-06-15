@@ -127,9 +127,9 @@
             this.checkBox1.Enabled = false;
             this.checkBox1.Location = new System.Drawing.Point(16, 122);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(206, 17);
+            this.checkBox1.Size = new System.Drawing.Size(212, 17);
             this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Запомнить параметры подключеня";
+            this.checkBox1.Text = "Запомнить параметры подключения";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // button2
@@ -139,7 +139,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(98, 23);
             this.button2.TabIndex = 10;
-            this.button2.Text = "Подключится";
+            this.button2.Text = "Подключиться";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

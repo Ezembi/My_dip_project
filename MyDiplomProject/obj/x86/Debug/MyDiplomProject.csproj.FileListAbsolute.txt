@@ -89,3 +89,4 @@ C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplo
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.MainForm.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.SelectProtocol.resources
 C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.DirectoriesForm.resources
+C:\Users\Виктор\Documents\Projects\!MyDiplomProject\My_dip_project\MyDiplomProject\obj\x86\Debug\MyDiplomProject.SelectVeshDock.resources

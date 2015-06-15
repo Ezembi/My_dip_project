@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -37,28 +36,22 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button10 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(273, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "АРМ Следоватя";
             // 
             // groupBox1
             // 
@@ -67,9 +60,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(314, 55);
+            this.groupBox1.Location = new System.Drawing.Point(314, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(306, 467);
+            this.groupBox1.Size = new System.Drawing.Size(306, 541);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Краткое описание";
@@ -83,7 +76,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(293, 441);
+            this.textBox1.Size = new System.Drawing.Size(293, 515);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "Для просмотра описания наведите курсор мыши на соответствующую кнопку";
             // 
@@ -151,66 +144,12 @@
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.shapeContainer1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 55);
+            this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(296, 270);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ведение протоколов";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox3.Controls.Add(this.button7);
-            this.groupBox3.Controls.Add(this.button6);
-            this.groupBox3.Location = new System.Drawing.Point(12, 349);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(296, 111);
-            this.groupBox3.TabIndex = 8;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Материалы проверки, уголовные дела";
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(5, 54);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(282, 46);
-            this.button7.TabIndex = 8;
-            this.button7.Text = "Просмотреть все уголовные дела, материалы проверки";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            this.button7.MouseEnter += new System.EventHandler(this.button7_MouseEnter);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(5, 19);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(282, 29);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "Добавить уголовное дело, материал проверки";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            this.button6.MouseEnter += new System.EventHandler(this.button6_MouseEnter);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.button8);
-            this.groupBox4.Location = new System.Drawing.Point(12, 466);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(296, 56);
-            this.groupBox4.TabIndex = 9;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Справочники";
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(5, 19);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(282, 29);
-            this.button8.TabIndex = 9;
-            this.button8.Text = "Ведение справочников";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
@@ -242,17 +181,91 @@
             this.lineShape1.Y1 = 201;
             this.lineShape1.Y2 = 201;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBox3.Controls.Add(this.button7);
+            this.groupBox3.Controls.Add(this.button6);
+            this.groupBox3.Location = new System.Drawing.Point(12, 377);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(296, 111);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Материалы проверки, уголовные дела";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(5, 54);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(282, 46);
+            this.button7.TabIndex = 8;
+            this.button7.Text = "Просмотреть все уголовные дела, материалы проверки";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button7.MouseEnter += new System.EventHandler(this.button7_MouseEnter);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(5, 19);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(282, 29);
+            this.button6.TabIndex = 7;
+            this.button6.Text = "Добавить уголовное дело, материал проверки";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.MouseEnter += new System.EventHandler(this.button6_MouseEnter);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button8);
+            this.groupBox4.Location = new System.Drawing.Point(12, 494);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(296, 59);
+            this.groupBox4.TabIndex = 9;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Справочники";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(5, 19);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(282, 29);
+            this.button8.TabIndex = 9;
+            this.button8.Text = "Ведение справочников";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.button10);
+            this.groupBox5.Location = new System.Drawing.Point(12, 301);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(293, 57);
+            this.groupBox5.TabIndex = 10;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Изьятое имущество";
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(5, 19);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(282, 29);
+            this.button10.TabIndex = 9;
+            this.button10.Text = "Просмотр всего изьятого имущества";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(632, 534);
+            this.ClientSize = new System.Drawing.Size(632, 565);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "АРМ следователя";
@@ -261,14 +274,13 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -285,5 +297,7 @@
         private System.Windows.Forms.Button button9;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button button10;
     }
 }

@@ -114,6 +114,12 @@
     <Compile Include="SelectProtocol.Designer.cs">
       <DependentUpon>SelectProtocol.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectVeshDock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectVeshDock.Designer.cs">
+      <DependentUpon>SelectVeshDock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Справочники\Directories.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectProtocol.resx">
       <DependentUpon>SelectProtocol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectVeshDock.resx">
+      <DependentUpon>SelectVeshDock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Справочники\Directories.resx">
       <DependentUpon>Directories.cs</DependentUpon>

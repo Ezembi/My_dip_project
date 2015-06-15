@@ -118,14 +118,16 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // экспортироватьВWordToolStripMenuItem
             // 
             this.экспортироватьВWordToolStripMenuItem.Name = "экспортироватьВWordToolStripMenuItem";
-            this.экспортироватьВWordToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.экспортироватьВWordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.экспортироватьВWordToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.экспортироватьВWordToolStripMenuItem.Text = "Экспортировать в Word";
             this.экспортироватьВWordToolStripMenuItem.Click += new System.EventHandler(this.экспортироватьВWordToolStripMenuItem_Click);
             // 

@@ -191,6 +191,10 @@ namespace MyDiplomProject
                             if (j != MaxColums - 1)
                                 sql += ",";
                         }
+
+                        if (STable == STable3)
+                            sql += ", Flag = 2";
+
                         sql += " where " + DBSHeader[0] + " = " + MyDataGridView.Rows[i].Cells[0].Value.ToString();
                         cmd = new MySqlCommand(sql, mycon);
                         cmd.ExecuteNonQuery();
@@ -210,6 +214,9 @@ namespace MyDiplomProject
 
                         sql += ", " + lastPcName;
 
+                        if (STable == STable3)
+                            sql += ", Flag";
+
                         sql += ") values (";
 
                         for (int j = 1; j < MaxColums; j++)
@@ -220,7 +227,12 @@ namespace MyDiplomProject
                                 sql += "NULL,";
                         }
 
-                        sql += PcNum + ")";
+                        sql += PcNum;
+
+                        if (STable == STable3)
+                            sql += ", 2)";
+                        else
+                            sql += ")";
 
                         cmd = new MySqlCommand(sql, mycon);
                         cmd.ExecuteNonQuery();
@@ -424,6 +436,9 @@ namespace MyDiplomProject
         
         private void SavePonyatoi(TextBox surname, TextBox pname, TextBox second_name, TextBox street, TextBox house, TextBox room, TextBox pk_ponatoi) // сохранение понятого
         {
+            MySqlDataAdapter da;
+            MySqlDataReader dr;
+
             try
             {
                 string sql = "";    // строка sql запросов
@@ -469,6 +484,16 @@ namespace MyDiplomProject
                     cmd = new MySqlCommand(sql, mycon);
                     cmd.ExecuteNonQuery();
 
+                    sql = "SELECT last_insert_id()";    // получение последнего внесённого первичного ключа
+                    cmd = new MySqlCommand(sql, mycon);
+                    cmd.ExecuteNonQuery();
+                    da = new MySqlDataAdapter(cmd);
+                    dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        pk_ponatoi.Text = dr[0].ToString();
+                    }
+                    dr.Close();
                 }
 
             }
@@ -873,6 +898,8 @@ namespace MyDiplomProject
                             sql += ", " + DBHeader[i];
                     }
 
+                    sql += ", Flag ";
+
                     sql += ") values (";
 
                     sql += "STR_TO_DATE('" + dateTimePicker1.Value.ToShortDateString() + "', '%d.%m.%Y')" + ", ";       //data_sostav
@@ -929,7 +956,9 @@ namespace MyDiplomProject
                     else
                         sql += "'" + PK_Dela + "', ";
 
-                    sql += "'" + textBox10.Text + "'";
+                    sql += "'" + textBox10.Text + "', ";
+
+                    sql += " 2";
 
 
                     sql += ")";
@@ -1016,7 +1045,9 @@ namespace MyDiplomProject
                     else
                         sql += DBHeader[22] + " = '" + PK_Dela + "', ";
 
-                    sql += DBHeader[23] + " = '" + textBox10.Text + "'"; 
+                    sql += DBHeader[23] + " = '" + textBox10.Text + "', ";
+
+                    sql += " Flag = 2";
 
                     sql += " where pk_protokol = " + pk_protokol;
 

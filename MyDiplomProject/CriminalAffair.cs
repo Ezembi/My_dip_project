@@ -620,6 +620,8 @@ namespace MyDiplomProject
                             sql += ", " + DBHeader[i];
                     }
 
+                    sql += ", Flag ";
+
                     sql += ") values (";
 
                     sql += "'" + textBox1.Text + "'" + ", ";    //номер материала
@@ -654,9 +656,9 @@ namespace MyDiplomProject
                         sql += "NULL" + ", ";    //Уполномоченный по делу
 
                     if (textBox6.Text != "")
-                        sql += "'" + textBox6.Text + "'" + ")";    //Подразделение следственного комитета
+                        sql += "'" + textBox6.Text + "'" + ", 2)";    //Подразделение следственного комитета
                     else
-                        sql += "NULL" + ")";    //Подразделение следственного комитета
+                        sql += "NULL" + ", 2)";    //Подразделение следственного комитета
 
                     // внесение информации в БД
                     cmd = new MySqlCommand(sql, mycon);
@@ -719,6 +721,8 @@ namespace MyDiplomProject
                         sql += DBHeader[8] + " = '" + textBox6.Text + "'";    //Подразделение следственного комитета
                     else
                         sql += DBHeader[8] + " = NULL";
+
+                    sql += ", Flag = 2";
 
                     sql += " where PK_Dela = " + PK_Dela;
 

@@ -2,13 +2,9 @@ CREATE DATABASE `polise` ;
 
 USE `polise`;
 
-CREATE DATABASE `polise` ;
-
-USE `polise`;
-
 Create table Ypakovka (
 	pk_ypakovka Int NOT NULL AUTO_INCREMENT,
-	nazvanie Varchar(200),
+	sposob Varchar(200),
  Primary Key (pk_ypakovka)) ENGINE = MyISAM
 COMMENT = 'Способы упаковки вещественных доказательств';
 
@@ -18,7 +14,6 @@ Create table Vesh_dok (
 	naiminovanie Varchar(500),
 	pk_material Int,
 	pk_ypakovka Int,
-	Flag Int,
 	pk_protokol Int NOT NULL,
  Primary Key (pk_vesh_dok,pk_protokol)) ENGINE = MyISAM
 COMMENT = 'Вещественное доказательство';
@@ -60,7 +55,6 @@ Create table Protokol (
 	pk_postanov Int,
 	PK_Dela Int,
 	install Varchar(2500),
-	Flag Int,
  Primary Key (pk_protokol)) ENGINE = MyISAM
 COMMENT = 'Протокол';
 
@@ -148,8 +142,8 @@ Create table Peoples (
 	primichanie Varchar(1000),
 	mystate Varchar(20),
 	pk_postanov Int,
-	pk_pol Int,
 	pk_protokol Int,
+	pk_pol Int,
  Primary Key (PK_people)) ENGINE = MyISAM
 COMMENT = 'Лицо в постановлении (другие лица)';
 
@@ -173,7 +167,6 @@ Create table Delo (
 	Comment Varchar(1000),
 	pk_polise Int,
 	PK_Raiona Int,
-	Flag Int,
  Primary Key (PK_Dela)) ENGINE = MyISAM
 COMMENT = 'Уголовное дело (материал проверки)';
 
@@ -205,7 +198,7 @@ COMMENT = 'Справочник классных чинов';
 
 Create table sp_pro_pol (
 	pk_pol Int NOT NULL AUTO_INCREMENT,
-	nazvanie Varchar(200),
+	nazvanie Varchar(1000),
 	id_number Varchar(200),
  Primary Key (pk_pol)) ENGINE = MyISAM
 COMMENT = 'Справочник процессуальных положений';
@@ -229,8 +222,8 @@ Create table r_tex_sredstv (
 	pk_tex_sredstvo Int NOT NULL,
 	pk_protokol Int NOT NULL,
  Primary Key (pc_r,pk_tex_sredstvo,pk_protokol)) ENGINE = MyISAM;
-
-Create table Apps (
+ 
+ Create table Apps (
 	pk_apps Int NOT NULL AUTO_INCREMENT,
 	nazvanie Varchar(200),
 	pk_protokol Int NOT NULL,

@@ -396,7 +396,29 @@ namespace MyDiplomProject
                 button5.Enabled = button6.Enabled = false;
             else
                 button5.Enabled = button6.Enabled = true;
+        }
+        private void button5_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button5, "Следующая страница");
+        }
 
+        private void button6_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button6, "Последняя страница");
+        }
+
+        private void button4_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button4, "Предидущая страница");
+        }
+
+        private void button3_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.button3, "Первая страница");
         }
     }
 }

@@ -115,19 +115,20 @@
             // создатьМатериалПроверкиУголовноеДелоToolStripMenuItem
             // 
             this.создатьМатериалПроверкиУголовноеДелоToolStripMenuItem.Name = "создатьМатериалПроверкиУголовноеДелоToolStripMenuItem";
-            this.создатьМатериалПроверкиУголовноеДелоToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
+            this.создатьМатериалПроверкиУголовноеДелоToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.создатьМатериалПроверкиУголовноеДелоToolStripMenuItem.Size = new System.Drawing.Size(370, 22);
             this.создатьМатериалПроверкиУголовноеДелоToolStripMenuItem.Text = "Создать материал проверки / уголовное дело";
             this.создатьМатериалПроверкиУголовноеДелоToolStripMenuItem.Click += new System.EventHandler(this.создатьМатериалПроверкиУголовноеДелоToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(324, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(367, 6);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(370, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 

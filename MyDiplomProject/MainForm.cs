@@ -164,5 +164,13 @@ namespace MyDiplomProject
             sp.ShowDialog();
             this.Visible = true;
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            SelectVeshDock svd = new SelectVeshDock(User, Password, Database, Ip);
+            svd.ShowDialog();
+            this.Visible = true;
+        }
     }
 }
